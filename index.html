@@ -1746,11 +1746,9 @@
       try {
         const data = await run('getRoom', [state.roomId]);
         if (data.error) return;
-
         state.players = data.players;
-        state.currentGame = data.currentGame;
+        if (data.currentGame) state.currentGame = data.currentGame; // ← only update if not empty
         if (data.defenseTimer) state.selectedTimer = data.defenseTimer;
-
         if (data.phase !== state.phase) {
           state.phase = data.phase;
           handlePhaseChange(data);
@@ -1774,6 +1772,7 @@
         case 'revealing_pre':        renderRevealingPre();                                 break;
         case 'defending':            renderDefending();                                    break;
         case 'revealing_post':       renderRevealingPost();                                break;
+        case 'greatness_setup':      isGIY ? renderGreatnessSetup() : null;      break;
         case 'greatness_setup_done': isGIY ? renderGreatnessSpin(data) : null;            break;
         case 'greatness_spin':       isGIY ? renderGreatnessSpin(data) : null;            break;
         case 'greatness_receiver':   isGIY ? renderGreatnessReceiver(data) : null;        break;
