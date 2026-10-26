@@ -937,15 +937,34 @@
       pollInterval: null
     };
 
-    // ── google.script.run wrapper ──────────────────────────────────────────────
-
+    const API = 'https://script.google.com/a/macros/clearcompany.com/s/AKfycbxYbQxio3jl4KCG_iN6nH_zZTkdKR3JuTGBcwmGHQPthUJWtapyT_6vZjXcmSkbknPt/exec';
+    
     function run(fnName, args) {
-      return new Promise(function(resolve, reject) {
-        var runner = google.script.run
-          .withSuccessHandler(resolve)
-          .withFailureHandler(reject);
-        runner[fnName].apply(runner, args || []);
+      // Map function names and args to API params
+      const params = buildParams(fnName, args);
+      const url = new URL(API);
+      Object.entries(params).forEach(function(pair) {
+        url.searchParams.set(pair[0], pair[1]);
       });
+      return fetch(url.toString()).then(function(r) { return r.json(); });
+    }
+    
+    function buildParams(fnName, args) {
+      args = args || [];
+      switch(fnName) {
+        case 'createRoom':   return { action: 'createRoom',   name: args[0] };
+        case 'joinRoom':     return { action: 'joinRoom',     roomId: args[0], name: args[1] };
+        case 'getRoom':      return { action: 'getRoom',      roomId: args[0] };
+        case 'getGameList':  return { action: 'getGameList' };
+        case 'startGame':    return { action: 'startGame',    roomId: args[0], gameId: args[1], count: (args[2]||{}).count||'', timer: (args[2]||{}).timer||'' };
+        case 'submitFact':   return { action: 'submitFact',   roomId: args[0], playerId: args[1], content: args[2] };
+        case 'submitVote':   return { action: 'submitVote',   roomId: args[0], playerId: args[1], guessedPlayerId: args[2], voteValue: args[3] };
+        case 'advancePhase': return { action: 'advancePhase', roomId: args[0] };
+        case 'getResults':   return { action: 'getResults',   roomId: args[0] };
+        case 'exitGame':     return { action: 'exitGame',     roomId: args[0] };
+        case 'resetRoom':    return { action: 'resetRoom',    roomId: args[0] };
+        default:             return { action: fnName };
+      }
     }
 
     // ── Utilities ──────────────────────────────────────────────────────────────
