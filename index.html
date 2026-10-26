@@ -1752,6 +1752,23 @@
       }).join('');
     }
 
+    function updateURL(roomId) {
+      if (window.history && window.history.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('room', roomId);
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+    
+    function getRoomFromURL() {
+      try {
+        const url = new URL(window.location.href);
+        return url.searchParams.get('room');
+      } catch(e) {
+        return null;
+      }
+    }
+
     // ── Button listeners ───────────────────────────────────────────────────────
 
     document.getElementById('btn-exit').addEventListener('click', async function() {
@@ -1780,6 +1797,8 @@
         state.playerName = name;
         state.isHost = true;
         state.phase = 'lobby';
+        
+        updateURL(state.roomId); // ← add this line
 
         showScreen('screen-lobby');
         document.getElementById('lobby-code').textContent = state.roomId;
@@ -1813,6 +1832,8 @@
         state.playerName = name;
         state.isHost = false;
         state.phase = data.phase;
+        
+        updateURL(state.roomId); // ← add this line
 
         handlePhaseChange({ phase: data.phase, players: [] });
         startPolling();
@@ -1929,6 +1950,22 @@
         btn.textContent = 'Next hot take →';
       }
     });
+
+    // On load — check if URL has a room code and pre-fill it
+    (function() {
+      const roomFromURL = getRoomFromURL();
+      if (roomFromURL) {
+        const codeInput = document.getElementById('landing-code');
+        codeInput.value = roomFromURL.toUpperCase();
+        // Gently highlight it so they know it's pre-filled
+        codeInput.style.borderColor = 'var(--accent)';
+        codeInput.style.boxShadow = '0 0 0 3px rgba(124, 106, 247, 0.18)';
+        setTimeout(function() {
+          codeInput.style.borderColor = '';
+          codeInput.style.boxShadow = '';
+        }, 2000);
+      }
+    })();
   </script>
 </body>
 </html>
