@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Playground</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a24;
+      --border: #2a2a3a;
+      --accent: #7c6af7;
+      --accent-hover: #6a59e0;
+      --text: #f0f0f5;
+      --muted: #888899;
+      --success: #4caf88;
+      --danger: #f87171;
+      --radius: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.18); }
+      55%  { transform: scale(0.92); }
+      75%  { transform: scale(1.07); }
+      90%  { transform: scale(0.97); }
+      100% { transform: scale(1); }
+    }
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.7); }
+      70%  { opacity: 1; transform: scale(1.08); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    @keyframes barGrow {
+      from { width: 0%; }
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(120px) rotate(720deg); opacity: 0; }
+    }
+    @keyframes revealFlip {
+      0%   { transform: rotateX(90deg) scale(0.8); opacity: 0; }
+      60%  { transform: rotateX(-8deg) scale(1.03); opacity: 1; }
+      100% { transform: rotateX(0deg) scale(1); opacity: 1; }
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25%       { transform: rotate(-4deg); }
+      75%       { transform: rotate(4deg); }
+    }
+    @keyframes dotBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40%            { transform: translateY(-8px); opacity: 1; }
+    }
+    @keyframes flamePulse {
+      0%, 100% { transform: scale(1) rotate(-3deg); }
+      50%       { transform: scale(1.15) rotate(3deg); }
+    }
+
+    .screen { display: none; width: 100%; max-width: 500px; }
+    .screen.active {
+      display: block;
+      animation: fadeSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .card.fire::before {
+      background: linear-gradient(90deg, #f97316, #ef4444, #f97316);
+      background-size: 200% 100%;
+      animation: shimmer 2s linear infinite;
+    }
+
+    h1 { font-size: 2rem; font-weight: 800; }
+    h2 { font-size: 1.4rem; font-weight: 700; line-height: 1.3; }
+
+    .subtitle { color: var(--muted); font-size: 1rem; margin-top: -6px; }
+
+    .label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .label.fire { color: #f97316; }
+
+    .hint { font-size: 0.85rem; color: var(--muted); }
+
+    input, textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      padding: 12px 16px;
+      width: 100%;
+      outline: none;
+      resize: none;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124, 106, 247, 0.18);
+      transform: scale(1.01);
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      width: 100%;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(124, 106, 247, 0.35);
+    }
+
+    button:active { transform: translateY(0) scale(0.97); box-shadow: none; }
+
+    button:disabled {
+      background: var(--border);
+      color: var(--muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    button.secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(124, 106, 247, 0.08);
+    }
+
+    button.success {
+      background: var(--success);
+      animation: bounce 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    button.danger {
+      background: var(--danger);
+    }
+
+    button.danger:hover {
+      background: #ef4444;
+      box-shadow: 0 6px 20px rgba(248, 113, 113, 0.35);
+    }
+
+    /* ── Agree / Disagree buttons ── */
+
+    .agree-disagree {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-agree {
+      background: rgba(76, 175, 136, 0.12);
+      border: 2px solid var(--success);
+      border-radius: 12px;
+      color: var(--success);
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 18px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-agree:hover {
+      background: rgba(76, 175, 136, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(76, 175, 136, 0.3);
+    }
+
+    .btn-agree.selected {
+      background: var(--success);
+      color: white;
+      animation: bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .btn-disagree {
+      background: rgba(248, 113, 113, 0.12);
+      border: 2px solid var(--danger);
+      border-radius: 12px;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 18px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-disagree:hover {
+      background: rgba(248, 113, 113, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(248, 113, 113, 0.3);
+    }
+
+    .btn-disagree.selected {
+      background: var(--danger);
+      color: white;
+      animation: bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .btn-agree:disabled, .btn-disagree:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ── Divider ── */
+
+    .divider {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      position: relative;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider::before { left: 0; }
+    .divider::after  { right: 0; }
+
+    .room-code {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-align: center;
+      animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      text-shadow: 0 0 30px rgba(124, 106, 247, 0.4);
+    }
+
+    .player-list { display: flex; flex-wrap: wrap; gap: 8px; min-height: 44px; }
+
+    .player-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      animation: popIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .player-chip.me { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Game picker ── */
+
+    .game-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .game-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .game-card:nth-child(1) { animation-delay: 0.05s; }
+    .game-card:nth-child(2) { animation-delay: 0.12s; }
+    .game-card:nth-child(3) { animation-delay: 0.19s; }
+
+    .game-card:hover {
+      border-color: var(--accent);
+      background: rgba(124, 106, 247, 0.06);
+      transform: translateX(4px);
+    }
+
+    .game-card.selected {
+      border-color: var(--accent);
+      background: rgba(124, 106, 247, 0.12);
+    }
+
+    .game-emoji { font-size: 2rem; flex-shrink: 0; }
+    .game-info { display: flex; flex-direction: column; gap: 3px; }
+    .game-name { font-weight: 700; font-size: 1rem; }
+    .game-desc { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Count picker ── */
+
+    .count-picker {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .count-btn {
+      flex: 1;
+      min-width: 48px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 10px;
+      transition: border-color 0.2s, background 0.2s;
+      width: auto;
+    }
+
+    .count-btn:hover { border-color: var(--accent); }
+    .count-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    /* ── Fact / prompt box ── */
+
+    .fact-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      font-style: italic;
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .fact-box.fire {
+      border-left-color: #f97316;
+    }
+
+    /* ── Vote buttons ── */
+
+    .vote-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .vote-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 14px 18px;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+      animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .vote-btn:nth-child(1) { animation-delay: 0.05s; }
+    .vote-btn:nth-child(2) { animation-delay: 0.10s; }
+    .vote-btn:nth-child(3) { animation-delay: 0.15s; }
+    .vote-btn:nth-child(4) { animation-delay: 0.20s; }
+    .vote-btn:nth-child(5) { animation-delay: 0.25s; }
+
+    .vote-btn:hover {
+      border-color: var(--accent);
+      background: rgba(124, 106, 247, 0.08);
+      transform: translateX(6px);
+      box-shadow: -3px 0 0 var(--accent);
+    }
+
+    .vote-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+      animation: bounce 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .vote-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .vote-btn-arrow {
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+      color: var(--accent);
+    }
+
+    .vote-btn:hover .vote-btn-arrow { opacity: 1; transform: translateX(0); }
+    .vote-btn.selected .vote-btn-arrow { opacity: 1; transform: translateX(0); color: white; }
+
+    /* ── Status bar ── */
+
+    .status-bar {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+      min-height: 24px;
+    }
+
+    .progress-wrap {
+      background: var(--bg);
+      border-radius: 999px;
+      height: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      border-radius: 999px;
+      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .waiting-dots { display: flex; justify-content: center; gap: 4px; }
+
+    .waiting-dots span {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: dotBounce 1.2s ease-in-out infinite;
+    }
+
+    .waiting-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .waiting-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    /* ── Vote results ── */
+
+    .vote-results { display: flex; flex-direction: column; gap: 12px; }
+
+    .vote-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .vote-row:nth-child(1) { animation-delay: 0.05s; }
+    .vote-row:nth-child(2) { animation-delay: 0.12s; }
+    .vote-row:nth-child(3) { animation-delay: 0.19s; }
+    .vote-row:nth-child(4) { animation-delay: 0.26s; }
+    .vote-row:nth-child(5) { animation-delay: 0.33s; }
+
+    .vote-row-name { width: 90px; font-size: 0.9rem; flex-shrink: 0; }
+
+    .vote-bar-wrap {
+      flex: 1;
+      background: var(--bg);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .vote-bar {
+      height: 100%;
+      background: var(--border);
+      border-radius: 999px;
+      animation: barGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .vote-bar.winner {
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      box-shadow: 0 0 10px rgba(124, 106, 247, 0.5);
+    }
+
+    .vote-count { font-size: 0.85rem; color: var(--muted); width: 20px; text-align: right; }
+
+    /* ── Agree/Disagree tally ── */
+
+    .tally-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .tally-box {
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .tally-box.agree {
+      background: rgba(76, 175, 136, 0.12);
+      border: 1px solid var(--success);
+    }
+
+    .tally-box.disagree {
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid var(--danger);
+    }
+
+    .tally-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .tally-box.agree .tally-label { color: var(--success); }
+    .tally-box.disagree .tally-label { color: var(--danger); }
+
+    .tally-number {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .tally-box.agree .tally-number { color: var(--success); }
+    .tally-box.disagree .tally-number { color: var(--danger); }
+
+    /* ── Flip table ── */
+
+    .flip-table {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .flip-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .flip-row.flipped {
+      border-color: #f97316;
+      background: rgba(249, 115, 22, 0.06);
+    }
+
+    .flip-name { font-weight: 700; flex: 1; }
+
+    .flip-votes {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+
+    .vote-pill {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .vote-pill.agree { background: rgba(76,175,136,0.2); color: var(--success); }
+    .vote-pill.disagree { background: rgba(248,113,113,0.2); color: var(--danger); }
+    .flip-arrow { color: var(--muted); }
+    .flip-badge { font-size: 0.8rem; }
+
+    /* ── Reveal box ── */
+
+    .reveal-box {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      padding: 20px;
+      border-radius: 12px;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reveal-box.revealed {
+      animation: revealFlip 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+      background: linear-gradient(135deg, rgba(124,106,247,0.15), rgba(167,139,250,0.08));
+      box-shadow: 0 0 30px rgba(124, 106, 247, 0.25);
+    }
+
+    /* ── Defense banner ── */
+
+    .defense-banner {
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid #f97316;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .defense-author {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #f97316;
+    }
+
+    .defense-flame {
+      font-size: 2rem;
+      animation: flamePulse 1s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    /* ── Submitted banner ── */
+
+    .submitted-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(76, 175, 136, 0.12);
+      border: 1px solid var(--success);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--success);
+      font-weight: 700;
+      animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .checkmark {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.8rem;
+      animation: bounce 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      flex-shrink: 0;
+    }
+
+    /* ── MLT prompt ── */
+
+    .mlt-prompt {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .mlt-prompt .prompt-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .prompt-counter {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ── Exit button ── */
+
+    .exit-btn {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      width: auto;
+      transition: border-color 0.2s, color 0.2s;
+      z-index: 100;
+    }
+
+    .exit-btn:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: var(--surface);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .exit-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ── Emoji burst ── */
+
+    .emoji-burst {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      z-index: 999;
+      animation: confettiFall 1.2s ease-in forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Exit button — visible during games, host only -->
+  <button id="btn-exit" class="exit-btn" style="display:none">← Leave game</button>
+
+  <!-- SCREEN: Landing -->
+  <div id="screen-landing" class="screen active">
+    <div class="card">
+      <h1>Team Playground 🎮</h1>
+      <p class="subtitle">Get to know your team, one round at a time.</p>
+      <input id="landing-name" type="text" placeholder="Your name" maxlength="20" />
+      <button id="btn-create">Start a session</button>
+      <div class="divider">or</div>
+      <input id="landing-code" type="text" placeholder="Room code (e.g. JKMT)" maxlength="4" style="text-transform:uppercase" />
+      <button id="btn-join" class="secondary">Join a session</button>
+      <div id="landing-status" class="status-bar"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Lobby -->
+  <div id="screen-lobby" class="screen">
+    <div class="card">
+      <p class="label">Room code</p>
+      <div id="lobby-code" class="room-code">----</div>
+      <p class="hint" style="text-align:center">Share this code with your team</p>
+      <div id="lobby-players" class="player-list"></div>
+
+      <div id="host-controls" style="display:none; flex-direction:column; gap:12px;">
+        <p class="label" style="margin-top:8px">Pick a game</p>
+        <div id="game-list" class="game-list"></div>
+        <div id="game-options" style="display:none; flex-direction:column; gap:10px;"></div>
+        <button id="btn-start" disabled>Choose a game to start</button>
+      </div>
+
+      <div id="lobby-waiting-hint" style="display:none;">
+        <p class="hint" style="text-align:center; padding:12px 0">
+          Waiting for the host to start the session...
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Submitting -->
+  <div id="screen-submitting" class="screen">
+    <div class="card" id="submitting-card">
+      <p class="label" id="submitting-label">Guess Who?</p>
+      <h2 id="submitting-heading">Share a surprising fact about yourself</h2>
+      <p class="hint" id="submitting-hint">Something your teammates probably don't know</p>
+      <textarea id="fact-input" placeholder="I once..." maxlength="280" rows="3"></textarea>
+      <button id="btn-submit-fact">Submit</button>
+      <div id="submit-feedback"></div>
+      <div id="submit-status" class="status-bar"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Voting -->
+  <div id="screen-voting" class="screen">
+    <div class="card" id="voting-card">
+      <p class="label" id="voting-game-label">Guess Who?</p>
+      <div id="prompt-counter" class="prompt-counter"></div>
+      <h2 id="voting-heading">Who do you think said this?</h2>
+      <div id="prompt-display"></div>
+      <div id="agree-disagree-btns" class="agree-disagree" style="display:none">
+        <button class="btn-agree" id="btn-agree">👍 Agree</button>
+        <button class="btn-disagree" id="btn-disagree">👎 Disagree</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px">
+        <p class="hint" id="voting-hint"></p>
+        <div id="voting-players" class="vote-list"></div>
+      </div>
+      <div id="vote-status" class="status-bar"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Revealing Pre (HTT) — votes shown, author revealed, defense prompt -->
+  <div id="screen-revealing-pre" class="screen">
+    <div class="card fire">
+      <p class="label fire">🔥 Hot Take Tribunal</p>
+      <div id="rp-prompt" class="fact-box fire"></div>
+      <div id="rp-tally" class="tally-row"></div>
+      <div id="rp-author" class="reveal-box">
+        <div class="waiting-dots"><span></span><span></span><span></span></div>
+      </div>
+      <div id="rp-defense" style="display:none" class="defense-banner">
+        <div class="defense-flame">🔥</div>
+        <div id="rp-defense-name" class="defense-author"></div>
+        <div class="hint">Make your case. Everyone's listening.</div>
+      </div>
+      <button id="btn-start-defense" style="display:none">Everyone ready? Start the vote →</button>
+      <button id="btn-open-defense" style="display:none; background:#f97316">
+        Author — defend yourself! 🔥
+      </button>
+    </div>
+  </div>
+
+  <!-- SCREEN: Voting Post (HTT) — second vote after defense -->
+  <div id="screen-voting-post" class="screen">
+    <div class="card fire">
+      <p class="label fire">🔥 Hot Take Tribunal — Round 2</p>
+      <div id="vp-prompt" class="fact-box fire"></div>
+      <p class="hint" style="text-align:center">You heard the defense. Changed your mind?</p>
+      <div class="agree-disagree">
+        <button class="btn-agree" id="btn-agree-post">👍 Agree</button>
+        <button class="btn-disagree" id="btn-disagree-post">👎 Disagree</button>
+      </div>
+      <div id="vote-post-status" class="status-bar"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Revealing Post (HTT) — final comparison -->
+  <div id="screen-revealing-post" class="screen">
+    <div class="card fire">
+      <p class="label fire">🔥 The Verdict</p>
+      <div id="rv-prompt" class="fact-box fire"></div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <p class="hint">Before the defense</p>
+        <div id="rv-pre-tally" class="tally-row"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <p class="hint">After the defense</p>
+        <div id="rv-post-tally" class="tally-row"></div>
+      </div>
+      <p class="label" style="margin-top:4px">Who changed their mind?</p>
+      <div id="rv-flips" class="flip-table"></div>
+      <button id="btn-next-htt">Next hot take →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: Revealing (Guess Who / MLT) -->
+  <div id="screen-revealing" class="screen">
+    <div class="card">
+      <p class="label" id="reveal-game-label">The results are in 👀</p>
+      <div id="reveal-prompt" class="fact-box" style="display:none"></div>
+      <div id="reveal-votes" class="vote-results"></div>
+      <div id="reveal-box" class="reveal-box">
+        <div class="waiting-dots"><span></span><span></span><span></span></div>
+      </div>
+      <button id="btn-next-round">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    // ── State ──────────────────────────────────────────────────────────────────
+
+    const state = {
+      roomId: null,
+      playerId: null,
+      playerName: null,
+      isHost: false,
+      phase: null,
+      currentGame: null,
+      players: [],
+      hasSubmitted: false,
+      hasVoted: false,
+      hasVotedPost: false,
+      selectedGame: null,
+      selectedCount: null,
+      selectedTimer: null,
+      pollInterval: null
+    };
+
+    // ── google.script.run wrapper ──────────────────────────────────────────────
+
+    function run(fnName, args) {
+      return new Promise(function(resolve, reject) {
+        var runner = google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(reject);
+        runner[fnName].apply(runner, args || []);
+      });
+    }
+
+    // ── Utilities ──────────────────────────────────────────────────────────────
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(function(s) {
+        s.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
+    function showExitBtn(show) {
+      const btn = document.getElementById('btn-exit');
+      btn.style.display = show ? 'block' : 'none';
+      btn.disabled = !state.isHost;
+      btn.title = state.isHost ? 'End game for everyone' : 'Only the host can exit';
+    }
+
+    function burstEmojis(emojis, count) {
+      count = count || 12;
+      for (var i = 0; i < count; i++) {
+        (function(i) {
+          setTimeout(function() {
+            var el = document.createElement('div');
+            el.className = 'emoji-burst';
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            el.style.left = (10 + Math.random() * 80) + 'vw';
+            el.style.top  = (Math.random() * 40) + 'vh';
+            el.style.animationDuration = (0.9 + Math.random() * 0.6) + 's';
+            el.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
+            document.body.appendChild(el);
+            setTimeout(function() { el.remove(); }, 2000);
+          }, i * 80);
+        })(i);
+      }
+    }
+
+    function shake(id) {
+      const el = document.getElementById(id);
+      el.style.animation = 'none';
+      el.style.borderColor = '#f87171';
+      el.style.boxShadow = '0 0 0 3px rgba(248,113,113,0.2)';
+      setTimeout(function() {
+        el.style.animation = 'wiggle 0.35s ease both';
+        setTimeout(function() {
+          el.style.borderColor = '';
+          el.style.boxShadow = '';
+          el.style.animation = '';
+        }, 600);
+      }, 10);
+    }
+
+    function buildProgressHTML(count, total, label) {
+      const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+      return '<div style="display:flex;flex-direction:column;gap:6px">' +
+        '<span>' + count + ' of ' + total + ' ' + label + '</span>' +
+        '<div class="progress-wrap"><div class="progress-bar" style="width:' + pct + '%"></div></div>' +
+        '</div>';
+    }
+
+    function buildTallyHTML(tally) {
+      return '<div class="tally-box agree">' +
+          '<div class="tally-label">Agree</div>' +
+          '<div class="tally-number">' + tally.agree + '</div>' +
+        '</div>' +
+        '<div class="tally-box disagree">' +
+          '<div class="tally-label">Disagree</div>' +
+          '<div class="tally-number">' + tally.disagree + '</div>' +
+        '</div>';
+    }
+
+    // ── Polling ────────────────────────────────────────────────────────────────
+
+    function startPolling() {
+      if (state.pollInterval) clearInterval(state.pollInterval);
+      state.pollInterval = setInterval(syncRoom, 2500);
+    }
+
+    async function syncRoom() {
+      if (!state.roomId) return;
+      try {
+        const data = await run('getRoom', [state.roomId]);
+        if (data.error) return;
+
+        state.players = data.players;
+        state.currentGame = data.currentGame;
+        if (data.defenseTimer) state.selectedTimer = data.defenseTimer;
+
+        if (data.phase !== state.phase) {
+          state.phase = data.phase;
+          handlePhaseChange(data);
+        } else {
+          updatePhaseUI(data);
+        }
+      } catch(e) {
+        console.error('Sync error', e);
+      }
+    }
+
+    function handlePhaseChange(data) {
+      switch (data.phase) {
+        case 'lobby':          renderLobby(data);        break;
+        case 'submitting':     renderSubmitting(data);   break;
+        case 'voting':         renderVoting(data);       break;
+        case 'revealing':      renderRevealing(data);    break;
+        case 'revealing_pre':  renderRevealingPre(data); break;
+        case 'defending':      renderDefending(data);    break;
+        case 'revealing_post': renderRevealingPost(data);break;
+        case 'done':           renderDone();             break;
+      }
+    }
+
+    function updatePhaseUI(data) {
+      if (data.phase === 'submitting') {
+        const el = document.getElementById('submit-status');
+        if (el) el.innerHTML = buildProgressHTML(data.submissionCount, data.totalPlayers, 'submitted');
+      }
+      if (data.phase === 'voting') {
+        const el = document.getElementById('vote-status');
+        if (el) el.innerHTML = buildProgressHTML(data.voteCount, data.totalPlayers, 'voted');
+      }
+      if (data.phase === 'lobby') {
+        renderPlayerChips(data.players);
+      }
+    }
+
+    // ── Player chips ───────────────────────────────────────────────────────────
+
+    function renderPlayerChips(players) {
+      const container = document.getElementById('lobby-players');
+      if (!container) return;
+      if (container.querySelectorAll('.player-chip').length === players.length) return;
+      container.innerHTML = players.map(function(p) {
+        return '<div class="player-chip ' + (p.id === state.playerId ? 'me' : '') + '">' +
+          (p.id === state.playerId ? '⭐ ' : '') + p.name +
+        '</div>';
+      }).join('');
+    }
+
+    // ── Lobby ──────────────────────────────────────────────────────────────────
+
+    async function renderLobby(data) {
+      showScreen('screen-lobby');
+      showExitBtn(false);
+      document.getElementById('lobby-code').textContent = state.roomId;
+      renderPlayerChips(data.players || []);
+
+      if (state.isHost) {
+        document.getElementById('host-controls').style.display = 'flex';
+        document.getElementById('lobby-waiting-hint').style.display = 'none';
+        await loadGamePicker();
+      } else {
+        document.getElementById('host-controls').style.display = 'none';
+        document.getElementById('lobby-waiting-hint').style.display = 'block';
+      }
+    }
+
+    async function loadGamePicker() {
+      const games = await run('getGameList', []);
+      const container = document.getElementById('game-list');
+      container.innerHTML = games.map(function(g) {
+        return '<div class="game-card" data-id="' + g.id + '">' +
+          '<div class="game-emoji">' + g.emoji + '</div>' +
+          '<div class="game-info">' +
+            '<div class="game-name">' + g.label + '</div>' +
+            '<div class="game-desc">' + g.description + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      container.querySelectorAll('.game-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+          container.querySelectorAll('.game-card').forEach(function(c) {
+            c.classList.remove('selected');
+          });
+          card.classList.add('selected');
+          state.selectedGame = card.dataset.id;
+          state.selectedCount = null;
+
+          // Show options for games that need them
+          renderGameOptions(state.selectedGame, games);
+
+          const btn = document.getElementById('btn-start');
+          // For HTT, require count selection before enabling
+          if (state.selectedGame === 'hot_take_tribunal') {
+            btn.disabled = true;
+            btn.textContent = 'Choose how many rounds';
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Start session →';
+          }
+        });
+      });
+    }
+
+    function renderGameOptions(gameId, games) {
+      const container = document.getElementById('game-options');
+
+      if (gameId === 'hot_take_tribunal') {
+        const maxRounds = state.players.length || 5;
+        const roundOptions = [];
+        for (let i = 1; i <= maxRounds; i++) { roundOptions.push(i); }
+
+        container.style.display = 'flex';
+        container.innerHTML =
+          '<div style="display:flex;flex-direction:column;gap:8px">' +
+            '<p class="hint">How many hot takes?</p>' +
+            '<div class="count-picker">' +
+              roundOptions.map(function(n) {
+                return '<button class="count-btn" data-count="' + n + '">' + n + '</button>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:8px">' +
+            '<p class="hint">How long to defend? (seconds)</p>' +
+            '<div class="count-picker">' +
+              ['15','30','45','60'].map(function(n) {
+                return '<button class="count-btn timer-btn" data-timer="' + n + '">' + n + 's</button>';
+              }).join('') +
+            '</div>' +
+          '</div>';
+
+        // Round count selection
+        container.querySelectorAll('.count-btn:not(.timer-btn)').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            container.querySelectorAll('.count-btn:not(.timer-btn)').forEach(function(b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            state.selectedCount = parseInt(btn.dataset.count);
+            checkHTTReady();
+          });
+        });
+
+        // Timer selection
+        container.querySelectorAll('.timer-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            container.querySelectorAll('.timer-btn').forEach(function(b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            state.selectedTimer = parseInt(btn.dataset.timer);
+            checkHTTReady();
+          });
+        });
+
+      } else {
+        container.style.display = 'none';
+        container.innerHTML = '';
+      }
+    }
+
+    function checkHTTReady() {
+      const btn = document.getElementById('btn-start');
+      if (state.selectedCount && state.selectedTimer) {
+        btn.disabled = false;
+        btn.textContent = 'Start session →';
+      } else {
+        btn.disabled = true;
+        btn.textContent = state.selectedCount
+          ? 'Choose a defense timer'
+          : state.selectedTimer
+            ? 'Choose how many rounds'
+            : 'Choose rounds and timer';
+      }
+    }
+
+    // ── Submitting ─────────────────────────────────────────────────────────────
+
+    function renderSubmitting(data) {
+      state.hasSubmitted = false;
+      showScreen('screen-submitting');
+      showExitBtn(true);
+
+      const isHTT = state.currentGame === 'hot_take_tribunal';
+
+      document.getElementById('submitting-label').textContent =
+        isHTT ? '🔥 Hot Take Tribunal' : 'Guess Who?';
+
+      document.getElementById('submitting-heading').textContent =
+        isHTT ? 'Submit your hot take' : 'Share a surprising fact about yourself';
+
+      document.getElementById('submitting-hint').textContent =
+        isHTT
+          ? 'An unpopular opinion you\'re willing to defend'
+          : 'Something your teammates probably don\'t know';
+
+      document.getElementById('fact-input').placeholder =
+        isHTT ? 'Unpopular opinion: ...' : 'I once...';
+
+      const card = document.getElementById('submitting-card');
+      card.className = isHTT ? 'card fire' : 'card';
+
+      document.getElementById('fact-input').value = '';
+      document.getElementById('fact-input').disabled = false;
+      document.getElementById('btn-submit-fact').disabled = false;
+      document.getElementById('btn-submit-fact').textContent = 'Submit';
+      document.getElementById('btn-submit-fact').className = '';
+      document.getElementById('submit-feedback').innerHTML = '';
+      document.getElementById('submit-status').innerHTML =
+        buildProgressHTML(data.submissionCount || 0, data.totalPlayers, 'submitted');
+    }
+
+    // ── Voting ─────────────────────────────────────────────────────────────────
+
+    async function renderVoting(data) {
+      const isPostVote = data.votePhase === 'post';
+
+      if (state.currentGame === 'hot_take_tribunal' && isPostVote) {
+        await renderVotingPost(data);
+        return;
+      }
+
+      state.hasVoted = false;
+      showScreen('screen-voting');
+      showExitBtn(true);
+
+      const isHTT = state.currentGame === 'hot_take_tribunal';
+      const isMLT = state.currentGame === 'most_likely_to';
+      const isGW  = state.currentGame === 'guess_who';
+
+      document.getElementById('voting-card').className = isHTT ? 'card fire' : 'card';
+      document.getElementById('voting-game-label').textContent =
+        isHTT ? '🔥 Hot Take Tribunal' : isMLT ? 'Most Likely To' : 'Guess Who?';
+      document.getElementById('voting-game-label').className = isHTT ? 'label fire' : 'label';
+
+      // Blank these out until results load — prevents flash of wrong content
+      document.getElementById('voting-heading').textContent = '';
+      document.getElementById('voting-hint').textContent = '';
+      document.getElementById('prompt-display').innerHTML = '';
+      document.getElementById('voting-players').innerHTML = '';
+      document.getElementById('agree-disagree-btns').style.display = 'none';
+
+      document.getElementById('prompt-counter').textContent =
+        (data.currentFactIndex + 1) + ' of ' + data.factsTotal;
+
+      document.getElementById('vote-status').innerHTML =
+        buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
+
+      try {
+        const results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+
+        // Now safe to set heading
+        document.getElementById('voting-heading').textContent =
+          isGW  ? 'Who do you think said this?' :
+          isMLT ? 'Who is most likely to…' :
+                  'Do you agree with this take?';
+
+        document.getElementById('voting-hint').textContent =
+          isGW  ? "Pick your guess — you can't vote for yourself" :
+          isMLT ? 'Vote for one teammate' :
+          isHTT ? (results.authorId === state.playerId ? "This is your take — sit tight!" : 'Agree or disagree?') :
+                  '';
+
+        document.getElementById('agree-disagree-btns').style.display = isHTT ? 'grid' : 'none';
+        document.getElementById('voting-players').style.display = isHTT ? 'none' : 'flex';
+
+        const promptEl = document.getElementById('prompt-display');
+        if (isGW) {
+          promptEl.className = 'fact-box';
+          promptEl.innerHTML = '<em>' + results.prompt + '</em>';
+        } else if (isMLT) {
+          promptEl.className = 'mlt-prompt';
+          promptEl.innerHTML = '<div class="prompt-text">' + results.prompt + '</div>';
+        } else if (isHTT) {
+          promptEl.className = 'fact-box fire';
+          promptEl.innerHTML = '<em>' + results.prompt + '</em>';
+        }
+
+        if (isHTT && results.authorId === state.playerId) {
+          document.getElementById('btn-agree').disabled = true;
+          document.getElementById('btn-disagree').disabled = true;
+          state.hasVoted = true;
+          return;
+        }
+
+        if (isHTT) {
+          const btnAgree = document.getElementById('btn-agree');
+          const btnDisagree = document.getElementById('btn-disagree');
+          btnAgree.disabled = false;
+          btnAgree.className = 'btn-agree';
+          btnDisagree.disabled = false;
+          btnDisagree.className = 'btn-disagree';
+          btnAgree.onclick = function() { handleAgreeDisagree('agree', 'pre'); };
+          btnDisagree.onclick = function() { handleAgreeDisagree('disagree', 'pre'); };
+        }
+
+        if (!isHTT) {
+          const voters = isGW
+            ? state.players.filter(function(p) { return p.id !== state.playerId; })
+            : state.players;
+
+          const container = document.getElementById('voting-players');
+          container.innerHTML = voters.map(function(p, i) {
+            return '<button class="vote-btn" data-id="' + p.id + '" style="animation-delay:' + (i * 0.07) + 's">' +
+              '<span>' + p.name + '</span>' +
+              '<span class="vote-btn-arrow">→</span>' +
+            '</button>';
+          }).join('');
+
+          container.querySelectorAll('.vote-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() { handleVote(btn.dataset.id, btn); });
+          });
+        }
+
+      } catch(e) {
+        console.error('Error loading voting screen', e);
+      }
+    }
+
+    // ── Voting Post (HTT) ──────────────────────────────────────────────────────
+
+    async function renderVotingPost(data) {
+      state.hasVotedPost = false;
+      showScreen('screen-voting-post');
+      showExitBtn(true);
+
+      document.getElementById('vote-post-status').innerHTML =
+        buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
+
+      try {
+        const results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+
+        document.getElementById('vp-prompt').innerHTML = '<em>' + results.prompt + '</em>';
+
+        const btnAgreePost = document.getElementById('btn-agree-post');
+        const btnDisagreePost = document.getElementById('btn-disagree-post');
+
+        // Author can't vote on their own take
+        if (results.authorId === state.playerId) {
+          btnAgreePost.disabled = true;
+          btnDisagreePost.disabled = true;
+          document.getElementById('vote-post-status').textContent = 'Waiting for the verdict on your take...';
+          state.hasVotedPost = true;
+          return;
+        }
+
+        btnAgreePost.disabled = false;
+        btnAgreePost.className = 'btn-agree';
+        btnDisagreePost.disabled = false;
+        btnDisagreePost.className = 'btn-disagree';
+
+        btnAgreePost.onclick = function() { handleAgreeDisagree('agree', 'post'); };
+        btnDisagreePost.onclick = function() { handleAgreeDisagree('disagree', 'post'); };
+
+      } catch(e) {
+        console.error('Error loading post vote screen', e);
+      }
+    }
+
+    // ── Revealing Pre (HTT) ────────────────────────────────────────────────────
+
+    async function renderRevealingPre() {
+      showScreen('screen-revealing-pre');
+      showExitBtn(true);
+
+      // Clear everything before fetching — prevents ghosting
+      document.getElementById('rp-prompt').innerHTML = '';
+      document.getElementById('rp-tally').innerHTML = '';
+      document.getElementById('rp-defense').style.display = 'none';
+      document.getElementById('btn-open-defense').style.display = 'none';
+      document.getElementById('btn-start-defense').style.display = 'none';
+
+      const authorBox = document.getElementById('rp-author');
+      authorBox.className = 'reveal-box';
+      authorBox.style.borderColor = '';
+      authorBox.style.color = '';
+      authorBox.innerHTML =
+        '<div class="waiting-dots"><span></span><span></span><span></span></div>';
+
+      try {
+        const results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+
+        // Populate prompt and tally — no author info yet
+        document.getElementById('rp-prompt').innerHTML = '<em>' + results.prompt + '</em>';
+        document.getElementById('rp-tally').innerHTML = buildTallyHTML(results.preTally);
+
+        // Store author info in closure only — not in the DOM yet
+        const authorName = results.authorName;
+
+        setTimeout(function() {
+          authorBox.classList.add('revealed');
+          authorBox.style.borderColor = '#f97316';
+          authorBox.style.color = '#f97316';
+          authorBox.innerHTML = '🔥 ' + authorName + ' said this!';
+
+          setTimeout(function() {
+            document.getElementById('rp-defense-name').textContent =
+              authorName + ', it\'s your turn.';
+            document.getElementById('rp-defense').style.display = 'flex';
+
+            if (state.isHost) {
+              document.getElementById('btn-open-defense').style.display = 'block';
+            }
+          }, 600);
+
+          burstEmojis(['🔥','💀','😂','👀','🌶️'], 10);
+        }, 2000);
+
+      } catch(e) {
+        console.error('Error loading pre-reveal', e);
+      }
+    }
+
+    // ── Defending ─────────────────────────────────────────────────────────────
+    // This is a pass-through — just moves to post voting
+    // The defense happens verbally on Zoom
+    // Host clicks "Everyone ready? Start the vote" when done
+
+    async function renderDefending() {
+      if (state.isHost) {
+        document.getElementById('btn-open-defense').style.display = 'none';
+        document.getElementById('btn-start-defense').style.display = 'block';
+        startDefenseTimer();
+      } else {
+        startDefenseTimer();
+      }
+    }
+
+    function startDefenseTimer() {
+      const existing = document.getElementById('defense-timer');
+      if (existing) existing.remove();
+
+      const timerEl = document.createElement('div');
+      timerEl.id = 'defense-timer';
+      timerEl.style.cssText =
+        'text-align:center; font-size:2.5rem; font-weight:900; color:#f97316; ' +
+        'animation: flamePulse 1s ease-in-out infinite; margin-top: 4px;';
+
+      const defense = document.getElementById('rp-defense');
+      if (defense) {
+        defense.parentNode.insertBefore(timerEl, defense.nextSibling);
+      }
+
+      let seconds = state.selectedTimer || 30;
+
+      function tick() {
+        if (!document.getElementById('defense-timer')) return;
+        timerEl.textContent = seconds + 's 🔥';
+
+        if (seconds <= 10) {
+          timerEl.style.color = '#ef4444';
+          timerEl.style.fontSize = '3rem';
+        }
+
+        if (seconds <= 0) {
+          timerEl.textContent = "Time's up! ⏰";
+          timerEl.style.animation = 'none';
+          return;
+        }
+
+        seconds--;
+        setTimeout(tick, 1000);
+      }
+
+      tick();
+    }
+
+    // ── Revealing Post (HTT) ───────────────────────────────────────────────────
+
+    async function renderRevealingPost() {
+      showScreen('screen-revealing-post');
+      showExitBtn(true);
+
+      // Clear stale content
+      document.getElementById('rv-prompt').innerHTML = '';
+      document.getElementById('rv-pre-tally').innerHTML = '';
+      document.getElementById('rv-post-tally').innerHTML = '';
+      document.getElementById('rv-flips').innerHTML = '';
+
+      const btn = document.getElementById('btn-next-htt');
+      btn.disabled = false;
+      btn.textContent = 'Next hot take →';
+
+      try {
+        const results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+
+        document.getElementById('rv-prompt').innerHTML = '<em>' + results.prompt + '</em>';
+        document.getElementById('rv-pre-tally').innerHTML = buildTallyHTML(results.preTally);
+        document.getElementById('rv-post-tally').innerHTML = buildTallyHTML(results.postTally);
+
+        const container = document.getElementById('rv-flips');
+        if (results.flipData && results.flipData.length > 0) {
+          container.innerHTML = results.flipData.map(function(f, i) {
+            return '<div class="flip-row ' + (f.flipped ? 'flipped' : '') + '" style="animation-delay:' + (i * 0.08) + 's">' +
+              '<div class="flip-name">' + f.name + '</div>' +
+              '<div class="flip-votes">' +
+                '<span class="vote-pill ' + f.pre + '">' + f.pre + '</span>' +
+                '<span class="flip-arrow">→</span>' +
+                '<span class="vote-pill ' + f.post + '">' + f.post + '</span>' +
+                (f.flipped ? '<span class="flip-badge">🔄 flipped!</span>' : '') +
+              '</div>' +
+            '</div>';
+          }).join('');
+        } else {
+          container.innerHTML = '<p class="hint" style="text-align:center">No changes recorded</p>';
+        }
+
+        const flippedCount = results.flipData
+          ? results.flipData.filter(function(f) { return f.flipped; }).length
+          : 0;
+        if (flippedCount > 0) burstEmojis(['🔄','🤯','😮','🔥'], 10);
+
+      } catch(e) {
+        console.error('Error loading post reveal', e);
+      }
+    }
+
+    // ── Revealing (GW / MLT) ───────────────────────────────────────────────────
+
+    async function renderRevealing() {
+      showScreen('screen-revealing');
+      showExitBtn(true);
+
+      // Clear stale content first
+      document.getElementById('reveal-prompt').style.display = 'none';
+      document.getElementById('reveal-prompt').textContent = '';
+      document.getElementById('reveal-votes').innerHTML = '';
+      document.getElementById('reveal-game-label').textContent = '👀 Results';
+
+      const box = document.getElementById('reveal-box');
+      box.className = 'reveal-box';
+      box.style.borderColor = '';
+      box.style.color = '';
+      box.innerHTML =
+        '<div class="waiting-dots"><span></span><span></span><span></span></div>';
+
+      const btn = document.getElementById('btn-next-round');
+      btn.disabled = false;
+      btn.textContent = 'Next →';
+      btn.onclick = null;
+
+      try {
+        const results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+
+        const isMLT = results.game === 'most_likely_to';
+
+        document.getElementById('reveal-game-label').textContent =
+          isMLT ? 'Most Likely To — Results' : 'Guess Who? — Results';
+
+        const promptEl = document.getElementById('reveal-prompt');
+        promptEl.style.display = 'block';
+        promptEl.textContent = results.prompt;
+
+        const maxVotes = Math.max.apply(null,
+          results.voteSummary.map(function(v) { return v.votes; }).concat([1])
+        );
+
+        document.getElementById('reveal-votes').innerHTML = results.voteSummary.map(function(v) {
+          const pct = Math.round((v.votes / maxVotes) * 100);
+          const isWinner = v.id === results.winner.id;
+          return '<div class="vote-row">' +
+            '<div class="vote-row-name">' + v.name + '</div>' +
+            '<div class="vote-bar-wrap">' +
+              '<div class="vote-bar ' + (isWinner ? 'winner' : '') + '" style="width:' + pct + '%"></div>' +
+            '</div>' +
+            '<div class="vote-count">' + v.votes + '</div>' +
+          '</div>';
+        }).join('');
+
+        // Store in closure — keep out of DOM until reveal
+        const winnerName = results.winner.name;
+        const authorName = results.authorName;
+
+        setTimeout(function() {
+          box.classList.add('revealed');
+          if (isMLT) {
+            box.innerHTML = '🏆 <strong style="margin:0 6px">' + winnerName + '</strong> wins this one!';
+            burstEmojis(['🏆','👑','🎉','✨','😂'], 14);
+          } else {
+            box.innerHTML = '🎉 It was <strong style="margin:0 6px">' + authorName + '</strong>!';
+            burstEmojis(['🎉','✨','🎊','⭐','🙌'], 14);
+          }
+        }, 2000);
+
+      } catch(e) {
+        console.error('Error loading reveal', e);
+      }
+    }
+
+    // ── Done ───────────────────────────────────────────────────────────────────
+
+    function renderDone() {
+      showScreen('screen-revealing');
+      showExitBtn(false);
+      document.getElementById('reveal-prompt').style.display = 'none';
+      document.getElementById('reveal-votes').innerHTML = '';
+      document.getElementById('reveal-game-label').textContent = 'Session complete!';
+
+      const box = document.getElementById('reveal-box');
+      box.className = 'reveal-box revealed';
+      box.innerHTML = "That's everyone! 🎊";
+
+      const btn = document.getElementById('btn-next-round');
+      btn.textContent = 'Play another game';
+      btn.disabled = false;
+      btn.onclick = async function() {
+        btn.disabled = true;
+        btn.textContent = 'Going back...';
+        await run('resetRoom', [state.roomId]);
+      };
+
+      burstEmojis(['🎉','🎊','✨','🙌','⭐'], 20);
+    }
+
+    // ── Vote handlers ──────────────────────────────────────────────────────────
+
+    async function handleVote(playerId, btn) {
+      if (state.hasVoted) return;
+      state.hasVoted = true;
+
+      document.querySelectorAll('.vote-btn').forEach(function(b) {
+        b.disabled = true;
+        if (b.dataset.id === playerId) b.classList.add('selected');
+      });
+
+      document.getElementById('vote-status').innerHTML =
+        '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+        '<div>Vote locked in! Waiting for others...</div>';
+
+      try {
+        await run('submitVote', [state.roomId, state.playerId, playerId, '']);
+      } catch(e) {
+        document.getElementById('vote-status').textContent = 'Error submitting vote.';
+        state.hasVoted = false;
+      }
+    }
+
+    async function handleAgreeDisagree(value, phase) {
+      if (phase === 'pre' && state.hasVoted) return;
+      if (phase === 'post' && state.hasVotedPost) return;
+
+      if (phase === 'pre') {
+        state.hasVoted = true;
+        const btnAgree = document.getElementById('btn-agree');
+        const btnDisagree = document.getElementById('btn-disagree');
+        btnAgree.disabled = true;
+        btnDisagree.disabled = true;
+        if (value === 'agree') btnAgree.classList.add('selected');
+        else btnDisagree.classList.add('selected');
+        document.getElementById('vote-status').innerHTML =
+          '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+          '<div>Vote locked in! Waiting for others...</div>';
+      } else {
+        state.hasVotedPost = true;
+        const btnAgreePost = document.getElementById('btn-agree-post');
+        const btnDisagreePost = document.getElementById('btn-disagree-post');
+        btnAgreePost.disabled = true;
+        btnDisagreePost.disabled = true;
+        if (value === 'agree') btnAgreePost.classList.add('selected');
+        else btnDisagreePost.classList.add('selected');
+        document.getElementById('vote-post-status').innerHTML =
+          '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+          '<div>Vote locked in! Waiting for others...</div>';
+      }
+
+      try {
+        await run('submitVote', [state.roomId, state.playerId, '', value]);
+      } catch(e) {
+        if (phase === 'pre') {
+          document.getElementById('vote-status').textContent = 'Error. Try again.';
+          state.hasVoted = false;
+        } else {
+          document.getElementById('vote-post-status').textContent = 'Error. Try again.';
+          state.hasVotedPost = false;
+        }
+      }
+    }
+
+    function renderPlayerChips(players) {
+      const container = document.getElementById('lobby-players');
+      if (!container) return;
+      if (container.querySelectorAll('.player-chip').length === players.length) return;
+      container.innerHTML = players.map(function(p) {
+        const isMe = p.id === state.playerId;
+        return '<div class="player-chip ' + (isMe ? 'me' : '') + '">' +
+          (isMe ? '<span>⭐</span>' : '') +
+          '<span>' + p.name + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    // ── Button listeners ───────────────────────────────────────────────────────
+
+    document.getElementById('btn-exit').addEventListener('click', async function() {
+      if (!state.isHost) return;
+      if (!confirm('End the game for everyone and go back to the lobby?')) return;
+      const btn = document.getElementById('btn-exit');
+      btn.disabled = true;
+      btn.textContent = 'Exiting...';
+      await run('exitGame', [state.roomId]);
+    });
+
+    document.getElementById('btn-create').addEventListener('click', async function() {
+      const name = document.getElementById('landing-name').value.trim();
+      if (!name) { shake('landing-name'); return; }
+
+      const btn = document.getElementById('btn-create');
+      btn.disabled = true;
+      btn.textContent = 'Creating room...';
+
+      try {
+        const data = await run('createRoom', [name]);
+        if (data.error) throw new Error(data.error);
+
+        state.roomId = data.roomId;
+        state.playerId = data.playerId;
+        state.playerName = name;
+        state.isHost = true;
+        state.phase = 'lobby';
+
+        showScreen('screen-lobby');
+        document.getElementById('lobby-code').textContent = state.roomId;
+        renderPlayerChips([{ id: state.playerId, name: name }]);
+        await loadGamePicker();
+        document.getElementById('host-controls').style.display = 'flex';
+        startPolling();
+      } catch(e) {
+        document.getElementById('landing-status').textContent = 'Something went wrong. Try again.';
+        btn.disabled = false;
+        btn.textContent = 'Start a session';
+      }
+    });
+
+    document.getElementById('btn-join').addEventListener('click', async function() {
+      const name = document.getElementById('landing-name').value.trim();
+      const code = document.getElementById('landing-code').value.trim().toUpperCase();
+      if (!name) { shake('landing-name'); return; }
+      if (!code) { shake('landing-code'); return; }
+
+      const btn = document.getElementById('btn-join');
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+
+      try {
+        const data = await run('joinRoom', [code, name]);
+        if (data.error) throw new Error(data.error);
+
+        state.roomId = code;
+        state.playerId = data.playerId;
+        state.playerName = name;
+        state.isHost = false;
+        state.phase = data.phase;
+
+        handlePhaseChange({ phase: data.phase, players: [] });
+        startPolling();
+      } catch(e) {
+        document.getElementById('landing-status').textContent = 'Room not found. Check the code and try again.';
+        btn.disabled = false;
+        btn.textContent = 'Join a session';
+      }
+    });
+
+    document.getElementById('btn-start').addEventListener('click', async function() {
+      if (!state.selectedGame) return;
+      const btn = document.getElementById('btn-start');
+      btn.disabled = true;
+      btn.textContent = 'Starting...';
+
+      const options = {};
+      if (state.selectedGame === 'hot_take_tribunal') {
+        options.count = state.selectedCount;
+        options.timer = state.selectedTimer;
+      }
+
+      try {
+        await run('startGame', [state.roomId, state.selectedGame, options]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Start session →';
+      }
+    });
+
+    document.getElementById('btn-submit-fact').addEventListener('click', async function() {
+      const content = document.getElementById('fact-input').value.trim();
+      if (!content) { shake('fact-input'); return; }
+
+      const btn = document.getElementById('btn-submit-fact');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      state.hasSubmitted = true;
+
+      try {
+        const result = await run('submitFact', [state.roomId, state.playerId, content]);
+
+        if (result.error) {
+          document.getElementById('submit-status').textContent = result.error;
+          btn.disabled = false;
+          btn.textContent = 'Submit';
+          state.hasSubmitted = false;
+          return;
+        }
+
+        btn.textContent = 'Submitted ✓';
+        btn.classList.add('success');
+        document.getElementById('fact-input').disabled = true;
+        document.getElementById('submit-feedback').innerHTML =
+          '<div class="submitted-banner">' +
+            '<div class="checkmark">✓</div>' +
+            'Locked in! Waiting for your teammates...' +
+          '</div>';
+        document.getElementById('submit-status').innerHTML =
+          '<div class="waiting-dots" style="margin-top:4px"><span></span><span></span><span></span></div>';
+
+        burstEmojis(['✨','⭐','💫'], 6);
+
+      } catch(e) {
+        document.getElementById('submit-status').textContent = 'Error submitting. Try again.';
+        btn.disabled = false;
+        btn.textContent = 'Submit';
+        state.hasSubmitted = false;
+      }
+    });
+
+    document.getElementById('btn-next-round').addEventListener('click', async function() {
+      const btn = document.getElementById('btn-next-round');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Next →';
+      }
+    });
+
+    document.getElementById('btn-open-defense').addEventListener('click', async function() {
+      const btn = document.getElementById('btn-open-defense');
+      btn.disabled = true;
+      btn.textContent = 'Defense time...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById('btn-start-defense').addEventListener('click', async function() {
+      const btn = document.getElementById('btn-start-defense');
+      btn.disabled = true;
+      btn.textContent = 'Opening vote...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById('btn-next-htt').addEventListener('click', async function() {
+      const btn = document.getElementById('btn-next-htt');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Next hot take →';
+      }
+    });
+  </script>
+</body>
+</html>
