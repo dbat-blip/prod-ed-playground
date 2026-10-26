@@ -1325,14 +1325,14 @@
     function handlePhaseChange(data) {
       const isPas = state.currentGame === 'pick_a_side';
       switch (data.phase) {
-        case 'lobby':          renderLobby(data);        break;
-        case 'submitting':     renderSubmitting(data);   break;
-        case 'voting':         renderVoting(data);       break;
-        case 'revealing':      renderRevealing(data);    break;
-        case 'revealing_pre':  renderRevealingPre(data); break;
-        case 'defending':      renderDefending(data);    break;
-        case 'revealing_post': renderRevealingPost(data);break;
-        case 'done':           renderDone();             break;
+        case 'lobby':          renderLobby(data);                              break;
+        case 'submitting':     renderSubmitting(data);                         break;
+        case 'voting':         isPas ? renderPasVoting(data) : renderVoting(data); break;
+        case 'revealing':      isPas ? renderPasReveal()     : renderRevealing();  break;
+        case 'revealing_pre':  renderRevealingPre();                           break;
+        case 'defending':      renderDefending();                              break;
+        case 'revealing_post': renderRevealingPost();                          break;
+        case 'done':           renderDone();                                   break;
       }
     }
 
