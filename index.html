@@ -2311,7 +2311,10 @@
       const btn = document.getElementById('btn-start');
       btn.disabled = true;
       btn.textContent = 'Starting...';
-
+    
+      // Set immediately so handlePhaseChange routes correctly
+      state.currentGame = state.selectedGame;
+    
       const options = {};
       if (state.selectedGame === 'hot_take_tribunal') {
         options.count = state.selectedCount;
@@ -2319,10 +2322,11 @@
       } else if (state.selectedGame === 'pick_a_side') {
         options.count = state.selectedCount;
       }
-
+    
       try {
         await run('startGame', [state.roomId, state.selectedGame, options]);
       } catch(e) {
+        state.currentGame = null;
         btn.disabled = false;
         btn.textContent = 'Start session →';
       }
