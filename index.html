@@ -2988,6 +2988,8 @@ async function renderPasReveal() {
     async function renderGreatnessPrompt() {
       showScreen('screen-greatness-prompt');
       showExitBtn(true);
+
+      document.getElementById('greatness-slot').style.display = 'block'; // ← reset for each round
     
       const gState = await run('getGreatnessState', [state.roomId]);
     
@@ -3072,6 +3074,8 @@ async function renderPasReveal() {
     }
     
     function showPromptCard(prompt, giverName) {
+      document.getElementById('greatness-slot').style.display = 'none';
+      
       const promptCard = document.getElementById('greatness-prompt-card');
       promptCard.style.display = 'block';
       promptCard.textContent = prompt;
