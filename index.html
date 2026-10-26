@@ -774,15 +774,162 @@
       z-index: 999;
       animation: confettiFall 1.2s ease-in forwards;
     }
-    /* ── Pick a Side ── */
+    /* ── Pick a Side — Results ── */
+    
+    .pas-results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .pas-result-row {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .pas-result-row.controversial {
+      border-color: var(--accent);
+    }
+    
+    .pas-result-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+    
+    .pas-result-ab {
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .pas-result-vs {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    
+    .pas-fire-badge {
+      font-size: 0.85rem;
+      margin-left: 2px;
+    }
+    
+    .pas-result-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .pas-bar-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+      max-width: 80px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .pas-bar-name.side-a { color: var(--accent); text-align: left; }
+    .pas-bar-name.side-b { color: #f97316; text-align: right; }
+    
+    .pas-result-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .pas-result-bar-a {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 999px;
+      animation: barGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    /* Hot take callout */
+    
+    .pas-hot-take {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .pas-hot-take-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    
+    .pas-hot-take-score {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+    
+    .pas-hot-take-speakers {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .pas-speaker-line {
+      font-size: 0.88rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    
+    .pas-speaker-line.side-a {
+      background: rgba(124, 106, 247, 0.08);
+      border: 1px solid var(--accent);
+      color: var(--text);
+    }
+    
+    .pas-speaker-line.side-b {
+      background: rgba(249, 115, 22, 0.08);
+      border: 1px solid #f97316;
+      color: var(--text);
+    }
+    
+    .pas-speaker-line.devils {
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid var(--danger);
+      color: var(--text);
+    }
+    
+    /* ── Pick a Side — Voting ── */
     
     @keyframes slideFromLeft {
-      from { opacity: 0; transform: translateX(-60px) scale(0.95); }
+      from { opacity: 0; transform: translateX(-50px) scale(0.96); }
       to   { opacity: 1; transform: translateX(0) scale(1); }
     }
     
     @keyframes slideFromRight {
-      from { opacity: 0; transform: translateX(60px) scale(0.95); }
+      from { opacity: 0; transform: translateX(50px) scale(0.96); }
       to   { opacity: 1; transform: translateX(0) scale(1); }
     }
     
@@ -794,12 +941,12 @@
     
     @keyframes chosenExpand {
       0%   { transform: scale(1); }
-      40%  { transform: scale(1.06); }
+      40%  { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
     
     @keyframes rejectedShrink {
-      to { opacity: 0.3; transform: scale(0.94); filter: grayscale(0.5); }
+      to { opacity: 0.25; transform: scale(0.93); }
     }
     
     @keyframes countdownPop {
@@ -814,7 +961,6 @@
       grid-template-columns: 1fr auto 1fr;
       align-items: stretch;
       min-height: 140px;
-      gap: 0;
     }
     
     .pas-option {
@@ -830,30 +976,13 @@
       cursor: pointer;
       border: 2px solid transparent;
       transition: box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
     }
-    
-    .pas-option::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .pas-option:hover::after { opacity: 1; }
     
     .pas-option.option-a {
       background: rgba(124, 106, 247, 0.1);
       border-color: var(--accent);
       border-radius: 14px 0 0 14px;
       animation: slideFromLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    
-    .pas-option.option-a::after {
-      background: radial-gradient(circle at center, rgba(124,106,247,0.2), transparent 70%);
     }
     
     .pas-option.option-b {
@@ -863,15 +992,11 @@
       animation: slideFromRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
     }
     
-    .pas-option.option-b::after {
-      background: radial-gradient(circle at center, rgba(249,115,22,0.2), transparent 70%);
-    }
-    
     .pas-option.chosen-a {
       background: var(--accent);
       color: white;
       border-color: var(--accent);
-      box-shadow: 0 0 30px rgba(124, 106, 247, 0.5);
+      box-shadow: 0 0 28px rgba(124, 106, 247, 0.45);
       animation: chosenExpand 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       cursor: default;
     }
@@ -880,7 +1005,7 @@
       background: #f97316;
       color: white;
       border-color: #f97316;
-      box-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
+      box-shadow: 0 0 28px rgba(249, 115, 22, 0.45);
       animation: chosenExpand 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       cursor: default;
     }
@@ -889,10 +1014,6 @@
       animation: rejectedShrink 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       cursor: default;
       pointer-events: none;
-    }
-    
-    .pas-option:disabled {
-      cursor: not-allowed;
     }
     
     .pas-vs {
@@ -910,7 +1031,7 @@
       font-size: 0.7rem;
       font-weight: 900;
       color: var(--muted);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
     
@@ -919,184 +1040,8 @@
       font-size: 4rem;
       font-weight: 900;
       color: var(--accent);
-      animation: countdownPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       line-height: 1;
       padding: 8px 0;
-    }
-    
-    /* Final results list */
-    
-    .pas-results-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .pas-result-row {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    
-    .pas-result-row.controversial {
-      border-color: var(--accent);
-      background: rgba(124, 106, 247, 0.06);
-    }
-    
-    .pas-result-prompts {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0;
-      font-size: 0.82rem;
-      font-weight: 700;
-      min-height: 44px;
-    }
-    
-    .pas-result-a {
-      background: rgba(124, 106, 247, 0.12);
-      border: 1px solid var(--accent);
-      border-radius: 8px 0 0 8px;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8px;
-      line-height: 1.3;
-    }
-    
-    .pas-result-b {
-      background: rgba(249, 115, 22, 0.12);
-      border: 1px solid #f97316;
-      border-radius: 0 8px 8px 0;
-      color: #f97316;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8px;
-      line-height: 1.3;
-    }
-    
-    .pas-result-or {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 6px;
-      font-size: 0.65rem;
-      font-weight: 900;
-      color: var(--muted);
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .pas-result-split {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .pas-result-names-a {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-      flex: 1;
-      text-align: left;
-    }
-    
-    .pas-result-names-b {
-      font-size: 0.8rem;
-      color: #f97316;
-      font-weight: 600;
-      flex: 1;
-      text-align: right;
-    }
-    
-    .pas-result-bar-wrap {
-      flex: 2;
-      height: 8px;
-      background: var(--border);
-      border-radius: 999px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .pas-result-bar-a {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      background: var(--accent);
-      border-radius: 999px;
-      animation: barGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    
-    /* Hot take callout */
-    
-    .pas-hot-take {
-      background: rgba(124, 106, 247, 0.08);
-      border: 2px solid var(--accent);
-      border-radius: 14px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    
-    .pas-hot-take-label {
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    
-    .pas-hot-take-prompt {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0;
-      font-size: 0.9rem;
-      font-weight: 700;
-      min-height: 52px;
-    }
-    
-    .pas-hot-take-speakers {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    
-    .pas-speaker-line {
-      font-size: 0.9rem;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-    
-    .pas-speaker-line.side-a {
-      background: rgba(124, 106, 247, 0.1);
-      border: 1px solid var(--accent);
-      color: var(--accent);
-    }
-    
-    .pas-speaker-line.side-b {
-      background: rgba(249, 115, 22, 0.1);
-      border: 1px solid #f97316;
-      color: #f97316;
-    }
-    
-    .pas-speaker-line.devils {
-      background: rgba(248, 113, 113, 0.1);
-      border: 1px solid var(--danger);
-      color: var(--danger);
     }
   </style>
 </head>
@@ -1729,105 +1674,98 @@
       }
     }
     
-    async function renderPasReveal() {
-      showScreen('screen-pas-reveal');
-      showExitBtn(true);
-    
-      document.getElementById('pas-results-list').innerHTML = '';
-      document.getElementById('pas-hot-take').style.display = 'none';
-    
-      const btn = document.getElementById('btn-pas-next');
-      btn.disabled = false;
-      btn.textContent = 'Play another game';
-      btn.onclick = async function() {
-        btn.disabled = true;
-        btn.textContent = 'Going back...';
-        await run('resetRoom', [state.roomId]);
-      };
-    
-      try {
-        const data = await run('getAllPasResults', [state.roomId]);
-        if (data.error) return;
-    
-        const controversial = data.mostControversial;
-    
-        // Render all rounds
-        const list = document.getElementById('pas-results-list');
-        list.innerHTML = data.rounds.map(function(r, i) {
-          const isControversial = r.index === controversial.index;
-          const totalVotes = r.sideA.length + r.sideB.length;
-          const pctA = totalVotes > 0 ? Math.round((r.sideA.length / totalVotes) * 100) : 50;
-    
-          return '<div class="pas-result-row ' + (isControversial ? 'controversial' : '') + '" style="animation-delay:' + (i * 0.08) + 's">' +
-            (isControversial ? '<div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px">🔥 Most controversial</div>' : '') +
-            '<div class="pas-result-prompts">' +
-              '<div class="pas-result-a">' + r.promptA + '</div>' +
-              '<div class="pas-result-or">or</div>' +
-              '<div class="pas-result-b">' + r.promptB + '</div>' +
-            '</div>' +
-            '<div class="pas-result-split">' +
-              '<div class="pas-result-names-a">' + (r.sideA.length > 0 ? r.sideA.join(', ') : '—') + '</div>' +
-              '<div class="pas-result-bar-wrap">' +
-                '<div class="pas-result-bar-a" style="width:' + pctA + '%"></div>' +
-              '</div>' +
-              '<div class="pas-result-names-b">' + (r.sideB.length > 0 ? r.sideB.join(', ') : '—') + '</div>' +
-            '</div>' +
+async function renderPasReveal() {
+  showScreen('screen-pas-reveal');
+  showExitBtn(true);
+
+  document.getElementById('pas-results-list').innerHTML = '';
+  document.getElementById('pas-hot-take').style.display = 'none';
+
+  const btn = document.getElementById('btn-pas-next');
+  btn.disabled = false;
+  btn.textContent = 'Play another game';
+  btn.onclick = async function() {
+    btn.disabled = true;
+    btn.textContent = 'Going back...';
+    await run('resetRoom', [state.roomId]);
+  };
+
+  try {
+    const data = await run('getAllPasResults', [state.roomId]);
+    if (data.error) return;
+
+    const controversial = data.mostControversial;
+    const list = document.getElementById('pas-results-list');
+
+    // Simple round rows — no colored boxes, just clean text + bar
+    list.innerHTML = data.rounds.map(function(r, i) {
+      const total = r.sideA.length + r.sideB.length;
+      const pctA = total > 0 ? Math.round((r.sideA.length / total) * 100) : 50;
+      const isC = r.index === controversial.index;
+
+      return '<div class="pas-result-row' + (isC ? ' controversial' : '') + '" style="animation-delay:' + (i * 0.09) + 's">' +
+        '<div class="pas-result-label">' +
+          '<span class="pas-result-ab">' + r.promptA + '</span>' +
+          '<span class="pas-result-vs">vs</span>' +
+          '<span class="pas-result-ab">' + r.promptB + '</span>' +
+          (isC ? '<span class="pas-fire-badge">🔥</span>' : '') +
+        '</div>' +
+        '<div class="pas-result-bar-row">' +
+          '<span class="pas-bar-name side-a">' + (r.sideA.length > 0 ? r.sideA.join(', ') : '—') + '</span>' +
+          '<div class="pas-result-bar-wrap">' +
+            '<div class="pas-result-bar-a" style="width:' + pctA + '%"></div>' +
+          '</div>' +
+          '<span class="pas-bar-name side-b">' + (r.sideB.length > 0 ? r.sideB.join(', ') : '—') + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // Hot take callout — appears after short pause, no repeated prompt
+    setTimeout(function() {
+      const hotTake = document.getElementById('pas-hot-take');
+      hotTake.style.display = 'flex';
+
+      let speakersHTML = '';
+
+      if (controversial.isUnanimous) {
+        const chosenOption = controversial.unanimousSide === 'a'
+          ? controversial.promptA : controversial.promptB;
+        speakersHTML =
+          '<div class="pas-speaker-line devils">' +
+            '😈 Everyone picked <strong>' + chosenOption + '</strong> — ' +
+            controversial.devilsAdvocate + ', can you make a case for the other side?' +
           '</div>';
-        }).join('');
-    
-        // Show most controversial callout after a pause
-        setTimeout(function() {
-          const hotTake = document.getElementById('pas-hot-take');
-          hotTake.style.display = 'flex';
-    
-          const totalVotes = controversial.sideA.length + controversial.sideB.length;
-          const pctA = totalVotes > 0
-            ? Math.round((controversial.sideA.length / totalVotes) * 100) : 50;
-    
-          let speakersHTML = '';
-    
-          if (controversial.isUnanimous) {
-            speakersHTML =
-              '<div class="pas-speaker-line devils">' +
-                '😈 ' + controversial.devilsAdvocate + ' — everyone agreed on ' +
-                (controversial.unanimousSide === 'a' ? controversial.promptA : controversial.promptB) +
-                '. Can you make a case for the other side?' +
-              '</div>';
-          } else {
-            if (controversial.speakerA) {
-              speakersHTML +=
-                '<div class="pas-speaker-line side-a">' +
-                  '⚡ ' + controversial.speakerA + ' chose ' + controversial.promptA + ' — the floor is yours' +
-                '</div>';
-            }
-            if (controversial.speakerB) {
-              speakersHTML +=
-                '<div class="pas-speaker-line side-b">' +
-                  '🔥 ' + controversial.speakerB + ' chose ' + controversial.promptB + ' — the floor is yours' +
-                '</div>';
-            }
-          }
-    
-          hotTake.innerHTML =
-            '<div class="pas-hot-take-label">🔥 Most controversial — let\'s talk about it</div>' +
-            '<div class="pas-hot-take-prompt">' +
-              '<div class="pas-result-a">' + controversial.promptA + '</div>' +
-              '<div class="pas-result-or">or</div>' +
-              '<div class="pas-result-b">' + controversial.promptB + '</div>' +
-            '</div>' +
-            '<div style="display:flex;gap:8px;font-size:0.85rem;color:var(--muted);justify-content:center">' +
-              '<span style="color:var(--accent);font-weight:700">' + controversial.sideA.length + ' vs ' + controversial.sideB.length + '</span>' +
-              '— the closest split of the night' +
-            '</div>' +
-            '<div class="pas-hot-take-speakers">' + speakersHTML + '</div>';
-    
-          burstEmojis(['⚡','🔥','👀','😂','🤯'], 12);
-        }, 800);
-    
-      } catch(e) {
-        console.error('Error loading Pick a Side results', e);
+      } else {
+        if (controversial.speakerA) {
+          speakersHTML +=
+            '<div class="pas-speaker-line side-a">' +
+              '⚡ <strong>' + controversial.speakerA + '</strong> — tell us why you chose ' +
+              controversial.promptA +
+            '</div>';
+        }
+        if (controversial.speakerB) {
+          speakersHTML +=
+            '<div class="pas-speaker-line side-b">' +
+              '🔥 <strong>' + controversial.speakerB + '</strong> — tell us why you chose ' +
+              controversial.promptB +
+            '</div>';
+        }
       }
-    }
+
+      hotTake.innerHTML =
+        '<div class="pas-hot-take-label">🔥 Most controversial — let\'s talk about it</div>' +
+        '<div class="pas-hot-take-score">' +
+          controversial.sideA.length + ' vs ' + controversial.sideB.length +
+        '</div>' +
+        '<div class="pas-hot-take-speakers">' + speakersHTML + '</div>';
+
+      burstEmojis(['⚡','🔥','👀','😂','🤯'], 10);
+    }, 600);
+
+  } catch(e) {
+    console.error('Error loading Pick a Side results', e);
+  }
+}
     // ── Submitting ─────────────────────────────────────────────────────────────
 
     function renderSubmitting(data) {
