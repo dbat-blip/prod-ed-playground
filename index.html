@@ -2316,6 +2316,8 @@
       if (state.selectedGame === 'hot_take_tribunal') {
         options.count = state.selectedCount;
         options.timer = state.selectedTimer;
+      } else if (state.selectedGame === 'pick_a_side') {
+        options.count = state.selectedCount;
       }
 
       try {
