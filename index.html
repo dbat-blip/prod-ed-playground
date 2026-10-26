@@ -2901,7 +2901,7 @@ async function renderPasReveal() {
     async function runGreatnessSpin() {
       if (greatnessState.spinning) return;
       greatnessState.spinning = true;
-      greatnessState.animating = true; // ← block poll interruptions
+      greatnessState.animating = true;
     
       const btn = document.getElementById('btn-spin-receiver');
       btn.disabled = true;
@@ -2919,6 +2919,7 @@ async function renderPasReveal() {
     
         if (result.done) {
           greatnessState.animating = false;
+          greatnessState.spinning = false;
           return;
         }
     
@@ -2939,6 +2940,9 @@ async function renderPasReveal() {
     
         await new Promise(function(r) { setTimeout(r, 2000); });
     
+        // Sync phase before giver spin starts
+        state.phase = 'greatness_receiver';
+    
         await runGiverSpin(result.receiverName, result.receiverId);
     
       } catch(e) {
@@ -2957,6 +2961,7 @@ async function renderPasReveal() {
       const allExceptReceiver = gState.players.filter(function(p) {
         return p.id !== receiverId;
       });
+    
       renderGreatnessDeck(allExceptReceiver);
     
       await new Promise(function(r) { setTimeout(r, 400); });
@@ -2980,7 +2985,9 @@ async function renderPasReveal() {
     
       await new Promise(function(r) { setTimeout(r, 2000); });
     
-      // Done animating — let the poll take over and render the prompt screen
+      // Manually sync phase so poll doesn't re-trigger
+      state.phase = 'greatness_giver';
+    
       greatnessState.animating = false;
       greatnessState.spinning = false;
     }
