@@ -1761,23 +1761,26 @@
     }
 
     function handlePhaseChange(data) {
+      // Don't interrupt card animations on the host
+      if (greatnessState.animating && state.isHost) return;
+    
       const isPas = state.currentGame === 'pick_a_side';
       const isGIY = state.currentGame === 'greatness_in_you';
     
       switch (data.phase) {
-        case 'lobby':                renderLobby(data);                                    break;
-        case 'submitting':           renderSubmitting(data);                               break;
-        case 'voting':               isPas ? renderPasVoting(data) : renderVoting(data);   break;
+        case 'lobby':                renderLobby(data);                                      break;
+        case 'submitting':           renderSubmitting(data);                                 break;
+        case 'voting':               isPas ? renderPasVoting(data) : renderVoting(data);     break;
         case 'revealing':            isPas ? renderPasReveal() : isGIY ? renderGreatnessDone() : renderRevealing(); break;
-        case 'revealing_pre':        renderRevealingPre();                                 break;
-        case 'defending':            renderDefending();                                    break;
-        case 'revealing_post':       renderRevealingPost();                                break;
-        case 'greatness_setup':      isGIY ? renderGreatnessSetup() : null;      break;
-        case 'greatness_setup_done': isGIY ? renderGreatnessSpin(data) : null;            break;
-        case 'greatness_spin':       isGIY ? renderGreatnessSpin(data) : null;            break;
-        case 'greatness_receiver':   isGIY ? renderGreatnessReceiver(data) : null;        break;
-        case 'greatness_giver':      isGIY ? renderGreatnessPrompt() : null;              break;
-        case 'done':                 isGIY ? renderGreatnessDone() : renderDone();        break;
+        case 'revealing_pre':        renderRevealingPre();                                   break;
+        case 'defending':            renderDefending();                                      break;
+        case 'revealing_post':       renderRevealingPost();                                  break;
+        case 'greatness_setup':      isGIY ? renderGreatnessSetup() : null;                 break;
+        case 'greatness_setup_done': isGIY ? renderGreatnessSpin(data) : null;              break;
+        case 'greatness_spin':       isGIY ? renderGreatnessSpin(data) : null;              break;
+        case 'greatness_receiver':   isGIY ? renderGreatnessReceiver(data) : null;          break;
+        case 'greatness_giver':      isGIY ? renderGreatnessPrompt() : null;                break;
+        case 'done':                 isGIY ? renderGreatnessDone() : renderDone();          break;
       }
     }
 
@@ -2724,7 +2727,8 @@ async function renderPasReveal() {
       receiverName: null,
       giverName: null,
       prompt: null,
-      spinning: false
+      spinning: false,
+      animating: false  // ← add this
     };
     
     async function renderGreatnessSetup() {
@@ -2897,6 +2901,7 @@ async function renderPasReveal() {
     async function runGreatnessSpin() {
       if (greatnessState.spinning) return;
       greatnessState.spinning = true;
+      greatnessState.animating = true; // ← block poll interruptions
     
       const btn = document.getElementById('btn-spin-receiver');
       btn.disabled = true;
@@ -2908,12 +2913,15 @@ async function renderPasReveal() {
           btn.disabled = false;
           btn.textContent = '🎰 Spin to find out';
           greatnessState.spinning = false;
+          greatnessState.animating = false;
           return;
         }
     
-        if (result.done) return;
+        if (result.done) {
+          greatnessState.animating = false;
+          return;
+        }
     
-        // Animate cards
         const gState = await run('getGreatnessState', [state.roomId]);
         const eligiblePlayers = gState.players.filter(function(p) {
           return gState.exemptIds.indexOf(p.id) === -1;
@@ -2921,7 +2929,6 @@ async function renderPasReveal() {
     
         await animateCardSpin(eligiblePlayers, result.receiverId);
     
-        // Show result text
         const resultEl = document.getElementById('greatness-spin-result');
         resultEl.style.display = 'block';
         resultEl.innerHTML =
@@ -2930,37 +2937,23 @@ async function renderPasReveal() {
     
         burstEmojis(['✨','⭐','💫','🌟'], 10);
     
-        // Move to giver spin after pause
-        setTimeout(async function() {
-          await runGiverSpin(result.receiverName, result.receiverId);
-        }, 2000);
+        await new Promise(function(r) { setTimeout(r, 2000); });
+    
+        await runGiverSpin(result.receiverName, result.receiverId);
     
       } catch(e) {
         console.error('Spin error', e);
         greatnessState.spinning = false;
+        greatnessState.animating = false;
       }
     }
     
     async function runGiverSpin(receiverName, receiverId) {
-      // Update heading
       document.getElementById('greatness-spin-heading').textContent = 'Who\'s sharing?';
       document.getElementById('greatness-spin-result').style.display = 'none';
     
-      // Re-render deck without receiver
       const gState = await run('getGreatnessState', [state.roomId]);
-      const giverPool = gState.players.filter(function(p) {
-        return p.id !== receiverId &&
-               gState.exemptIds.indexOf(p.id) === -1;
-      });
     
-      renderGreatnessDeck(giverPool.concat(
-        gState.players.filter(function(p) {
-          return p.id !== receiverId &&
-                 gState.exemptIds.indexOf(p.id) !== -1;
-        })
-      ));
-    
-      // Actually spin all players except receiver as eligible givers
       const allExceptReceiver = gState.players.filter(function(p) {
         return p.id !== receiverId;
       });
@@ -2969,7 +2962,11 @@ async function renderPasReveal() {
       await new Promise(function(r) { setTimeout(r, 400); });
     
       const giverResult = await run('spinGiver', [state.roomId]);
-      if (giverResult.error) return;
+      if (giverResult.error) {
+        greatnessState.animating = false;
+        greatnessState.spinning = false;
+        return;
+      }
     
       await animateCardSpin(allExceptReceiver, giverResult.giverId);
     
@@ -2981,11 +2978,11 @@ async function renderPasReveal() {
     
       burstEmojis(['💜','✨','💫'], 8);
     
-      // Move to prompt screen after pause
-      setTimeout(function() {
-        greatnessState.spinning = false;
-        // Phase change will be picked up by poll
-      }, 2000);
+      await new Promise(function(r) { setTimeout(r, 2000); });
+    
+      // Done animating — let the poll take over and render the prompt screen
+      greatnessState.animating = false;
+      greatnessState.spinning = false;
     }
     
     async function renderGreatnessPrompt() {
@@ -3014,7 +3011,7 @@ async function renderPasReveal() {
     async function runPromptSlot(finalPrompt, giverName) {
       const slotInner = document.getElementById('greatness-slot-inner');
     
-      // Fill slot with shuffled prompts for scroll effect
+      // More dummies = longer scroll = more satisfying
       const dummies = [
         "What's one thing that makes them great?",
         "What's a strength they have?",
@@ -3024,23 +3021,29 @@ async function renderPasReveal() {
         "What would you miss about them?",
         "What's their superpower?",
         "What have you learned from them?",
+        "What's one thing that makes them great?",
+        "What's a strength they have?",
+        "What do you admire about them?",
+        "What do they bring to the team?",
+        "What's something they do really well?",
         finalPrompt
       ];
     
+      slotInner.style.transform = 'translateY(0)';
+      slotInner.style.transition = 'none';
       slotInner.innerHTML = dummies.map(function(p) {
         return '<div class="greatness-slot-item">' + p + '</div>';
       }).join('');
     
       const itemHeight = 56;
       let currentIndex = 0;
-      let speed = 30;
-      let slowdownStart = dummies.length - 3;
+      let speed = 60;              // start slower so you can see it moving
+      const slowdownStart = dummies.length - 5;
     
       return new Promise(function(resolve) {
         function scroll() {
           if (currentIndex >= dummies.length - 1) {
-            // Land on final prompt
-            slotInner.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)';
+            slotInner.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
             slotInner.style.transform = 'translateY(-' + ((dummies.length - 1) * itemHeight) + 'px)';
             slotInner.querySelectorAll('.greatness-slot-item').forEach(function(el, i) {
               el.classList.toggle('active', i === dummies.length - 1);
@@ -3049,7 +3052,7 @@ async function renderPasReveal() {
             setTimeout(function() {
               showPromptCard(finalPrompt, giverName);
               resolve();
-            }, 400);
+            }, 600);
             return;
           }
     
@@ -3058,13 +3061,13 @@ async function renderPasReveal() {
           currentIndex++;
     
           if (currentIndex > slowdownStart) {
-            speed = Math.min(speed + 80, 320);
+            speed = Math.min(speed + 120, 500);
           }
     
           setTimeout(scroll, speed);
         }
     
-        setTimeout(scroll, 200);
+        setTimeout(scroll, 300);
       });
     }
     
@@ -3089,12 +3092,12 @@ async function renderPasReveal() {
     }
     
     function renderGreatnessReceiver(data) {
-      // Non-hosts see the spin screen while host is spinning
       if (!state.isHost) {
         showScreen('screen-greatness-spin');
         showExitBtn(false);
         document.getElementById('btn-spin-receiver').style.display = 'none';
         document.getElementById('greatness-spin-waiting').style.display = 'block';
+        document.getElementById('greatness-spin-waiting').textContent = 'The spotlight is being chosen... ✨';
         document.getElementById('greatness-spin-result').style.display = 'none';
       }
     }
