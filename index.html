@@ -1753,17 +1753,20 @@
     }
 
     function updateURL(roomId) {
-      if (window.history && window.history.replaceState) {
+      try {
         const url = new URL(window.location.href);
         url.searchParams.set('room', roomId);
         window.history.replaceState({}, '', url.toString());
+      } catch(e) {
+        console.warn('Could not update URL', e);
       }
     }
     
     function getRoomFromURL() {
       try {
         const url = new URL(window.location.href);
-        return url.searchParams.get('room');
+        const room = url.searchParams.get('room');
+        return room ? room.toUpperCase().trim() : null;
       } catch(e) {
         return null;
       }
@@ -1951,19 +1954,43 @@
       }
     });
 
-    // On load — check if URL has a room code and pre-fill it
     (function() {
       const roomFromURL = getRoomFromURL();
-      if (roomFromURL) {
+      if (roomFromURL && roomFromURL.length === 4) {
         const codeInput = document.getElementById('landing-code');
-        codeInput.value = roomFromURL.toUpperCase();
-        // Gently highlight it so they know it's pre-filled
+        const nameInput = document.getElementById('landing-name');
+    
+        codeInput.value = roomFromURL;
+    
+        // Highlight the code field
         codeInput.style.borderColor = 'var(--accent)';
         codeInput.style.boxShadow = '0 0 0 3px rgba(124, 106, 247, 0.18)';
+    
+        // Show a banner so it's obvious
+        const status = document.getElementById('landing-status');
+        status.innerHTML =
+          '<div style="' +
+            'background: rgba(124,106,247,0.1);' +
+            'border: 1px solid var(--accent);' +
+            'border-radius: 8px;' +
+            'padding: 10px 14px;' +
+            'color: var(--accent);' +
+            'font-size: 0.9rem;' +
+            'font-weight: 600;' +
+            'text-align: center;' +
+            'animation: popIn 0.4s cubic-bezier(0.22,1,0.36,1) both' +
+          '">' +
+            '👋 Room <strong>' + roomFromURL + '</strong> is ready — enter your name to join' +
+          '</div>';
+    
+        // Focus name field since code is already filled
+        setTimeout(function() { nameInput.focus(); }, 100);
+    
+        // Fade out the highlight after 3 seconds
         setTimeout(function() {
           codeInput.style.borderColor = '';
           codeInput.style.boxShadow = '';
-        }, 2000);
+        }, 3000);
       }
     })();
   </script>
