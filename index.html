@@ -2090,6 +2090,103 @@
       }
     }
 
+    function renderModePicker() {
+      showScreen('screen-mode-picker');
+      showExitBtn(false);
+    }
+    
+    async function renderQuizPicker() {
+      showScreen('screen-quiz-picker');
+      showExitBtn(false);
+    
+      const quizzes = await run('getQuizList', []);
+      const container = document.getElementById('quiz-list');
+      container.innerHTML = quizzes.map(function(q) {
+        return '<div class="game-card" data-id="' + q.id + '">' +
+          '<div class="game-emoji">' + q.emoji + '</div>' +
+          '<div class="game-info">' +
+            '<div class="game-name">' + q.label + '</div>' +
+            '<div class="game-desc">' + q.description + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    
+      var selectedQuizId = null;
+    
+      container.querySelectorAll('.game-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+          container.querySelectorAll('.game-card').forEach(function(c) {
+            c.classList.remove('selected');
+          });
+          card.classList.add('selected');
+          selectedQuizId = card.dataset.id;
+          const btn = document.getElementById('btn-start-quiz');
+          btn.disabled = false;
+          btn.textContent = 'Start quiz →';
+        });
+      });
+    
+      document.getElementById('btn-start-quiz').onclick = async function() {
+        if (!selectedQuizId) return;
+        const btn = document.getElementById('btn-start-quiz');
+        btn.disabled = true;
+        btn.textContent = 'Starting...';
+        state.currentGame = 'quiz_' + selectedQuizId;
+        quizState.quizId = selectedQuizId;
+        await run('startQuiz', [state.roomId, selectedQuizId]);
+      };
+    }
+    
+    document.getElementById('btn-back-to-modes').addEventListener('click', function() {
+      renderModePicker();
+    });
+    
+    document.getElementById('mode-games').addEventListener('click', async function() {
+      showScreen('screen-lobby');
+      document.getElementById('lobby-code').textContent = state.roomId;
+      if (state.isHost) {
+        document.getElementById('host-controls').style.display = 'flex';
+        document.getElementById('lobby-waiting-hint').style.display = 'none';
+        await loadGamePicker();
+      } else {
+        document.getElementById('host-controls').style.display = 'none';
+        document.getElementById('lobby-waiting-hint').style.display = 'block';
+      }
+    });
+    
+    document.getElementById('mode-quiz').addEventListener('click', async function() {
+      if (state.isHost) {
+        await renderQuizPicker();
+      } else {
+        showScreen('screen-quiz-waiting-start');
+      }
+    });
+    
+    async function startQuizFlow(quizId) {
+      quizState.quizId = quizId;
+      quizState.currentQuestion = 0;
+      quizState.answers = [];
+    
+      const data = await run('getQuizQuestions', [quizId, state.playerId]);
+      if (data.error) return;
+    
+      quizState.questions = data.questions;
+      renderQuizQuestion();
+    }
+    
+    function renderQuizQuestion() {
+      showScreen('screen-quiz-question');
+      showExitBtn(true);
+    
+      const q = quizState.questions[quizState.currentQuestion];
+      const total = quizState.questions.length;
+      const current = quizState.currentQuestion + 1;
+      const pct = Math.round((quizState.currentQuestion / total) * 100);
+    
+      var quizLabel = (quizState.quizId || '').replace(/_/g, ' ');
+      document.getElementById('quiz-label').textContent = '🧠 ' + quizLabel;
+    }
+    
     function shake(id) {
       const el = document.getElementById(id);
       el.style.animation = 'none';
@@ -3658,28 +3755,21 @@ async function renderPasReveal() {
     document.getElementById('btn-create').addEventListener('click', async function() {
       const name = document.getElementById('landing-name').value.trim();
       if (!name) { shake('landing-name'); return; }
-
       const btn = document.getElementById('btn-create');
       btn.disabled = true;
       btn.textContent = 'Creating room...';
-
       try {
         const data = await run('createRoom', [name]);
         if (data.error) throw new Error(data.error);
-
         state.roomId = data.roomId;
         state.playerId = data.playerId;
         state.playerName = name;
         state.isHost = true;
         state.phase = 'lobby';
-        
-        updateURL(state.roomId); // ← add this line
-
-        showScreen('screen-lobby');
-        document.getElementById('lobby-code').textContent = state.roomId;
+    
+        updateURL(state.roomId);
+        renderModePicker();
         renderPlayerChips([{ id: state.playerId, name: name }]);
-        await loadGamePicker();
-        document.getElementById('host-controls').style.display = 'flex';
         startPolling();
       } catch(e) {
         document.getElementById('landing-status').textContent = 'Something went wrong. Try again.';
@@ -3869,6 +3959,27 @@ async function renderPasReveal() {
       } catch(e) {
         btn.disabled = false;
         btn.textContent = 'Next spotlight →';
+      }
+    });
+
+    document.getElementById('mode-games').addEventListener('click', async function() {
+      showScreen('screen-lobby');
+      document.getElementById('lobby-code').textContent = state.roomId;
+      if (state.isHost) {
+        document.getElementById('host-controls').style.display = 'flex';
+        document.getElementById('lobby-waiting-hint').style.display = 'none';
+        await loadGamePicker();
+      } else {
+        document.getElementById('host-controls').style.display = 'none';
+        document.getElementById('lobby-waiting-hint').style.display = 'block';
+      }
+    });
+    
+    document.getElementById('mode-quiz').addEventListener('click', async function() {
+      if (state.isHost) {
+        await renderQuizPicker();
+      } else {
+        showScreen('screen-quiz-waiting-start');
       }
     });
 
