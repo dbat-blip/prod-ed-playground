@@ -1382,6 +1382,298 @@
       font-style: italic;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+    /* ── Mode picker ── */
+    
+    .mode-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .mode-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+      text-align: center;
+    }
+    
+    .mode-card:nth-child(2) { animation-delay: 0.1s; }
+    
+    .mode-card:hover {
+      border-color: var(--accent);
+      background: rgba(124, 106, 247, 0.06);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(124, 106, 247, 0.15);
+    }
+    
+    .mode-emoji { font-size: 2.5rem; }
+    .mode-name  { font-weight: 800; font-size: 1rem; }
+    .mode-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.3; }
+    
+    /* ── Quiz question ── */
+    
+    .quiz-progress-bar-wrap {
+      background: var(--bg);
+      border-radius: 999px;
+      height: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-top: -8px;
+    }
+    
+    .quiz-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      border-radius: 999px;
+      transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    
+    .quiz-answer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .quiz-answer-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 14px 18px;
+      width: 100%;
+      text-align: left;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+      line-height: 1.4;
+    }
+    
+    .quiz-answer-btn:nth-child(1) { animation-delay: 0.04s; }
+    .quiz-answer-btn:nth-child(2) { animation-delay: 0.08s; }
+    .quiz-answer-btn:nth-child(3) { animation-delay: 0.12s; }
+    .quiz-answer-btn:nth-child(4) { animation-delay: 0.16s; }
+    .quiz-answer-btn:nth-child(5) { animation-delay: 0.20s; }
+    
+    .quiz-answer-btn:hover {
+      border-color: var(--accent);
+      background: rgba(124, 106, 247, 0.06);
+      transform: translateX(4px);
+    }
+    
+    .quiz-answer-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+      animation: bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+      transform: none;
+    }
+    
+    .quiz-answer-btn:disabled {
+      cursor: default;
+      transform: none;
+    }
+    
+    /* ── Quiz result ── */
+    
+    .quiz-profile-card {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      box-shadow: 0 0 24px rgba(124, 106, 247, 0.12);
+    }
+    
+    .quiz-profile-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+    
+    .quiz-profile-tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.4;
+    }
+    
+    .quiz-profile-strength {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    
+    .quiz-profile-tradeoff {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    
+    .quiz-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .quiz-dim-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .quiz-dim-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      width: 110px;
+      flex-shrink: 0;
+      color: var(--muted);
+    }
+    
+    .quiz-dim-label.primary { color: var(--accent); font-weight: 800; }
+    
+    .quiz-dim-bar-wrap {
+      flex: 1;
+      background: var(--bg);
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    
+    .quiz-dim-bar {
+      height: 100%;
+      background: var(--border);
+      border-radius: 999px;
+      animation: barGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .quiz-dim-bar.primary {
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+    }
+    
+    .quiz-dim-pct {
+      font-size: 0.78rem;
+      color: var(--muted);
+      width: 30px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    
+    .quiz-prompt-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.5;
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .quiz-prompt-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    
+    /* ── Group reveal ── */
+    
+    .group-results-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .group-result-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .group-result-card.primary-highlight {
+      border-color: var(--accent);
+    }
+    
+    .group-result-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .group-result-info { flex: 1; }
+    
+    .group-result-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    
+    .group-result-profile {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    
+    .group-result-tagline {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+    
+    .quiz-group-prompt {
+      background: rgba(124, 106, 247, 0.06);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text);
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    
+    .quiz-group-prompt-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -1608,6 +1900,87 @@
     </div>
   </div>
 
+  <!-- SCREEN: Mode Picker (replaces direct game picker in lobby) -->
+  <div id="screen-mode-picker" class="screen">
+    <div class="card">
+      <p class="label">What are we playing?</p>
+      <div class="mode-cards">
+        <div class="mode-card" id="mode-games">
+          <div class="mode-emoji">🎮</div>
+          <div class="mode-name">Games</div>
+          <div class="mode-desc">Quick, fun, and social</div>
+        </div>
+        <div class="mode-card" id="mode-quiz">
+          <div class="mode-emoji">🧠</div>
+          <div class="mode-name">Personality Lab</div>
+          <div class="mode-desc">Reflective quizzes, group reveal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SCREEN: Quiz Picker -->
+  <div id="screen-quiz-picker" class="screen">
+    <div class="card">
+      <p class="label">🧠 Personality Lab</p>
+      <div id="quiz-list" class="game-list"></div>
+      <button id="btn-start-quiz" disabled>Choose a quiz to start</button>
+      <button id="btn-back-to-modes" class="secondary" style="margin-top:-4px">← Back</button>
+    </div>
+  </div>
+  
+  <!-- SCREEN: Quiz Waiting (non-host) -->
+  <div id="screen-quiz-waiting-start" class="screen">
+    <div class="card">
+      <p class="label">🧠 Personality Lab</p>
+      <div class="greatness-waiting">
+        <div style="font-size:3rem">🧠</div>
+        <h2>Get ready...</h2>
+        <p class="hint">Your host is choosing a quiz</p>
+        <div class="waiting-dots" style="margin-top:8px">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SCREEN: Quiz Question -->
+  <div id="screen-quiz-question" class="screen">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <p class="label" id="quiz-label">🧠 Quiz</p>
+        <p class="hint" id="quiz-progress">1 of 10</p>
+      </div>
+      <div class="quiz-progress-bar-wrap">
+        <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+      </div>
+      <h2 id="quiz-question-text"></h2>
+      <div id="quiz-answers" class="quiz-answer-list"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Quiz My Result -->
+  <div id="screen-quiz-result" class="screen">
+    <div class="card">
+      <p class="label" id="result-quiz-label">🧠 Your Result</p>
+      <div id="result-profile-card" class="quiz-profile-card"></div>
+      <div id="result-breakdown" class="quiz-breakdown"></div>
+      <div id="result-prompt-box" class="quiz-prompt-box"></div>
+      <div id="result-waiting" class="status-bar" style="text-align:center; margin-top:4px"></div>
+    </div>
+  </div>
+  
+  <!-- SCREEN: Quiz Group Reveal -->
+  <div id="screen-quiz-reveal" class="screen">
+    <div class="card">
+      <p class="label" id="reveal-quiz-label">🧠 The Results Are In</p>
+      <div id="group-results-grid" class="group-results-grid"></div>
+      <div id="group-discussion-prompt" class="quiz-group-prompt"></div>
+      <button id="btn-quiz-play-again">Try another quiz →</button>
+      <button id="btn-quiz-back-to-games" class="secondary" style="margin-top:-4px">Back to games</button>
+    </div>
+  </div>
+
   <script>
     // ── State ──────────────────────────────────────────────────────────────────
 
@@ -1627,6 +2000,14 @@
       selectedCount: null,
       selectedTimer: null,
       pollInterval: null
+    };
+
+    var quizState = {
+      quizId: null,
+      questions: [],
+      currentQuestion: 0,
+      answers: [],
+      result: null
     };
 
     const API = 'https://script.google.com/a/macros/clearcompany.com/s/AKfycbxYbQxio3jl4KCG_iN6nH_zZTkdKR3JuTGBcwmGHQPthUJWtapyT_6vZjXcmSkbknPt/exec';
@@ -1661,6 +2042,15 @@
         case 'completeSpotlight':  return { action: 'completeSpotlight',  roomId: args[0] };
         case 'getGreatnessState':  return { action: 'getGreatnessState',  roomId: args[0] };
         case 'getAllPasResults': return { action: 'getAllPasResults', roomId: args[0] };
+        case 'getQuizList':         return { action: 'getQuizList' };
+        case 'startQuiz':           return { action: 'startQuiz',          roomId: args[0], quizId: args[1] };
+        case 'getQuizQuestions':    return { action: 'getQuizQuestions',   quizId: args[0], playerId: args[1] };
+        case 'submitQuizAnswer':    return { action: 'submitQuizAnswer',   roomId: args[0], quizId: args[1], playerId: args[2], questionIndex: args[3], answerDim: args[4] };
+        case 'submitQuizResult':    return { action: 'submitQuizResult',   roomId: args[0], quizId: args[1], playerId: args[2] };
+        case 'getMyQuizResult':     return { action: 'getMyQuizResult',    roomId: args[0], quizId: args[1], playerId: args[2] };
+        case 'getGroupQuizResults': return { action: 'getGroupQuizResults',roomId: args[0], quizId: args[1] };
+        case 'triggerQuizReveal':   return { action: 'triggerQuizReveal',  roomId: args[0] };
+        case 'resetQuiz':           return { action: 'resetQuiz',          roomId: args[0] };
         default:             return { action: fnName };
       }
     }
@@ -1734,6 +2124,105 @@
         '</div>';
     }
 
+    // ── Mode picker ────────────────────────────────────────────────────────────────
+      // Waiting indicator
+      updateQuizWaitingStatus();
+    }
+    
+    async function updateQuizWaitingStatus() {
+      const groupData = await run('getGroupQuizResults', [state.roomId, quizState.quizId]);
+      if (groupData.error) return;
+    
+      const remaining = groupData.totalPlayers - groupData.finishedCount;
+      const waitingEl = document.getElementById('result-waiting');
+    
+      if (remaining > 0) {
+        waitingEl.innerHTML = buildProgressHTML(groupData.finishedCount, groupData.totalPlayers, 'finished');
+        if (state.isHost && groupData.finishedCount >= 2) {
+          waitingEl.innerHTML +=
+            '<button id="btn-trigger-reveal" style="margin-top:10px; font-size:0.85rem; padding:10px">' +
+              'Show results early →' +
+            '</button>';
+          var revealBtn = document.getElementById('btn-trigger-reveal');
+          if (revealBtn) {
+            revealBtn.addEventListener('click', async function() {
+              revealBtn.disabled = true;
+              await run('triggerQuizReveal', [state.roomId]);
+            });
+          }
+        }
+      } else {
+        waitingEl.innerHTML = '<div style="color:var(--success);font-weight:700">Everyone\'s done! Revealing results... ✨</div>';
+      }
+    }
+    
+    // ── Group reveal ───────────────────────────────────────────────────────────────
+    
+    async function renderGroupQuizReveal() {
+      showScreen('screen-quiz-reveal');
+      showExitBtn(true);
+    
+      const data = await run('getGroupQuizResults', [state.roomId, quizState.quizId]);
+      if (data.error) return;
+    
+      document.getElementById('reveal-quiz-label').textContent = '🧠 ' + data.quizLabel + ' — Results';
+    
+      const grid = document.getElementById('group-results-grid');
+      grid.innerHTML = data.playerResults.map(function(p, i) {
+        const initial = p.name.charAt(0).toUpperCase();
+        const primaryDim = p.primaryDim ? p.primaryDim.split('+')[0] : null;
+        const dims = data.dimensions;
+        return '<div class="group-result-card" style="animation-delay:' + (i * 0.1) + 's">' +
+          '<div class="group-result-avatar">' + initial + '</div>' +
+          '<div class="group-result-info">' +
+            '<div class="group-result-name">' + p.name + '</div>' +
+            '<div class="group-result-profile">' + p.profileName + '</div>' +
+            (p.tagline ? '<div class="group-result-tagline">"' + p.tagline + '"</div>' : '') +
+          '</div>' +
+        '</div>';
+      }).join('');
+    
+      document.getElementById('group-discussion-prompt').innerHTML =
+        '<div class="quiz-group-prompt-label">💬 Team discussion</div>' +
+        data.groupPrompt;
+    
+      burstEmojis(['🧠','✨','💡','🎯','⭐'], 12);
+    }
+    
+    // ── Phase handling for quizzes ─────────────────────────────────────────────────
+    
+    // Add these to handlePhaseChange switch:
+    // case 'quiz_active':  handleQuizActive(data); break;
+    // case 'quiz_reveal':  renderGroupQuizReveal(); break;
+    
+    function handleQuizActive(data) {
+      // Extract quizId from current_game field e.g. "quiz_decision_making_dna"
+      var currentGame = data.currentGame || state.currentGame || '';
+      var quizId = currentGame.replace('quiz_', '');
+      if (!quizId) return;
+      quizState.quizId = quizId;
+      startQuizFlow(quizId);
+    }
+    
+    // ── Quiz buttons ───────────────────────────────────────────────────────────────
+    
+    document.getElementById('btn-quiz-play-again').addEventListener('click', async function() {
+      const btn = document.getElementById('btn-quiz-play-again');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      quizState.quizId = null;
+      quizState.questions = [];
+      quizState.currentQuestion = 0;
+      quizState.answers = [];
+      await run('resetQuiz', [state.roomId]);
+    });
+    
+    document.getElementById('btn-quiz-back-to-games').addEventListener('click', async function() {
+      const btn = document.getElementById('btn-quiz-back-to-games');
+      btn.disabled = true;
+      await run('resetQuiz', [state.roomId]);
+    });
+
     // ── Polling ────────────────────────────────────────────────────────────────
 
     function startPolling() {
@@ -1747,8 +2236,15 @@
         const data = await run('getRoom', [state.roomId]);
         if (data.error) return;
         state.players = data.players;
-        if (data.currentGame) state.currentGame = data.currentGame; // ← only update if not empty
+        if (data.currentGame) state.currentGame = data.currentGame;
         if (data.defenseTimer) state.selectedTimer = data.defenseTimer;
+    
+        // Keep quizState.quizId in sync
+        if (data.currentGame && data.currentGame.indexOf('quiz_') === 0) {
+          var qid = data.currentGame.replace('quiz_', '');
+          if (!quizState.quizId) quizState.quizId = qid;
+        }
+    
         if (data.phase !== state.phase) {
           state.phase = data.phase;
           handlePhaseChange(data);
@@ -1761,11 +2257,11 @@
     }
 
     function handlePhaseChange(data) {
-      // Don't interrupt card animations on the host
       if (greatnessState.animating && state.isHost) return;
     
       const isPas = state.currentGame === 'pick_a_side';
       const isGIY = state.currentGame === 'greatness_in_you';
+      const isQuiz = state.currentGame && state.currentGame.indexOf('quiz_') === 0;
     
       switch (data.phase) {
         case 'lobby':                renderLobby(data);                                      break;
@@ -1780,6 +2276,8 @@
         case 'greatness_spin':       isGIY ? renderGreatnessSpin(data) : null;              break;
         case 'greatness_receiver':   isGIY ? renderGreatnessReceiver(data) : null;          break;
         case 'greatness_giver':      isGIY ? renderGreatnessPrompt() : null;                break;
+        case 'quiz_active':          handleQuizActive(data);                                 break;
+        case 'quiz_reveal':          renderGroupQuizReveal();                                break;
         case 'done':                 isGIY ? renderGreatnessDone() : renderDone();          break;
       }
     }
@@ -1791,7 +2289,6 @@
       }
       if (data.phase === 'voting') {
         if (state.currentGame === 'pick_a_side') {
-          // If fact index changed, a new round started — re-render the whole voting screen
           if (data.currentFactIndex !== state.currentFactIndex) {
             state.currentFactIndex = data.currentFactIndex;
             state.hasVoted = false;
@@ -1809,6 +2306,13 @@
       }
       if (data.phase === 'lobby') {
         renderPlayerChips(data.players);
+      }
+      // Update waiting indicator on result screen
+      if (data.phase === 'quiz_active') {
+        const waitingEl = document.getElementById('result-waiting');
+        if (waitingEl && waitingEl.closest('.screen.active')) {
+          updateQuizWaitingStatus();
+        }
       }
     }
 
@@ -1828,18 +2332,19 @@
     // ── Lobby ──────────────────────────────────────────────────────────────────
 
     async function renderLobby(data) {
-      showScreen('screen-lobby');
       showExitBtn(false);
       document.getElementById('lobby-code').textContent = state.roomId;
-      renderPlayerChips(data.players || []);
-
+    
       if (state.isHost) {
-        document.getElementById('host-controls').style.display = 'flex';
-        document.getElementById('lobby-waiting-hint').style.display = 'none';
-        await loadGamePicker();
+        // Show mode picker for host
+        renderModePicker();
+        // But still update player chips in background
+        renderPlayerChips(data.players || []);
       } else {
+        showScreen('screen-lobby');
         document.getElementById('host-controls').style.display = 'none';
         document.getElementById('lobby-waiting-hint').style.display = 'block';
+        renderPlayerChips(data.players || []);
       }
     }
 
