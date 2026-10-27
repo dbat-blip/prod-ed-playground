@@ -2185,44 +2185,112 @@
     
       var quizLabel = (quizState.quizId || '').replace(/_/g, ' ');
       document.getElementById('quiz-label').textContent = '🧠 ' + quizLabel;
+      document.getElementById('quiz-progress').textContent = current + ' of ' + total;
+      document.getElementById('quiz-progress-bar').style.width = pct + '%';
+    
+      const questionEl = document.getElementById('quiz-question-text');
+      questionEl.style.animation = 'none';
+      questionEl.offsetHeight;
+      questionEl.style.animation = 'fadeSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both';
+      questionEl.textContent = q.text;
+    
+      const answersEl = document.getElementById('quiz-answers');
+      answersEl.innerHTML = q.answers.map(function(a, i) {
+        return '<button class="quiz-answer-btn" data-dim="' + a.dim + '" style="animation-delay:' + (i * 0.06) + 's">' +
+          a.text +
+        '</button>';
+      }).join('');
+    
+      answersEl.querySelectorAll('.quiz-answer-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          handleQuizAnswer(btn.dataset.dim, btn);
+        });
+      });
     }
     
-    function shake(id) {
-      const el = document.getElementById(id);
-      el.style.animation = 'none';
-      el.style.borderColor = '#f87171';
-      el.style.boxShadow = '0 0 0 3px rgba(248,113,113,0.2)';
-      setTimeout(function() {
-        el.style.animation = 'wiggle 0.35s ease both';
-        setTimeout(function() {
-          el.style.borderColor = '';
-          el.style.boxShadow = '';
-          el.style.animation = '';
-        }, 600);
-      }, 10);
+    async function handleQuizAnswer(dim, btn) {
+      document.querySelectorAll('.quiz-answer-btn').forEach(function(b) {
+        b.disabled = true;
+        b.style.opacity = b === btn ? '1' : '0.4';
+      });
+      btn.classList.add('selected');
+    
+      quizState.answers.push(dim);
+    
+      await run('submitQuizAnswer', [
+        state.roomId,
+        quizState.quizId,
+        state.playerId,
+        quizState.currentQuestion,
+        dim
+      ]);
+    
+      setTimeout(async function() {
+        quizState.currentQuestion++;
+        if (quizState.currentQuestion >= quizState.questions.length) {
+          await finishQuiz();
+        } else {
+          renderQuizQuestion();
+        }
+      }, 400);
     }
-
-    function buildProgressHTML(count, total, label) {
-      const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-      return '<div style="display:flex;flex-direction:column;gap:6px">' +
-        '<span>' + count + ' of ' + total + ' ' + label + '</span>' +
-        '<div class="progress-wrap"><div class="progress-bar" style="width:' + pct + '%"></div></div>' +
-        '</div>';
+    
+    async function finishQuiz() {
+      const result = await run('submitQuizResult', [
+        state.roomId,
+        quizState.quizId,
+        state.playerId
+      ]);
+      if (result.error) return;
+      quizState.result = result;
+      await renderMyQuizResult(result);
     }
-
-    function buildTallyHTML(tally) {
-      return '<div class="tally-box agree">' +
-          '<div class="tally-label">Agree</div>' +
-          '<div class="tally-number">' + tally.agree + '</div>' +
+    
+    async function renderMyQuizResult() {
+      showScreen('screen-quiz-result');
+      showExitBtn(true);
+    
+      const data = await run('getMyQuizResult', [
+        state.roomId,
+        quizState.quizId,
+        state.playerId
+      ]);
+      if (data.error) return;
+    
+      document.getElementById('result-quiz-label').textContent = '🧠 ' + data.quizLabel;
+    
+      const primaryDim = data.primaryDim.split('+')[0];
+      document.getElementById('result-profile-card').innerHTML =
+        '<div class="quiz-profile-name">' + data.profileName + '</div>' +
+        '<div class="quiz-profile-tagline">"' + data.tagline + '"</div>' +
+        '<div class="quiz-profile-strength" style="margin-top:8px">' +
+          '<strong style="color:var(--success)">Strength:</strong> ' + (data.profile.strength || '') +
         '</div>' +
-        '<div class="tally-box disagree">' +
-          '<div class="tally-label">Disagree</div>' +
-          '<div class="tally-number">' + tally.disagree + '</div>' +
+        '<div class="quiz-profile-tradeoff">' +
+          '<strong>Watch out for:</strong> ' + (data.profile.tradeoff || '') +
         '</div>';
-    }
-
-    // ── Mode picker ────────────────────────────────────────────────────────────────
-      // Waiting indicator
+    
+      const dims = data.dimensions;
+      const scores = data.scores;
+      const total = Object.values(scores).reduce(function(a, b) { return a + b; }, 0) || 1;
+    
+      document.getElementById('result-breakdown').innerHTML =
+        Object.keys(dims).map(function(dim, i) {
+          const pct = Math.round((scores[dim] || 0) / total * 100);
+          const isPrimary = dim === primaryDim;
+          return '<div class="quiz-dim-row" style="animation-delay:' + (i * 0.07) + 's">' +
+            '<div class="quiz-dim-label ' + (isPrimary ? 'primary' : '') + '">' + dims[dim].label + '</div>' +
+            '<div class="quiz-dim-bar-wrap">' +
+              '<div class="quiz-dim-bar ' + (isPrimary ? 'primary' : '') + '" style="width:' + pct + '%"></div>' +
+            '</div>' +
+            '<div class="quiz-dim-pct">' + pct + '%</div>' +
+          '</div>';
+        }).join('');
+    
+      document.getElementById('result-prompt-box').innerHTML =
+        '<div class="quiz-prompt-label">Your conversation starter</div>' +
+        (data.profile.prompt || '');
+    
       updateQuizWaitingStatus();
     }
     
@@ -2232,6 +2300,7 @@
     
       const remaining = groupData.totalPlayers - groupData.finishedCount;
       const waitingEl = document.getElementById('result-waiting');
+      if (!waitingEl) return;
     
       if (remaining > 0) {
         waitingEl.innerHTML = buildProgressHTML(groupData.finishedCount, groupData.totalPlayers, 'finished');
@@ -2252,7 +2321,6 @@
         waitingEl.innerHTML = '<div style="color:var(--success);font-weight:700">Everyone\'s done! Revealing results... ✨</div>';
       }
     }
-    
     // ── Group reveal ───────────────────────────────────────────────────────────────
     
     async function renderGroupQuizReveal() {
