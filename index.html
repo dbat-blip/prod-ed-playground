@@ -6,7 +6,6 @@
   <title>Prod Ed Team Playground</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg: #0f0f13;
       --surface: #1a1a24;
@@ -19,7 +18,6 @@
       --danger: #f87171;
       --radius: 16px;
     }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -31,7 +29,6 @@
       padding: 20px;
       overflow-x: hidden;
     }
-
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -82,13 +79,11 @@
       0%, 100% { transform: scale(1) rotate(-3deg); }
       50%       { transform: scale(1.15) rotate(3deg); }
     }
-
     .screen { display: none; width: 100%; max-width: 500px; }
     .screen.active {
       display: block;
       animation: fadeSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -100,7 +95,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .card::before {
       content: '';
       position: absolute;
@@ -110,18 +104,14 @@
       background-size: 200% 100%;
       animation: shimmer 3s linear infinite;
     }
-
     .card.fire::before {
       background: linear-gradient(90deg, #f97316, #ef4444, #f97316);
       background-size: 200% 100%;
       animation: shimmer 2s linear infinite;
     }
-
     h1 { font-size: 2rem; font-weight: 800; }
     h2 { font-size: 1.4rem; font-weight: 700; line-height: 1.3; }
-
     .subtitle { color: var(--muted); font-size: 1rem; margin-top: -6px; }
-
     .label {
       font-size: 0.75rem;
       font-weight: 700;
@@ -129,11 +119,8 @@
       text-transform: uppercase;
       color: var(--accent);
     }
-
     .label.fire { color: #f97316; }
-
     .hint { font-size: 0.85rem; color: var(--muted); }
-
     input, textarea {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -147,13 +134,11 @@
       font-family: inherit;
       transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
     }
-
     input:focus, textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(124, 106, 247, 0.18);
       transform: scale(1.01);
     }
-
     button {
       background: var(--accent);
       border: none;
@@ -168,15 +153,12 @@
       position: relative;
       overflow: hidden;
     }
-
     button:hover {
       background: var(--accent-hover);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(124, 106, 247, 0.35);
     }
-
     button:active { transform: translateY(0) scale(0.97); box-shadow: none; }
-
     button:disabled {
       background: var(--border);
       color: var(--muted);
@@ -184,42 +166,33 @@
       transform: none;
       box-shadow: none;
     }
-
     button.secondary {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text);
       box-shadow: none;
     }
-
     button.secondary:hover {
       border-color: var(--accent);
       color: var(--accent);
       background: rgba(124, 106, 247, 0.08);
     }
-
     button.success {
       background: var(--success);
       animation: bounce 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     button.danger {
       background: var(--danger);
     }
-
     button.danger:hover {
       background: #ef4444;
       box-shadow: 0 6px 20px rgba(248, 113, 113, 0.35);
     }
-
-    /* ── Agree / Disagree buttons ── */
-
     .agree-disagree {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-
     .btn-agree {
       background: rgba(76, 175, 136, 0.12);
       border: 2px solid var(--success);
@@ -231,19 +204,16 @@
       padding: 18px;
       transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
     }
-
     .btn-agree:hover {
       background: rgba(76, 175, 136, 0.25);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(76, 175, 136, 0.3);
     }
-
     .btn-agree.selected {
       background: var(--success);
       color: white;
       animation: bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .btn-disagree {
       background: rgba(248, 113, 113, 0.12);
       border: 2px solid var(--danger);
@@ -255,35 +225,28 @@
       padding: 18px;
       transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
     }
-
     .btn-disagree:hover {
       background: rgba(248, 113, 113, 0.25);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(248, 113, 113, 0.3);
     }
-
     .btn-disagree.selected {
       background: var(--danger);
       color: white;
       animation: bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .btn-agree:disabled, .btn-disagree:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
     }
-
-    /* ── Divider ── */
-
     .divider {
       text-align: center;
       color: var(--muted);
       font-size: 0.85rem;
       position: relative;
     }
-
     .divider::before, .divider::after {
       content: '';
       position: absolute;
@@ -292,10 +255,8 @@
       height: 1px;
       background: var(--border);
     }
-
     .divider::before { left: 0; }
     .divider::after  { right: 0; }
-
     .room-code {
       font-size: 3.5rem;
       font-weight: 900;
@@ -305,9 +266,7 @@
       animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
       text-shadow: 0 0 30px rgba(124, 106, 247, 0.4);
     }
-
     .player-list { display: flex; flex-wrap: wrap; gap: 8px; min-height: 44px; }
-
     .player-chip {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -320,13 +279,8 @@
       gap: 6px;
       white-space: nowrap;
     }
-
     .player-chip.me { border-color: var(--accent); color: var(--accent); }
-
-    /* ── Game picker ── */
-
     .game-list { display: flex; flex-direction: column; gap: 10px; }
-
     .game-card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -339,35 +293,27 @@
       transition: border-color 0.2s, background 0.2s, transform 0.2s;
       animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .game-card:nth-child(1) { animation-delay: 0.05s; }
     .game-card:nth-child(2) { animation-delay: 0.12s; }
     .game-card:nth-child(3) { animation-delay: 0.19s; }
-
     .game-card:hover {
       border-color: var(--accent);
       background: rgba(124, 106, 247, 0.06);
       transform: translateX(4px);
     }
-
     .game-card.selected {
       border-color: var(--accent);
       background: rgba(124, 106, 247, 0.12);
     }
-
     .game-emoji { font-size: 2rem; flex-shrink: 0; }
     .game-info { display: flex; flex-direction: column; gap: 3px; }
     .game-name { font-weight: 700; font-size: 1rem; }
     .game-desc { font-size: 0.8rem; color: var(--muted); }
-
-    /* ── Count picker ── */
-
     .count-picker {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .count-btn {
       flex: 1;
       min-width: 48px;
@@ -382,16 +328,12 @@
       transition: border-color 0.2s, background 0.2s;
       width: auto;
     }
-
     .count-btn:hover { border-color: var(--accent); }
     .count-btn.selected {
       border-color: var(--accent);
       background: var(--accent);
       color: white;
     }
-
-    /* ── Fact / prompt box ── */
-
     .fact-box {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -403,15 +345,8 @@
       font-style: italic;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
-    .fact-box.fire {
-      border-left-color: #f97316;
-    }
-
-    /* ── Vote buttons ── */
-
+    .fact-box.fire { border-left-color: #f97316; }
     .vote-list { display: flex; flex-direction: column; gap: 8px; }
-
     .vote-btn {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -429,48 +364,38 @@
       transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
       animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .vote-btn:nth-child(1) { animation-delay: 0.05s; }
     .vote-btn:nth-child(2) { animation-delay: 0.10s; }
     .vote-btn:nth-child(3) { animation-delay: 0.15s; }
     .vote-btn:nth-child(4) { animation-delay: 0.20s; }
     .vote-btn:nth-child(5) { animation-delay: 0.25s; }
-
     .vote-btn:hover {
       border-color: var(--accent);
       background: rgba(124, 106, 247, 0.08);
       transform: translateX(6px);
       box-shadow: -3px 0 0 var(--accent);
     }
-
     .vote-btn.selected {
       border-color: var(--accent);
       background: var(--accent);
       color: white;
       animation: bounce 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .vote-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
-
     .vote-btn-arrow {
       opacity: 0;
       transform: translateX(-6px);
       transition: opacity 0.2s, transform 0.2s;
       color: var(--accent);
     }
-
     .vote-btn:hover .vote-btn-arrow { opacity: 1; transform: translateX(0); }
     .vote-btn.selected .vote-btn-arrow { opacity: 1; transform: translateX(0); color: white; }
-
-    /* ── Status bar ── */
-
     .status-bar {
       font-size: 0.85rem;
       color: var(--muted);
       text-align: center;
       min-height: 24px;
     }
-
     .progress-wrap {
       background: var(--bg);
       border-radius: 999px;
@@ -478,16 +403,13 @@
       overflow: hidden;
       border: 1px solid var(--border);
     }
-
     .progress-bar {
       height: 100%;
       background: linear-gradient(90deg, var(--accent), #a78bfa);
       border-radius: 999px;
       transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
     .waiting-dots { display: flex; justify-content: center; gap: 4px; }
-
     .waiting-dots span {
       display: inline-block;
       width: 6px; height: 6px;
@@ -495,29 +417,21 @@
       background: var(--accent);
       animation: dotBounce 1.2s ease-in-out infinite;
     }
-
     .waiting-dots span:nth-child(2) { animation-delay: 0.2s; }
     .waiting-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-    /* ── Vote results ── */
-
     .vote-results { display: flex; flex-direction: column; gap: 12px; }
-
     .vote-row {
       display: flex;
       align-items: center;
       gap: 12px;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .vote-row:nth-child(1) { animation-delay: 0.05s; }
     .vote-row:nth-child(2) { animation-delay: 0.12s; }
     .vote-row:nth-child(3) { animation-delay: 0.19s; }
     .vote-row:nth-child(4) { animation-delay: 0.26s; }
     .vote-row:nth-child(5) { animation-delay: 0.33s; }
-
     .vote-row-name { width: 90px; font-size: 0.9rem; flex-shrink: 0; }
-
     .vote-bar-wrap {
       flex: 1;
       background: var(--bg);
@@ -526,46 +440,36 @@
       overflow: hidden;
       border: 1px solid var(--border);
     }
-
     .vote-bar {
       height: 100%;
       background: var(--border);
       border-radius: 999px;
       animation: barGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .vote-bar.winner {
       background: linear-gradient(90deg, var(--accent), #a78bfa);
       box-shadow: 0 0 10px rgba(124, 106, 247, 0.5);
     }
-
     .vote-count { font-size: 0.85rem; color: var(--muted); width: 20px; text-align: right; }
-
-    /* ── Agree/Disagree tally ── */
-
     .tally-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-
     .tally-box {
       border-radius: 12px;
       padding: 16px;
       text-align: center;
       animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .tally-box.agree {
       background: rgba(76, 175, 136, 0.12);
       border: 1px solid var(--success);
     }
-
     .tally-box.disagree {
       background: rgba(248, 113, 113, 0.12);
       border: 1px solid var(--danger);
     }
-
     .tally-label {
       font-size: 0.75rem;
       font-weight: 700;
@@ -573,27 +477,20 @@
       text-transform: uppercase;
       margin-bottom: 6px;
     }
-
     .tally-box.agree .tally-label { color: var(--success); }
     .tally-box.disagree .tally-label { color: var(--danger); }
-
     .tally-number {
       font-size: 2.2rem;
       font-weight: 900;
       line-height: 1;
     }
-
     .tally-box.agree .tally-number { color: var(--success); }
     .tally-box.disagree .tally-number { color: var(--danger); }
-
-    /* ── Flip table ── */
-
     .flip-table {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-
     .flip-row {
       display: flex;
       align-items: center;
@@ -605,35 +502,27 @@
       font-size: 0.9rem;
       animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .flip-row.flipped {
       border-color: #f97316;
       background: rgba(249, 115, 22, 0.06);
     }
-
     .flip-name { font-weight: 700; flex: 1; }
-
     .flip-votes {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 0.85rem;
     }
-
     .vote-pill {
       padding: 3px 10px;
       border-radius: 999px;
       font-weight: 700;
       font-size: 0.8rem;
     }
-
     .vote-pill.agree { background: rgba(76,175,136,0.2); color: var(--success); }
     .vote-pill.disagree { background: rgba(248,113,113,0.2); color: var(--danger); }
     .flip-arrow { color: var(--muted); }
     .flip-badge { font-size: 0.8rem; }
-
-    /* ── Reveal box ── */
-
     .reveal-box {
       text-align: center;
       font-size: 1.3rem;
@@ -648,15 +537,11 @@
       align-items: center;
       justify-content: center;
     }
-
     .reveal-box.revealed {
       animation: revealFlip 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
       background: linear-gradient(135deg, rgba(124,106,247,0.15), rgba(167,139,250,0.08));
       box-shadow: 0 0 30px rgba(124, 106, 247, 0.25);
     }
-
-    /* ── Defense banner ── */
-
     .defense-banner {
       background: rgba(249, 115, 22, 0.1);
       border: 1px solid #f97316;
@@ -668,21 +553,16 @@
       gap: 8px;
       animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .defense-author {
       font-size: 1.3rem;
       font-weight: 800;
       color: #f97316;
     }
-
     .defense-flame {
       font-size: 2rem;
       animation: flamePulse 1s ease-in-out infinite;
       display: inline-block;
     }
-
-    /* ── Submitted banner ── */
-
     .submitted-banner {
       display: flex;
       align-items: center;
@@ -695,7 +575,6 @@
       font-weight: 700;
       animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .checkmark {
       width: 22px; height: 22px;
       border-radius: 50%;
@@ -708,9 +587,6 @@
       animation: bounce 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
       flex-shrink: 0;
     }
-
-    /* ── MLT prompt ── */
-
     .mlt-prompt {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -720,21 +596,16 @@
       text-align: center;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
     .mlt-prompt .prompt-text {
       font-size: 1.3rem;
       font-weight: 700;
       line-height: 1.4;
     }
-
     .prompt-counter {
       font-size: 0.8rem;
       color: var(--muted);
       text-align: right;
     }
-
-    /* ── Exit button ── */
-
     .exit-btn {
       position: fixed;
       top: 16px;
@@ -751,7 +622,6 @@
       transition: border-color 0.2s, color 0.2s;
       z-index: 100;
     }
-
     .exit-btn:hover {
       border-color: var(--danger);
       color: var(--danger);
@@ -759,14 +629,10 @@
       transform: none;
       box-shadow: none;
     }
-
     .exit-btn:disabled {
       opacity: 0.3;
       cursor: not-allowed;
     }
-
-    /* ── Emoji burst ── */
-
     .emoji-burst {
       position: fixed;
       pointer-events: none;
@@ -774,14 +640,11 @@
       z-index: 999;
       animation: confettiFall 1.2s ease-in forwards;
     }
-    /* ── Pick a Side — Results ── */
-    
     .pas-results-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
     .pas-result-row {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -792,11 +655,7 @@
       gap: 8px;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
-    .pas-result-row.controversial {
-      border-color: var(--accent);
-    }
-    
+    .pas-result-row.controversial { border-color: var(--accent); }
     .pas-result-label {
       display: flex;
       align-items: center;
@@ -805,12 +664,7 @@
       font-size: 0.85rem;
       line-height: 1.3;
     }
-    
-    .pas-result-ab {
-      font-weight: 600;
-      color: var(--text);
-    }
-    
+    .pas-result-ab { font-weight: 600; color: var(--text); }
     .pas-result-vs {
       font-size: 0.7rem;
       font-weight: 800;
@@ -818,18 +672,12 @@
       text-transform: uppercase;
       flex-shrink: 0;
     }
-    
-    .pas-fire-badge {
-      font-size: 0.85rem;
-      margin-left: 2px;
-    }
-    
+    .pas-fire-badge { font-size: 0.85rem; margin-left: 2px; }
     .pas-result-bar-row {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    
     .pas-bar-name {
       font-size: 0.75rem;
       font-weight: 600;
@@ -839,10 +687,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
     .pas-bar-name.side-a { color: var(--accent); text-align: left; }
     .pas-bar-name.side-b { color: #f97316; text-align: right; }
-    
     .pas-result-bar-wrap {
       flex: 1;
       height: 8px;
@@ -851,7 +697,6 @@
       overflow: hidden;
       position: relative;
     }
-    
     .pas-result-bar-a {
       position: absolute;
       left: 0; top: 0;
@@ -860,9 +705,6 @@
       border-radius: 999px;
       animation: barGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
-    /* Hot take callout */
-    
     .pas-hot-take {
       background: var(--bg);
       border: 1px solid var(--accent);
@@ -873,7 +715,6 @@
       gap: 10px;
       animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .pas-hot-take-label {
       font-size: 0.72rem;
       font-weight: 800;
@@ -881,20 +722,17 @@
       text-transform: uppercase;
       color: var(--accent);
     }
-    
     .pas-hot-take-score {
       font-size: 1.6rem;
       font-weight: 900;
       color: var(--accent);
       line-height: 1;
     }
-    
     .pas-hot-take-speakers {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
     .pas-speaker-line {
       font-size: 0.88rem;
       padding: 10px 14px;
@@ -902,67 +740,54 @@
       font-weight: 600;
       line-height: 1.4;
     }
-    
     .pas-speaker-line.side-a {
       background: rgba(124, 106, 247, 0.08);
       border: 1px solid var(--accent);
       color: var(--text);
     }
-    
     .pas-speaker-line.side-b {
       background: rgba(249, 115, 22, 0.08);
       border: 1px solid #f97316;
       color: var(--text);
     }
-    
     .pas-speaker-line.devils {
       background: rgba(248, 113, 113, 0.08);
       border: 1px solid var(--danger);
       color: var(--text);
     }
-    
-    /* ── Pick a Side — Voting ── */
-    
     @keyframes slideFromLeft {
       from { opacity: 0; transform: translateX(-50px) scale(0.96); }
       to   { opacity: 1; transform: translateX(0) scale(1); }
     }
-    
     @keyframes slideFromRight {
       from { opacity: 0; transform: translateX(50px) scale(0.96); }
       to   { opacity: 1; transform: translateX(0) scale(1); }
     }
-    
     @keyframes orPop {
       0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
       60%  { opacity: 1; transform: scale(1.3) rotate(5deg); }
       100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
-    
     @keyframes chosenExpand {
       0%   { transform: scale(1); }
       40%  { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
-    
     @keyframes rejectedShrink {
       to { opacity: 0.25; transform: scale(0.93); }
     }
-    
     @keyframes countdownPop {
       0%   { transform: scale(0.5); opacity: 0; }
       50%  { transform: scale(1.3); opacity: 1; }
       80%  { transform: scale(0.95); }
       100% { transform: scale(1); opacity: 1; }
     }
-    
     .pas-arena {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: stretch;
       min-height: 140px;
     }
-    
     .pas-option {
       border-radius: 14px;
       padding: 24px 16px;
@@ -977,21 +802,18 @@
       border: 2px solid transparent;
       transition: box-shadow 0.2s;
     }
-    
     .pas-option.option-a {
       background: rgba(124, 106, 247, 0.1);
       border-color: var(--accent);
       border-radius: 14px 0 0 14px;
       animation: slideFromLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .pas-option.option-b {
       background: rgba(249, 115, 22, 0.1);
       border-color: #f97316;
       border-radius: 0 14px 14px 0;
       animation: slideFromRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
     }
-    
     .pas-option.chosen-a {
       background: var(--accent);
       color: white;
@@ -1000,7 +822,6 @@
       animation: chosenExpand 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       cursor: default;
     }
-    
     .pas-option.chosen-b {
       background: #f97316;
       color: white;
@@ -1009,13 +830,11 @@
       animation: chosenExpand 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       cursor: default;
     }
-    
     .pas-option.rejected {
       animation: rejectedShrink 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       cursor: default;
       pointer-events: none;
     }
-    
     .pas-vs {
       display: flex;
       align-items: center;
@@ -1026,7 +845,6 @@
       border-bottom: 1px solid var(--border);
       animation: orPop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
     }
-    
     .pas-vs-text {
       font-size: 0.7rem;
       font-weight: 900;
@@ -1034,7 +852,6 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
-    
     .pas-countdown {
       text-align: center;
       font-size: 4rem;
@@ -1043,55 +860,29 @@
       line-height: 1;
       padding: 8px 0;
     }
-
-    /* ── The Greatness in You ── */
-    
     @keyframes cardFlip {
       0%   { transform: rotateY(0deg); }
       50%  { transform: rotateY(90deg); }
       100% { transform: rotateY(0deg); }
     }
-    
-    @keyframes cardShuffle {
-      0%   { transform: translateX(0) rotate(0deg); }
-      25%  { transform: translateX(-12px) rotate(-4deg); }
-      75%  { transform: translateX(12px) rotate(4deg); }
-      100% { transform: translateX(0) rotate(0deg); }
-    }
-    
     @keyframes cardReveal {
       0%   { transform: rotateY(90deg) scale(0.9); opacity: 0; }
       100% { transform: rotateY(0deg) scale(1); opacity: 1; }
     }
-    
-    @keyframes slotScroll {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(-100%); }
-    }
-    
     @keyframes promptReveal {
       0%   { opacity: 0; transform: translateY(16px) scale(0.97); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    
     @keyframes glowPulse {
       0%, 100% { box-shadow: 0 0 20px rgba(124, 106, 247, 0.3); }
       50%       { box-shadow: 0 0 40px rgba(124, 106, 247, 0.6); }
     }
-    
-    @keyframes sparkleFloat {
-      0%   { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-40px) scale(0.5); opacity: 0; }
-    }
-    
     .greatness-card::before {
       background: linear-gradient(90deg, #a78bfa, #7c6af7, #c4b5fd, #a78bfa);
       background-size: 200% 100%;
       animation: shimmer 2s linear infinite;
     }
-    
     .greatness-label { color: #a78bfa; }
-    
     .greatness-waiting {
       display: flex;
       flex-direction: column;
@@ -1099,26 +890,20 @@
       gap: 12px;
       padding: 20px 0;
     }
-    
     .greatness-waiting-icon {
       font-size: 3rem;
       animation: flamePulse 2s ease-in-out infinite;
     }
-    
     .greatness-counter {
       font-size: 0.8rem;
       color: var(--muted);
       text-align: center;
     }
-    
-    /* ── Exempt list ── */
-    
     .greatness-exempt-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
     .greatness-exempt-row {
       display: flex;
       align-items: center;
@@ -1131,17 +916,14 @@
       transition: border-color 0.2s, background 0.2s;
       animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .greatness-exempt-row:hover {
       border-color: var(--accent);
       background: rgba(124, 106, 247, 0.05);
     }
-    
     .greatness-exempt-row.exempted {
       border-color: var(--muted);
       background: rgba(136, 136, 153, 0.08);
     }
-    
     .exempt-checkbox {
       width: 20px;
       height: 20px;
@@ -1154,27 +936,21 @@
       transition: border-color 0.2s, background 0.2s;
       font-size: 0.75rem;
     }
-    
     .greatness-exempt-row.exempted .exempt-checkbox {
       border-color: var(--muted);
       background: var(--muted);
       color: white;
     }
-    
     .exempt-name {
       font-size: 0.95rem;
       font-weight: 600;
       flex: 1;
     }
-    
     .exempt-badge {
       font-size: 0.7rem;
       color: var(--muted);
       font-style: italic;
     }
-    
-    /* ── Card shuffle ── */
-    
     .greatness-spin-stage {
       display: flex;
       flex-direction: column;
@@ -1182,7 +958,6 @@
       gap: 20px;
       padding: 10px 0;
     }
-    
     .greatness-cards {
       display: flex;
       justify-content: center;
@@ -1191,7 +966,6 @@
       position: relative;
       width: 100%;
     }
-    
     .greatness-card-item {
       width: 70px;
       height: 96px;
@@ -1207,21 +981,18 @@
       backface-visibility: hidden;
       transition: transform 0.3s;
     }
-    
     .greatness-card-item.face-down {
       background: linear-gradient(135deg, #7c6af7, #a78bfa);
       border: 2px solid #a78bfa;
       color: transparent;
       box-shadow: 0 4px 12px rgba(124, 106, 247, 0.3);
     }
-    
     .greatness-card-item.face-down::after {
       content: '✨';
       color: rgba(255,255,255,0.4);
       font-size: 1.4rem;
       position: absolute;
     }
-    
     .greatness-card-item.face-up {
       background: var(--surface);
       border: 2px solid var(--accent);
@@ -1233,32 +1004,25 @@
       padding: 8px;
       line-height: 1.3;
     }
-    
     .greatness-card-item.eliminated {
       opacity: 0;
       transform: scale(0.8) translateY(-10px);
       transition: opacity 0.3s, transform 0.3s;
     }
-    
     .greatness-spin-result {
       text-align: center;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .greatness-spin-result .result-name {
       font-size: 1.6rem;
       font-weight: 900;
       color: var(--accent);
       margin-bottom: 4px;
     }
-    
     .greatness-spin-result .result-label {
       font-size: 0.85rem;
       color: var(--muted);
     }
-    
-    /* ── Slot machine ── */
-    
     .greatness-slot {
       height: 56px;
       overflow: hidden;
@@ -1267,7 +1031,6 @@
       background: var(--bg);
       position: relative;
     }
-    
     .greatness-slot::before,
     .greatness-slot::after {
       content: '';
@@ -1277,23 +1040,19 @@
       z-index: 2;
       pointer-events: none;
     }
-    
     .greatness-slot::before {
       top: 0;
       background: linear-gradient(to bottom, var(--bg), transparent);
     }
-    
     .greatness-slot::after {
       bottom: 0;
       background: linear-gradient(to top, var(--bg), transparent);
     }
-    
     .greatness-slot-inner {
       display: flex;
       flex-direction: column;
       transition: transform 0.05s linear;
     }
-    
     .greatness-slot-item {
       height: 56px;
       display: flex;
@@ -1307,14 +1066,10 @@
       flex-shrink: 0;
       line-height: 1.3;
     }
-    
     .greatness-slot-item.active {
       color: var(--text);
       font-weight: 700;
     }
-    
-    /* ── Prompt card ── */
-    
     .greatness-prompt-card {
       background: var(--bg);
       border: 1px solid var(--accent);
@@ -1327,9 +1082,6 @@
       animation: promptReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
       box-shadow: 0 0 24px rgba(124, 106, 247, 0.15);
     }
-    
-    /* ── Receiver / Giver banners ── */
-    
     .greatness-receiver-banner {
       display: flex;
       align-items: center;
@@ -1341,18 +1093,15 @@
       padding: 14px 18px;
       animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .greatness-receiver-name {
       font-size: 1.2rem;
       font-weight: 800;
       color: #a78bfa;
     }
-    
     .greatness-receiver-label {
       font-size: 0.8rem;
       color: var(--muted);
     }
-    
     .greatness-giver-banner {
       display: flex;
       flex-direction: column;
@@ -1363,18 +1112,15 @@
       padding: 12px 16px;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .greatness-giver-name {
       font-size: 1rem;
       font-weight: 800;
       color: var(--accent);
     }
-    
     .greatness-giver-label {
       font-size: 0.8rem;
       color: var(--muted);
     }
-    
     .greatness-listening {
       text-align: center;
       font-size: 1rem;
@@ -1382,14 +1128,11 @@
       font-style: italic;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    /* ── Mode picker ── */
-    
     .mode-cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    
     .mode-card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -1404,22 +1147,16 @@
       animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       text-align: center;
     }
-    
     .mode-card:nth-child(2) { animation-delay: 0.1s; }
-    
     .mode-card:hover {
       border-color: var(--accent);
       background: rgba(124, 106, 247, 0.06);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(124, 106, 247, 0.15);
     }
-    
     .mode-emoji { font-size: 2.5rem; }
     .mode-name  { font-weight: 800; font-size: 1rem; }
     .mode-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.3; }
-    
-    /* ── Quiz question ── */
-    
     .quiz-progress-bar-wrap {
       background: var(--bg);
       border-radius: 999px;
@@ -1428,20 +1165,17 @@
       border: 1px solid var(--border);
       margin-top: -8px;
     }
-    
     .quiz-progress-bar {
       height: 100%;
       background: linear-gradient(90deg, var(--accent), #a78bfa);
       border-radius: 999px;
       transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    
     .quiz-answer-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
     .quiz-answer-btn {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -1457,19 +1191,16 @@
       animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
       line-height: 1.4;
     }
-    
     .quiz-answer-btn:nth-child(1) { animation-delay: 0.04s; }
     .quiz-answer-btn:nth-child(2) { animation-delay: 0.08s; }
     .quiz-answer-btn:nth-child(3) { animation-delay: 0.12s; }
     .quiz-answer-btn:nth-child(4) { animation-delay: 0.16s; }
     .quiz-answer-btn:nth-child(5) { animation-delay: 0.20s; }
-    
     .quiz-answer-btn:hover {
       border-color: var(--accent);
       background: rgba(124, 106, 247, 0.06);
       transform: translateX(4px);
     }
-    
     .quiz-answer-btn.selected {
       border-color: var(--accent);
       background: var(--accent);
@@ -1477,14 +1208,10 @@
       animation: bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
       transform: none;
     }
-    
     .quiz-answer-btn:disabled {
       cursor: default;
       transform: none;
     }
-    
-    /* ── Quiz result ── */
-    
     .quiz-profile-card {
       background: var(--bg);
       border: 1px solid var(--accent);
@@ -1496,46 +1223,39 @@
       animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
       box-shadow: 0 0 24px rgba(124, 106, 247, 0.12);
     }
-    
     .quiz-profile-name {
       font-size: 1.4rem;
       font-weight: 900;
       color: var(--accent);
     }
-    
     .quiz-profile-tagline {
       font-size: 0.9rem;
       color: var(--muted);
       font-style: italic;
       line-height: 1.4;
     }
-    
     .quiz-profile-strength {
       font-size: 0.85rem;
       color: var(--text);
       margin-top: 4px;
       line-height: 1.5;
     }
-    
     .quiz-profile-tradeoff {
       font-size: 0.85rem;
       color: var(--muted);
       line-height: 1.5;
     }
-    
     .quiz-breakdown {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
     .quiz-dim-row {
       display: flex;
       align-items: center;
       gap: 10px;
       animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .quiz-dim-label {
       font-size: 0.82rem;
       font-weight: 600;
@@ -1543,9 +1263,7 @@
       flex-shrink: 0;
       color: var(--muted);
     }
-    
     .quiz-dim-label.primary { color: var(--accent); font-weight: 800; }
-    
     .quiz-dim-bar-wrap {
       flex: 1;
       background: var(--bg);
@@ -1554,18 +1272,15 @@
       overflow: hidden;
       border: 1px solid var(--border);
     }
-    
     .quiz-dim-bar {
       height: 100%;
       background: var(--border);
       border-radius: 999px;
       animation: barGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .quiz-dim-bar.primary {
       background: linear-gradient(90deg, var(--accent), #a78bfa);
     }
-    
     .quiz-dim-pct {
       font-size: 0.78rem;
       color: var(--muted);
@@ -1573,7 +1288,6 @@
       text-align: right;
       flex-shrink: 0;
     }
-    
     .quiz-prompt-box {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -1585,7 +1299,6 @@
       line-height: 1.5;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .quiz-prompt-label {
       font-size: 0.7rem;
       font-weight: 800;
@@ -1594,15 +1307,11 @@
       color: var(--accent);
       margin-bottom: 6px;
     }
-    
-    /* ── Group reveal ── */
-    
     .group-results-grid {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    
     .group-result-card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -1613,11 +1322,7 @@
       gap: 14px;
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
-    .group-result-card.primary-highlight {
-      border-color: var(--accent);
-    }
-    
+    .group-result-card.primary-highlight { border-color: var(--accent); }
     .group-result-avatar {
       width: 40px;
       height: 40px;
@@ -1631,22 +1336,18 @@
       color: white;
       flex-shrink: 0;
     }
-    
     .group-result-info { flex: 1; }
-    
     .group-result-name {
       font-size: 0.85rem;
       font-weight: 700;
       color: var(--muted);
       margin-bottom: 2px;
     }
-    
     .group-result-profile {
       font-size: 1rem;
       font-weight: 800;
       color: var(--text);
     }
-    
     .group-result-tagline {
       font-size: 0.78rem;
       color: var(--muted);
@@ -1654,7 +1355,6 @@
       margin-top: 2px;
       line-height: 1.3;
     }
-    
     .quiz-group-prompt {
       background: rgba(124, 106, 247, 0.06);
       border: 1px solid var(--accent);
@@ -1665,7 +1365,6 @@
       color: var(--text);
       animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    
     .quiz-group-prompt-label {
       font-size: 0.7rem;
       font-weight: 800;
@@ -1674,11 +1373,37 @@
       color: var(--accent);
       margin-bottom: 8px;
     }
+
+    /* ── Debug panel ── */
+    #debug-panel {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(10,10,20,0.92);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      max-width: 260px;
+      z-index: 999;
+      display: none;
+    }
+    #debug-panel.visible { display: block; }
+    #debug-log { max-height: 120px; overflow-y: auto; }
+    #debug-log div { margin-bottom: 3px; }
+    #debug-log .err { color: var(--danger); }
+    #debug-log .ok  { color: var(--success); }
   </style>
 </head>
 <body>
 
-  <!-- Exit button — visible during games, host only -->
+  <!-- Debug panel — press D to toggle -->
+  <div id="debug-panel">
+    <div style="font-weight:700; color:var(--text); margin-bottom:6px">🐛 Debug log</div>
+    <div id="debug-log"></div>
+  </div>
+
   <button id="btn-exit" class="exit-btn" style="display:none">← Leave game</button>
 
   <!-- SCREEN: Landing -->
@@ -1702,14 +1427,12 @@
       <div id="lobby-code" class="room-code">----</div>
       <p class="hint" style="text-align:center">Share this code with your team</p>
       <div id="lobby-players" class="player-list"></div>
-
       <div id="host-controls" style="display:none; flex-direction:column; gap:12px;">
         <p class="label" style="margin-top:8px">Pick a game</p>
         <div id="game-list" class="game-list"></div>
         <div id="game-options" style="display:none; flex-direction:column; gap:10px;"></div>
         <button id="btn-start" disabled>Choose a game to start</button>
       </div>
-
       <div id="lobby-waiting-hint" style="display:none;">
         <p class="hint" style="text-align:center; padding:12px 0">
           Waiting for the host to start the session...
@@ -1750,7 +1473,7 @@
     </div>
   </div>
 
-  <!-- SCREEN: Revealing Pre (HTT) — votes shown, author revealed, defense prompt -->
+  <!-- SCREEN: Revealing Pre (HTT) -->
   <div id="screen-revealing-pre" class="screen">
     <div class="card fire">
       <p class="label fire">🔥 Hot Take Tribunal</p>
@@ -1771,7 +1494,7 @@
     </div>
   </div>
 
-  <!-- SCREEN: Voting Post (HTT) — second vote after defense -->
+  <!-- SCREEN: Voting Post (HTT) -->
   <div id="screen-voting-post" class="screen">
     <div class="card fire">
       <p class="label fire">🔥 Hot Take Tribunal — Round 2</p>
@@ -1785,7 +1508,7 @@
     </div>
   </div>
 
-  <!-- SCREEN: Revealing Post (HTT) — final comparison -->
+  <!-- SCREEN: Revealing Post (HTT) -->
   <div id="screen-revealing-post" class="screen">
     <div class="card fire">
       <p class="label fire">🔥 The Verdict</p>
@@ -1827,7 +1550,7 @@
       <div id="pas-vote-status" class="status-bar"></div>
     </div>
   </div>
-  
+
   <!-- SCREEN: Pick a Side — Final Results -->
   <div id="screen-pas-reveal" class="screen">
     <div class="card">
@@ -1848,7 +1571,7 @@
       <button id="btn-greatness-start">Start ✨</button>
     </div>
   </div>
-  
+
   <!-- SCREEN: Greatness in You — Waiting (non-host) -->
   <div id="screen-greatness-waiting" class="screen">
     <div class="card greatness-card">
@@ -1863,7 +1586,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- SCREEN: Greatness in You — Spin -->
   <div id="screen-greatness-spin" class="screen">
     <div class="card greatness-card">
@@ -1874,15 +1597,13 @@
         <div id="greatness-cards" class="greatness-cards"></div>
         <div id="greatness-spin-result" class="greatness-spin-result" style="display:none"></div>
       </div>
-      <button id="btn-spin-receiver" style="display:none">
-        🎰 Spin to find out
-      </button>
+      <button id="btn-spin-receiver" style="display:none">🎰 Spin to find out</button>
       <p id="greatness-spin-waiting" class="hint" style="text-align:center; display:none">
         Waiting for the host to spin...
       </p>
     </div>
   </div>
-  
+
   <!-- SCREEN: Greatness in You — Prompt -->
   <div id="screen-greatness-prompt" class="screen">
     <div class="card greatness-card">
@@ -1900,7 +1621,7 @@
     </div>
   </div>
 
-  <!-- SCREEN: Mode Picker (replaces direct game picker in lobby) -->
+  <!-- SCREEN: Mode Picker -->
   <div id="screen-mode-picker" class="screen">
     <div class="card">
       <p class="label">What are we playing?</p>
@@ -1918,7 +1639,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- SCREEN: Quiz Picker -->
   <div id="screen-quiz-picker" class="screen">
     <div class="card">
@@ -1928,7 +1649,7 @@
       <button id="btn-back-to-modes" class="secondary" style="margin-top:-4px">← Back</button>
     </div>
   </div>
-  
+
   <!-- SCREEN: Quiz Waiting (non-host) -->
   <div id="screen-quiz-waiting-start" class="screen">
     <div class="card">
@@ -1943,7 +1664,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- SCREEN: Quiz Question -->
   <div id="screen-quiz-question" class="screen">
     <div class="card">
@@ -1969,7 +1690,7 @@
       <div id="result-waiting" class="status-bar" style="text-align:center; margin-top:4px"></div>
     </div>
   </div>
-  
+
   <!-- SCREEN: Quiz Group Reveal -->
   <div id="screen-quiz-reveal" class="screen">
     <div class="card">
@@ -1982,9 +1703,27 @@
   </div>
 
   <script>
-    // ── State ──────────────────────────────────────────────────────────────────
+    // ── Debug logger ───────────────────────────────────────────────────────────
+    var debugVisible = false;
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'd' || e.key === 'D') {
+        debugVisible = !debugVisible;
+        document.getElementById('debug-panel').classList.toggle('visible', debugVisible);
+      }
+    });
+    function dbg(msg, type) {
+      var log = document.getElementById('debug-log');
+      var el = document.createElement('div');
+      el.className = type || '';
+      el.textContent = new Date().toLocaleTimeString() + ' ' + msg;
+      log.prepend(el);
+      // Keep last 30 entries
+      while (log.children.length > 30) log.removeChild(log.lastChild);
+      console.log('[DBG]', msg);
+    }
 
-    const state = {
+    // ── State ──────────────────────────────────────────────────────────────────
+    var state = {
       roomId: null,
       playerId: null,
       playerName: null,
@@ -2010,20 +1749,45 @@
       result: null
     };
 
-    const API = 'https://script.google.com/a/macros/clearcompany.com/s/AKfycbxYbQxio3jl4KCG_iN6nH_zZTkdKR3JuTGBcwmGHQPthUJWtapyT_6vZjXcmSkbknPt/exec';
-    
+    var greatnessState = {
+      exemptIds: [],
+      receiverName: null,
+      giverName: null,
+      prompt: null,
+      spinning: false,
+      animating: false
+    };
+
+    // ── API ────────────────────────────────────────────────────────────────────
+    var API = 'https://script.google.com/a/macros/clearcompany.com/s/AKfycbxYbQxio3jl4KCG_iN6nH_zZTkdKR3JuTGBcwmGHQPthUJWtapyT_6vZjXcmSkbknPt/exec';
+
     function run(fnName, args) {
-      // Map function names and args to API params
-      const params = buildParams(fnName, args);
-      const url = new URL(API);
-      Object.entries(params).forEach(function(pair) {
-        url.searchParams.set(pair[0], pair[1]);
+      var params = buildParams(fnName, args || []);
+      var url = new URL(API);
+      Object.keys(params).forEach(function(k) {
+        url.searchParams.set(k, params[k]);
       });
-      return fetch(url.toString()).then(function(r) { return r.json(); });
+      dbg('→ ' + fnName);
+      return fetch(url.toString())
+        .then(function(r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(data) {
+          if (data.error) {
+            dbg('✗ ' + fnName + ': ' + data.error, 'err');
+          } else {
+            dbg('✓ ' + fnName, 'ok');
+          }
+          return data;
+        })
+        .catch(function(err) {
+          dbg('✗ ' + fnName + ': ' + err.message, 'err');
+          throw err;
+        });
     }
-    
+
     function buildParams(fnName, args) {
-      args = args || [];
       switch(fnName) {
         case 'createRoom':   return { action: 'createRoom',   name: args[0] };
         case 'joinRoom':     return { action: 'joinRoom',     roomId: args[0], name: args[1] };
@@ -2041,34 +1805,67 @@
         case 'spinGiver':          return { action: 'spinGiver',          roomId: args[0] };
         case 'completeSpotlight':  return { action: 'completeSpotlight',  roomId: args[0] };
         case 'getGreatnessState':  return { action: 'getGreatnessState',  roomId: args[0] };
-        case 'getAllPasResults': return { action: 'getAllPasResults', roomId: args[0] };
-        case 'getQuizList':         return { action: 'getQuizList' };
-        case 'startQuiz':           return { action: 'startQuiz',          roomId: args[0], quizId: args[1] };
-        case 'getQuizQuestions':    return { action: 'getQuizQuestions',   quizId: args[0], playerId: args[1] };
-        case 'submitQuizAnswer':    return { action: 'submitQuizAnswer',   roomId: args[0], quizId: args[1], playerId: args[2], questionIndex: args[3], answerDim: args[4] };
-        case 'submitQuizResult':    return { action: 'submitQuizResult',   roomId: args[0], quizId: args[1], playerId: args[2] };
-        case 'getMyQuizResult':     return { action: 'getMyQuizResult',    roomId: args[0], quizId: args[1], playerId: args[2] };
-        case 'getGroupQuizResults': return { action: 'getGroupQuizResults',roomId: args[0], quizId: args[1] };
-        case 'triggerQuizReveal':   return { action: 'triggerQuizReveal',  roomId: args[0] };
-        case 'resetQuiz':           return { action: 'resetQuiz',          roomId: args[0] };
-        default:             return { action: fnName };
+        case 'getAllPasResults':    return { action: 'getAllPasResults',    roomId: args[0] };
+        case 'getQuizList':        return { action: 'getQuizList' };
+        case 'startQuiz':          return { action: 'startQuiz',          roomId: args[0], quizId: args[1] };
+        case 'getQuizQuestions':   return { action: 'getQuizQuestions',   quizId: args[0], playerId: args[1] };
+        case 'submitQuizAnswer':   return { action: 'submitQuizAnswer',   roomId: args[0], quizId: args[1], playerId: args[2], questionIndex: args[3], answerDim: args[4] };
+        case 'submitQuizResult':   return { action: 'submitQuizResult',   roomId: args[0], quizId: args[1], playerId: args[2] };
+        case 'getMyQuizResult':    return { action: 'getMyQuizResult',    roomId: args[0], quizId: args[1], playerId: args[2] };
+        case 'getGroupQuizResults':return { action: 'getGroupQuizResults',roomId: args[0], quizId: args[1] };
+        case 'triggerQuizReveal':  return { action: 'triggerQuizReveal',  roomId: args[0] };
+        case 'resetQuiz':          return { action: 'resetQuiz',          roomId: args[0] };
+        default: return { action: fnName };
       }
     }
 
-    // ── Utilities ──────────────────────────────────────────────────────────────
-
+    // ── Helpers ────────────────────────────────────────────────────────────────
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(function(s) {
         s.classList.remove('active');
       });
-      document.getElementById(id).classList.add('active');
+      var target = document.getElementById(id);
+      if (target) {
+        target.classList.add('active');
+        dbg('screen → ' + id);
+      } else {
+        dbg('screen not found: ' + id, 'err');
+      }
     }
 
     function showExitBtn(show) {
-      const btn = document.getElementById('btn-exit');
+      var btn = document.getElementById('btn-exit');
       btn.style.display = show ? 'block' : 'none';
       btn.disabled = !state.isHost;
-      btn.title = state.isHost ? 'End game for everyone' : 'Only the host can exit';
+    }
+
+    function shake(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.style.animation = 'wiggle 0.4s ease both';
+      setTimeout(function() { el.style.animation = ''; }, 500);
+    }
+
+    function buildProgressHTML(done, total, label) {
+      var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      return '<div style="display:flex;flex-direction:column;gap:6px">' +
+        '<div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--muted)">' +
+          '<span>' + done + ' of ' + total + ' ' + label + '</span>' +
+          '<span>' + pct + '%</span>' +
+        '</div>' +
+        '<div class="progress-wrap"><div class="progress-bar" style="width:' + pct + '%"></div></div>' +
+      '</div>';
+    }
+
+    function buildTallyHTML(tally) {
+      return '<div class="tally-box agree">' +
+        '<div class="tally-label">Agree</div>' +
+        '<div class="tally-number">' + (tally ? tally.agree : 0) + '</div>' +
+      '</div>' +
+      '<div class="tally-box disagree">' +
+        '<div class="tally-label">Disagree</div>' +
+        '<div class="tally-number">' + (tally ? tally.disagree : 0) + '</div>' +
+      '</div>';
     }
 
     function burstEmojis(emojis, count) {
@@ -2090,141 +1887,1245 @@
       }
     }
 
+    function updateURL(roomId) {
+      try {
+        var url = new URL(window.location.href);
+        url.searchParams.set('room', roomId);
+        window.history.replaceState({}, '', url.toString());
+      } catch(e) {}
+    }
+
+    function getRoomFromURL() {
+      try {
+        var url = new URL(window.location.href);
+        var room = url.searchParams.get('room');
+        return room ? room.toUpperCase().trim() : null;
+      } catch(e) { return null; }
+    }
+
+    // ── Polling ────────────────────────────────────────────────────────────────
+    function startPolling() {
+      if (state.pollInterval) clearInterval(state.pollInterval);
+      state.pollInterval = setInterval(syncRoom, 2500);
+      dbg('polling started');
+    }
+
+    async function syncRoom() {
+      if (!state.roomId) return;
+      try {
+        var data = await run('getRoom', [state.roomId]);
+        if (data.error) return;
+        state.players = data.players;
+        if (data.currentGame) state.currentGame = data.currentGame;
+        if (data.defenseTimer) state.selectedTimer = data.defenseTimer;
+
+        if (data.currentGame && data.currentGame.indexOf('quiz_') === 0) {
+          var qid = data.currentGame.replace('quiz_', '');
+          if (!quizState.quizId) quizState.quizId = qid;
+        }
+
+        if (data.phase !== state.phase) {
+          state.phase = data.phase;
+          handlePhaseChange(data);
+        } else {
+          updatePhaseUI(data);
+        }
+      } catch(e) {
+        dbg('sync error: ' + e.message, 'err');
+      }
+    }
+
+    function handlePhaseChange(data) {
+      if (greatnessState.animating && state.isHost) return;
+
+      var isPas = state.currentGame === 'pick_a_side';
+      var isGIY = state.currentGame === 'greatness_in_you';
+
+      switch (data.phase) {
+        case 'lobby':                renderLobby(data);                                           break;
+        case 'submitting':           renderSubmitting(data);                                      break;
+        case 'voting':               isPas ? renderPasVoting(data) : renderVoting(data);          break;
+        case 'revealing':            isPas ? renderPasReveal() : isGIY ? renderGreatnessDone() : renderRevealing(); break;
+        case 'revealing_pre':        renderRevealingPre();                                        break;
+        case 'defending':            renderDefending();                                           break;
+        case 'revealing_post':       renderRevealingPost();                                       break;
+        case 'greatness_setup':      isGIY ? renderGreatnessSetup() : null;                      break;
+        case 'greatness_setup_done': isGIY ? renderGreatnessSpin(data) : null;                   break;
+        case 'greatness_spin':       isGIY ? renderGreatnessSpin(data) : null;                   break;
+        case 'greatness_receiver':   isGIY ? renderGreatnessReceiver(data) : null;               break;
+        case 'greatness_giver':      isGIY ? renderGreatnessPrompt() : null;                     break;
+        case 'quiz_active':          handleQuizActive(data);                                      break;
+        case 'quiz_reveal':          renderGroupQuizReveal();                                     break;
+        case 'done':                 isGIY ? renderGreatnessDone() : renderDone();               break;
+      }
+    }
+
+    function updatePhaseUI(data) {
+      if (data.phase === 'submitting') {
+        var el = document.getElementById('submit-status');
+        if (el) el.innerHTML = buildProgressHTML(data.submissionCount, data.totalPlayers, 'submitted');
+      }
+      if (data.phase === 'voting') {
+        if (state.currentGame === 'pick_a_side') {
+          if (data.currentFactIndex !== state.currentFactIndex) {
+            state.currentFactIndex = data.currentFactIndex;
+            state.hasVoted = false;
+            renderPasVoting(data);
+          } else {
+            var el2 = document.getElementById('pas-vote-status');
+            if (el2 && !state.hasVoted) {
+              el2.innerHTML = buildProgressHTML(data.voteCount, data.totalPlayers, 'voted');
+            }
+          }
+        } else {
+          var el3 = document.getElementById('vote-status');
+          if (el3) el3.innerHTML = buildProgressHTML(data.voteCount, data.totalPlayers, 'voted');
+        }
+      }
+      if (data.phase === 'lobby') {
+        renderPlayerChips(data.players);
+      }
+      if (data.phase === 'quiz_active') {
+        var waitingEl = document.getElementById('result-waiting');
+        if (waitingEl && waitingEl.closest('.screen.active')) {
+          updateQuizWaitingStatus();
+        }
+      }
+    }
+
+    // ── Lobby ──────────────────────────────────────────────────────────────────
+    function renderPlayerChips(players) {
+      var container = document.getElementById('lobby-players');
+      if (!container) return;
+      if (container.querySelectorAll('.player-chip').length === players.length) return;
+      container.innerHTML = players.map(function(p) {
+        var isMe = p.id === state.playerId;
+        return '<div class="player-chip ' + (isMe ? 'me' : '') + '">' +
+          (isMe ? '<span>⭐</span>' : '') +
+          '<span>' + p.name + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    async function renderLobby(data) {
+      showExitBtn(false);
+      document.getElementById('lobby-code').textContent = state.roomId;
+
+      if (state.isHost) {
+        renderModePicker();
+        renderPlayerChips(data.players || []);
+      } else {
+        showScreen('screen-lobby');
+        document.getElementById('host-controls').style.display = 'none';
+        document.getElementById('lobby-waiting-hint').style.display = 'block';
+        renderPlayerChips(data.players || []);
+      }
+    }
+
     function renderModePicker() {
       showScreen('screen-mode-picker');
       showExitBtn(false);
     }
-    
+
+    async function loadGamePicker() {
+      try {
+        var games = await run('getGameList', []);
+        var container = document.getElementById('game-list');
+        container.innerHTML = games.map(function(g) {
+          return '<div class="game-card" data-id="' + g.id + '">' +
+            '<div class="game-emoji">' + g.emoji + '</div>' +
+            '<div class="game-info">' +
+              '<div class="game-name">' + g.label + '</div>' +
+              '<div class="game-desc">' + g.description + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+
+        container.querySelectorAll('.game-card').forEach(function(card) {
+          card.addEventListener('click', function() {
+            container.querySelectorAll('.game-card').forEach(function(c) {
+              c.classList.remove('selected');
+            });
+            card.classList.add('selected');
+            state.selectedGame = card.dataset.id;
+            state.selectedCount = null;
+            state.selectedTimer = null;
+            renderGameOptions(state.selectedGame, games);
+            var btn = document.getElementById('btn-start');
+            if (state.selectedGame === 'hot_take_tribunal') {
+              btn.disabled = true;
+              btn.textContent = 'Choose rounds and timer';
+            } else if (state.selectedGame === 'pick_a_side') {
+              btn.disabled = true;
+              btn.textContent = 'Choose how many rounds';
+            } else {
+              btn.disabled = false;
+              btn.textContent = 'Start session →';
+            }
+          });
+        });
+      } catch(e) {
+        dbg('loadGamePicker error: ' + e.message, 'err');
+      }
+    }
+
+    function renderGameOptions(gameId, games) {
+      var container = document.getElementById('game-options');
+
+      if (gameId === 'hot_take_tribunal') {
+        var maxRounds = state.players.length || 5;
+        var roundOptions = [];
+        for (var i = 1; i <= maxRounds; i++) { roundOptions.push(i); }
+
+        container.style.display = 'flex';
+        container.innerHTML =
+          '<div style="display:flex;flex-direction:column;gap:8px">' +
+            '<p class="hint">How many hot takes?</p>' +
+            '<div class="count-picker">' +
+              roundOptions.map(function(n) {
+                return '<button class="count-btn" data-count="' + n + '">' + n + '</button>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:8px">' +
+            '<p class="hint">How long to defend? (seconds)</p>' +
+            '<div class="count-picker">' +
+              ['15','30','45','60'].map(function(n) {
+                return '<button class="count-btn timer-btn" data-timer="' + n + '">' + n + 's</button>';
+              }).join('') +
+            '</div>' +
+          '</div>';
+
+        container.querySelectorAll('.count-btn:not(.timer-btn)').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            container.querySelectorAll('.count-btn:not(.timer-btn)').forEach(function(b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            state.selectedCount = parseInt(btn.dataset.count);
+            checkHTTReady();
+          });
+        });
+
+        container.querySelectorAll('.timer-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            container.querySelectorAll('.timer-btn').forEach(function(b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            state.selectedTimer = parseInt(btn.dataset.timer);
+            checkHTTReady();
+          });
+        });
+
+      } else if (gameId === 'pick_a_side') {
+        container.style.display = 'flex';
+        container.innerHTML =
+          '<div style="display:flex;flex-direction:column;gap:8px">' +
+            '<p class="hint">How many rounds?</p>' +
+            '<div class="count-picker">' +
+              ['3','5','7','10'].map(function(n) {
+                return '<button class="count-btn pas-count-btn" data-count="' + n + '">' + n + '</button>';
+              }).join('') +
+            '</div>' +
+          '</div>';
+
+        container.querySelectorAll('.pas-count-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            container.querySelectorAll('.pas-count-btn').forEach(function(b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            state.selectedCount = parseInt(btn.dataset.count);
+            document.getElementById('btn-start').disabled = false;
+            document.getElementById('btn-start').textContent = 'Start session →';
+          });
+        });
+
+        document.getElementById('btn-start').disabled = true;
+        document.getElementById('btn-start').textContent = 'Choose how many rounds';
+
+      } else {
+        container.style.display = 'none';
+        container.innerHTML = '';
+      }
+    }
+
+    function checkHTTReady() {
+      var btn = document.getElementById('btn-start');
+      if (state.selectedCount && state.selectedTimer) {
+        btn.disabled = false;
+        btn.textContent = 'Start session →';
+      } else {
+        btn.disabled = true;
+        btn.textContent = state.selectedCount
+          ? 'Choose a defense timer'
+          : state.selectedTimer
+            ? 'Choose how many rounds'
+            : 'Choose rounds and timer';
+      }
+    }
+
+    // ── Submitting ─────────────────────────────────────────────────────────────
+    function renderSubmitting(data) {
+      state.hasSubmitted = false;
+      showScreen('screen-submitting');
+      showExitBtn(true);
+      var isHTT = state.currentGame === 'hot_take_tribunal';
+      document.getElementById('submitting-label').textContent =
+        isHTT ? '🔥 Hot Take Tribunal' : 'Guess Who?';
+      document.getElementById('submitting-heading').textContent =
+        isHTT ? 'Submit your hot take' : 'Share a surprising fact about yourself';
+      document.getElementById('submitting-hint').textContent =
+        isHTT
+          ? 'An unpopular opinion you\'re willing to defend'
+          : 'Something your teammates probably don\'t know';
+      document.getElementById('fact-input').placeholder =
+        isHTT ? 'Unpopular opinion: ...' : 'I once...';
+      var card = document.getElementById('submitting-card');
+      card.className = isHTT ? 'card fire' : 'card';
+      document.getElementById('fact-input').value = '';
+      document.getElementById('fact-input').disabled = false;
+      document.getElementById('btn-submit-fact').disabled = false;
+      document.getElementById('btn-submit-fact').textContent = 'Submit';
+      document.getElementById('btn-submit-fact').className = '';
+      document.getElementById('submit-feedback').innerHTML = '';
+      document.getElementById('submit-status').innerHTML =
+        buildProgressHTML(data.submissionCount || 0, data.totalPlayers, 'submitted');
+    }
+
+    // ── Voting ─────────────────────────────────────────────────────────────────
+    async function renderVoting(data) {
+      var isPostVote = data.votePhase === 'post';
+      if (state.currentGame === 'hot_take_tribunal' && isPostVote) {
+        await renderVotingPost(data);
+        return;
+      }
+      state.hasVoted = false;
+      showScreen('screen-voting');
+      showExitBtn(true);
+      var isHTT = state.currentGame === 'hot_take_tribunal';
+      var isMLT = state.currentGame === 'most_likely_to';
+      var isGW  = state.currentGame === 'guess_who';
+      document.getElementById('voting-card').className = isHTT ? 'card fire' : 'card';
+      document.getElementById('voting-game-label').textContent =
+        isHTT ? '🔥 Hot Take Tribunal' : isMLT ? 'Most Likely To' : 'Guess Who?';
+      document.getElementById('voting-game-label').className = isHTT ? 'label fire' : 'label';
+      document.getElementById('voting-heading').textContent = '';
+      document.getElementById('voting-hint').textContent = '';
+      document.getElementById('prompt-display').innerHTML = '';
+      document.getElementById('voting-players').innerHTML = '';
+      document.getElementById('agree-disagree-btns').style.display = 'none';
+      document.getElementById('prompt-counter').textContent =
+        (data.currentFactIndex + 1) + ' of ' + data.factsTotal;
+      document.getElementById('vote-status').innerHTML =
+        buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
+      try {
+        var results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+        document.getElementById('voting-heading').textContent =
+          isGW  ? 'Who do you think said this?' :
+          isMLT ? 'Who is most likely to…' :
+                  'Do you agree with this take?';
+        document.getElementById('voting-hint').textContent =
+          isGW  ? "Pick your guess — you can't vote for yourself" :
+          isMLT ? 'Vote for one teammate' :
+          isHTT ? (results.authorId === state.playerId ? "This is your take — sit tight!" : 'Agree or disagree?') :
+                  '';
+        document.getElementById('agree-disagree-btns').style.display = isHTT ? 'grid' : 'none';
+        document.getElementById('voting-players').style.display = isHTT ? 'none' : 'flex';
+        var promptEl = document.getElementById('prompt-display');
+        if (isGW) {
+          promptEl.className = 'fact-box';
+          promptEl.innerHTML = '<em>' + results.prompt + '</em>';
+        } else if (isMLT) {
+          promptEl.className = 'mlt-prompt';
+          promptEl.innerHTML = '<div class="prompt-text">' + results.prompt + '</div>';
+        } else if (isHTT) {
+          promptEl.className = 'fact-box fire';
+          promptEl.innerHTML = '<em>' + results.prompt + '</em>';
+        }
+        if (isHTT && results.authorId === state.playerId) {
+          document.getElementById('btn-agree').disabled = true;
+          document.getElementById('btn-disagree').disabled = true;
+          state.hasVoted = true;
+          return;
+        }
+        if (isHTT) {
+          var btnAgree = document.getElementById('btn-agree');
+          var btnDisagree = document.getElementById('btn-disagree');
+          btnAgree.disabled = false;
+          btnAgree.className = 'btn-agree';
+          btnDisagree.disabled = false;
+          btnDisagree.className = 'btn-disagree';
+          btnAgree.onclick = function() { handleAgreeDisagree('agree', 'pre'); };
+          btnDisagree.onclick = function() { handleAgreeDisagree('disagree', 'pre'); };
+        }
+        if (!isHTT) {
+          var voters = isGW
+            ? state.players.filter(function(p) { return p.id !== state.playerId; })
+            : state.players;
+          var voteContainer = document.getElementById('voting-players');
+          voteContainer.innerHTML = voters.map(function(p, i) {
+            return '<button class="vote-btn" data-id="' + p.id + '" style="animation-delay:' + (i * 0.07) + 's">' +
+              '<span>' + p.name + '</span>' +
+              '<span class="vote-btn-arrow">→</span>' +
+            '</button>';
+          }).join('');
+          voteContainer.querySelectorAll('.vote-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() { handleVote(btn.dataset.id, btn); });
+          });
+        }
+      } catch(e) {
+        dbg('renderVoting error: ' + e.message, 'err');
+      }
+    }
+
+    async function renderVotingPost(data) {
+      state.hasVotedPost = false;
+      showScreen('screen-voting-post');
+      showExitBtn(true);
+      document.getElementById('vote-post-status').innerHTML =
+        buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
+      try {
+        var results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+        document.getElementById('vp-prompt').innerHTML = '<em>' + results.prompt + '</em>';
+        var btnAP = document.getElementById('btn-agree-post');
+        var btnDP = document.getElementById('btn-disagree-post');
+        if (results.authorId === state.playerId) {
+          btnAP.disabled = true;
+          btnDP.disabled = true;
+          document.getElementById('vote-post-status').textContent = 'Waiting for the verdict on your take...';
+          state.hasVotedPost = true;
+          return;
+        }
+        btnAP.disabled = false;
+        btnAP.className = 'btn-agree';
+        btnDP.disabled = false;
+        btnDP.className = 'btn-disagree';
+        btnAP.onclick = function() { handleAgreeDisagree('agree', 'post'); };
+        btnDP.onclick = function() { handleAgreeDisagree('disagree', 'post'); };
+      } catch(e) {
+        dbg('renderVotingPost error: ' + e.message, 'err');
+      }
+    }
+
+    // ── Revealing Pre ──────────────────────────────────────────────────────────
+    async function renderRevealingPre() {
+      showScreen('screen-revealing-pre');
+      showExitBtn(true);
+      document.getElementById('rp-prompt').innerHTML = '';
+      document.getElementById('rp-tally').innerHTML = '';
+      document.getElementById('rp-defense').style.display = 'none';
+      document.getElementById('btn-open-defense').style.display = 'none';
+      document.getElementById('btn-start-defense').style.display = 'none';
+      var authorBox = document.getElementById('rp-author');
+      authorBox.className = 'reveal-box';
+      authorBox.style.borderColor = '';
+      authorBox.style.color = '';
+      authorBox.innerHTML = '<div class="waiting-dots"><span></span><span></span><span></span></div>';
+      try {
+        var results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+        document.getElementById('rp-prompt').innerHTML = '<em>' + results.prompt + '</em>';
+        document.getElementById('rp-tally').innerHTML = buildTallyHTML(results.preTally);
+        var authorName = results.authorName;
+        setTimeout(function() {
+          authorBox.classList.add('revealed');
+          authorBox.style.borderColor = '#f97316';
+          authorBox.style.color = '#f97316';
+          authorBox.innerHTML = '🔥 ' + authorName + ' said this!';
+          setTimeout(function() {
+            document.getElementById('rp-defense-name').textContent = authorName + ', it\'s your turn.';
+            document.getElementById('rp-defense').style.display = 'flex';
+            if (state.isHost) {
+              document.getElementById('btn-open-defense').style.display = 'block';
+            }
+          }, 600);
+          burstEmojis(['🔥','💀','😂','👀','🌶️'], 10);
+        }, 2000);
+      } catch(e) {
+        dbg('renderRevealingPre error: ' + e.message, 'err');
+      }
+    }
+
+    async function renderDefending() {
+      if (state.isHost) {
+        document.getElementById('btn-open-defense').style.display = 'none';
+        document.getElementById('btn-start-defense').style.display = 'block';
+        startDefenseTimer();
+      } else {
+        startDefenseTimer();
+      }
+    }
+
+    function startDefenseTimer() {
+      var existing = document.getElementById('defense-timer');
+      if (existing) existing.remove();
+      var timerEl = document.createElement('div');
+      timerEl.id = 'defense-timer';
+      timerEl.style.cssText =
+        'text-align:center; font-size:2.5rem; font-weight:900; color:#f97316; ' +
+        'animation: flamePulse 1s ease-in-out infinite; margin-top: 4px;';
+      var defense = document.getElementById('rp-defense');
+      if (defense) {
+        defense.parentNode.insertBefore(timerEl, defense.nextSibling);
+      }
+      var seconds = state.selectedTimer || 30;
+      function tick() {
+        if (!document.getElementById('defense-timer')) return;
+        timerEl.textContent = seconds + 's 🔥';
+        if (seconds <= 10) {
+          timerEl.style.color = '#ef4444';
+          timerEl.style.fontSize = '3rem';
+        }
+        if (seconds <= 0) {
+          timerEl.textContent = "Time's up! ⏰";
+          timerEl.style.animation = 'none';
+          return;
+        }
+        seconds--;
+        setTimeout(tick, 1000);
+      }
+      tick();
+    }
+
+    // ── Revealing Post ─────────────────────────────────────────────────────────
+    async function renderRevealingPost() {
+      showScreen('screen-revealing-post');
+      showExitBtn(true);
+      document.getElementById('rv-prompt').innerHTML = '';
+      document.getElementById('rv-pre-tally').innerHTML = '';
+      document.getElementById('rv-post-tally').innerHTML = '';
+      document.getElementById('rv-flips').innerHTML = '';
+      var btn = document.getElementById('btn-next-htt');
+      btn.disabled = false;
+      btn.textContent = 'Next hot take →';
+      try {
+        var results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+        document.getElementById('rv-prompt').innerHTML = '<em>' + results.prompt + '</em>';
+        document.getElementById('rv-pre-tally').innerHTML = buildTallyHTML(results.preTally);
+        document.getElementById('rv-post-tally').innerHTML = buildTallyHTML(results.postTally);
+        var container = document.getElementById('rv-flips');
+        if (results.flipData && results.flipData.length > 0) {
+          container.innerHTML = results.flipData.map(function(f, i) {
+            return '<div class="flip-row ' + (f.flipped ? 'flipped' : '') + '" style="animation-delay:' + (i * 0.08) + 's">' +
+              '<div class="flip-name">' + f.name + '</div>' +
+              '<div class="flip-votes">' +
+                '<span class="vote-pill ' + f.pre + '">' + f.pre + '</span>' +
+                '<span class="flip-arrow">→</span>' +
+                '<span class="vote-pill ' + f.post + '">' + f.post + '</span>' +
+                (f.flipped ? '<span class="flip-badge">🔄 flipped!</span>' : '') +
+              '</div>' +
+            '</div>';
+          }).join('');
+        } else {
+          container.innerHTML = '<p class="hint" style="text-align:center">No changes recorded</p>';
+        }
+        var flippedCount = results.flipData
+          ? results.flipData.filter(function(f) { return f.flipped; }).length : 0;
+        if (flippedCount > 0) burstEmojis(['🔄','🤯','😮','🔥'], 10);
+      } catch(e) {
+        dbg('renderRevealingPost error: ' + e.message, 'err');
+      }
+    }
+
+    // ── Revealing (GW/MLT) ─────────────────────────────────────────────────────
+    async function renderRevealing() {
+      showScreen('screen-revealing');
+      showExitBtn(true);
+      document.getElementById('reveal-prompt').style.display = 'none';
+      document.getElementById('reveal-prompt').textContent = '';
+      document.getElementById('reveal-votes').innerHTML = '';
+      document.getElementById('reveal-game-label').textContent = '👀 Results';
+      var box = document.getElementById('reveal-box');
+      box.className = 'reveal-box';
+      box.style.borderColor = '';
+      box.style.color = '';
+      box.innerHTML = '<div class="waiting-dots"><span></span><span></span><span></span></div>';
+      var btn = document.getElementById('btn-next-round');
+      btn.disabled = false;
+      btn.textContent = 'Next →';
+      btn.onclick = null;
+      try {
+        var results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+        var isMLT = results.game === 'most_likely_to';
+        document.getElementById('reveal-game-label').textContent =
+          isMLT ? 'Most Likely To — Results' : 'Guess Who? — Results';
+        var promptEl = document.getElementById('reveal-prompt');
+        promptEl.style.display = 'block';
+        promptEl.textContent = results.prompt;
+        var maxVotes = Math.max.apply(null,
+          results.voteSummary.map(function(v) { return v.votes; }).concat([1])
+        );
+        document.getElementById('reveal-votes').innerHTML = results.voteSummary.map(function(v) {
+          var pct = Math.round((v.votes / maxVotes) * 100);
+          var isWinner = v.id === results.winner.id;
+          return '<div class="vote-row">' +
+            '<div class="vote-row-name">' + v.name + '</div>' +
+            '<div class="vote-bar-wrap">' +
+              '<div class="vote-bar ' + (isWinner ? 'winner' : '') + '" style="width:' + pct + '%"></div>' +
+            '</div>' +
+            '<div class="vote-count">' + v.votes + '</div>' +
+          '</div>';
+        }).join('');
+        var winnerName = results.winner.name;
+        var authorName = results.authorName;
+        setTimeout(function() {
+          box.classList.add('revealed');
+          if (isMLT) {
+            box.innerHTML = '🏆 <strong style="margin:0 6px">' + winnerName + '</strong> wins this one!';
+            burstEmojis(['🏆','👑','🎉','✨','😂'], 14);
+          } else {
+            box.innerHTML = '🎉 It was <strong style="margin:0 6px">' + authorName + '</strong>!';
+            burstEmojis(['🎉','✨','🎊','⭐','🙌'], 14);
+          }
+        }, 2000);
+      } catch(e) {
+        dbg('renderRevealing error: ' + e.message, 'err');
+      }
+    }
+
+    // ── Done ───────────────────────────────────────────────────────────────────
+    function renderDone() {
+      showScreen('screen-revealing');
+      showExitBtn(false);
+      document.getElementById('reveal-prompt').style.display = 'none';
+      document.getElementById('reveal-votes').innerHTML = '';
+      document.getElementById('reveal-game-label').textContent = 'Session complete!';
+      var box = document.getElementById('reveal-box');
+      box.className = 'reveal-box revealed';
+      box.innerHTML = "That's everyone! 🎊";
+      var btn = document.getElementById('btn-next-round');
+      btn.textContent = 'Play another game';
+      btn.disabled = false;
+      btn.onclick = async function() {
+        btn.disabled = true;
+        btn.textContent = 'Going back...';
+        await run('resetRoom', [state.roomId]);
+      };
+      burstEmojis(['🎉','🎊','✨','🙌','⭐'], 20);
+    }
+
+    // ── Vote handlers ──────────────────────────────────────────────────────────
+    async function handleVote(playerId, btn) {
+      if (state.hasVoted) return;
+      state.hasVoted = true;
+      document.querySelectorAll('.vote-btn').forEach(function(b) {
+        b.disabled = true;
+        if (b.dataset.id === playerId) b.classList.add('selected');
+      });
+      document.getElementById('vote-status').innerHTML =
+        '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+        '<div>Vote locked in! Waiting for others...</div>';
+      try {
+        await run('submitVote', [state.roomId, state.playerId, playerId, '']);
+      } catch(e) {
+        document.getElementById('vote-status').textContent = 'Error submitting vote.';
+        state.hasVoted = false;
+      }
+    }
+
+    async function handleAgreeDisagree(value, phase) {
+      if (phase === 'pre' && state.hasVoted) return;
+      if (phase === 'post' && state.hasVotedPost) return;
+      if (phase === 'pre') {
+        state.hasVoted = true;
+        var bA = document.getElementById('btn-agree');
+        var bD = document.getElementById('btn-disagree');
+        bA.disabled = true; bD.disabled = true;
+        if (value === 'agree') bA.classList.add('selected');
+        else bD.classList.add('selected');
+        document.getElementById('vote-status').innerHTML =
+          '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+          '<div>Vote locked in! Waiting for others...</div>';
+      } else {
+        state.hasVotedPost = true;
+        var bAP = document.getElementById('btn-agree-post');
+        var bDP = document.getElementById('btn-disagree-post');
+        bAP.disabled = true; bDP.disabled = true;
+        if (value === 'agree') bAP.classList.add('selected');
+        else bDP.classList.add('selected');
+        document.getElementById('vote-post-status').innerHTML =
+          '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+          '<div>Vote locked in! Waiting for others...</div>';
+      }
+      try {
+        await run('submitVote', [state.roomId, state.playerId, '', value]);
+      } catch(e) {
+        if (phase === 'pre') {
+          document.getElementById('vote-status').textContent = 'Error. Try again.';
+          state.hasVoted = false;
+        } else {
+          document.getElementById('vote-post-status').textContent = 'Error. Try again.';
+          state.hasVotedPost = false;
+        }
+      }
+    }
+
+    // ── Pick a Side ────────────────────────────────────────────────────────────
+    async function renderPasVoting(data) {
+      state.hasVoted = false;
+      showScreen('screen-pas-voting');
+      showExitBtn(true);
+      var counter = document.getElementById('pas-counter');
+      var promptEl = document.getElementById('pas-prompt-display');
+      var statusEl = document.getElementById('pas-vote-status');
+      var countdownEl = document.getElementById('pas-countdown');
+      counter.textContent = (data.currentFactIndex + 1) + ' of ' + data.factsTotal;
+      promptEl.innerHTML = '';
+      statusEl.innerHTML = buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
+      countdownEl.style.display = 'none';
+      try {
+        var results = await run('getResults', [state.roomId]);
+        if (results.error) return;
+        await runCountdown(countdownEl, 3);
+        promptEl.innerHTML =
+          '<div class="pas-arena">' +
+            '<button class="pas-option option-a" id="pas-btn-a">' + results.promptA + '</button>' +
+            '<div class="pas-vs"><div class="pas-vs-text">or</div></div>' +
+            '<button class="pas-option option-b" id="pas-btn-b">' + results.promptB + '</button>' +
+          '</div>';
+        document.getElementById('pas-btn-a').addEventListener('click', function() {
+          handlePasVote('a', results.promptA, results.promptB);
+        });
+        document.getElementById('pas-btn-b').addEventListener('click', function() {
+          handlePasVote('b', results.promptA, results.promptB);
+        });
+      } catch(e) {
+        dbg('renderPasVoting error: ' + e.message, 'err');
+      }
+    }
+
+    function runCountdown(el, from) {
+      return new Promise(function(resolve) {
+        el.style.display = 'block';
+        var n = from;
+        function tick() {
+          el.style.animation = 'none';
+          el.offsetHeight;
+          el.style.animation = 'countdownPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both';
+          el.textContent = n;
+          if (n <= 0) {
+            el.textContent = 'GO! ⚡';
+            setTimeout(function() { el.style.display = 'none'; resolve(); }, 500);
+            return;
+          }
+          n--;
+          setTimeout(tick, 700);
+        }
+        tick();
+      });
+    }
+
+    async function handlePasVote(side, promptA, promptB) {
+      if (state.hasVoted) return;
+      state.hasVoted = true;
+      var btnA = document.getElementById('pas-btn-a');
+      var btnB = document.getElementById('pas-btn-b');
+      if (side === 'a') {
+        btnA.classList.remove('option-a'); btnA.classList.add('chosen-a');
+        btnB.classList.remove('option-b'); btnB.classList.add('rejected');
+      } else {
+        btnB.classList.remove('option-b'); btnB.classList.add('chosen-b');
+        btnA.classList.remove('option-a'); btnA.classList.add('rejected');
+      }
+      btnA.disabled = true; btnB.disabled = true;
+      document.getElementById('pas-vote-status').innerHTML =
+        '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
+        '<div>Locked in! Waiting for others...</div>';
+      try {
+        await run('submitVote', [state.roomId, state.playerId, '', side]);
+      } catch(e) {
+        document.getElementById('pas-vote-status').textContent = 'Error. Try again.';
+        state.hasVoted = false;
+        btnA.disabled = false; btnB.disabled = false;
+        btnA.className = 'pas-option option-a';
+        btnB.className = 'pas-option option-b';
+      }
+    }
+
+    async function renderPasReveal() {
+      showScreen('screen-pas-reveal');
+      showExitBtn(true);
+      document.getElementById('pas-results-list').innerHTML = '';
+      document.getElementById('pas-hot-take').style.display = 'none';
+      var btn = document.getElementById('btn-pas-next');
+      btn.disabled = false;
+      btn.textContent = 'Play another game';
+      btn.onclick = async function() {
+        btn.disabled = true;
+        btn.textContent = 'Going back...';
+        await run('resetRoom', [state.roomId]);
+      };
+      try {
+        var data = await run('getAllPasResults', [state.roomId]);
+        if (data.error) return;
+        var controversial = data.mostControversial;
+        var list = document.getElementById('pas-results-list');
+        list.innerHTML = data.rounds.map(function(r, i) {
+          var total = r.sideA.length + r.sideB.length;
+          var pctA = total > 0 ? Math.round((r.sideA.length / total) * 100) : 50;
+          var isC = r.index === controversial.index;
+          return '<div class="pas-result-row' + (isC ? ' controversial' : '') + '" style="animation-delay:' + (i * 0.09) + 's">' +
+            '<div class="pas-result-label">' +
+              '<span class="pas-result-ab">' + r.promptA + '</span>' +
+              '<span class="pas-result-vs">vs</span>' +
+              '<span class="pas-result-ab">' + r.promptB + '</span>' +
+              (isC ? '<span class="pas-fire-badge">🔥</span>' : '') +
+            '</div>' +
+            '<div class="pas-result-bar-row">' +
+              '<span class="pas-bar-name side-a">' + (r.sideA.length > 0 ? r.sideA.join(', ') : '—') + '</span>' +
+              '<div class="pas-result-bar-wrap">' +
+                '<div class="pas-result-bar-a" style="width:' + pctA + '%"></div>' +
+              '</div>' +
+              '<span class="pas-bar-name side-b">' + (r.sideB.length > 0 ? r.sideB.join(', ') : '—') + '</span>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+        setTimeout(function() {
+          var hotTake = document.getElementById('pas-hot-take');
+          hotTake.style.display = 'flex';
+          var speakersHTML = '';
+          if (controversial.isUnanimous) {
+            var chosenOption = controversial.unanimousSide === 'a'
+              ? controversial.promptA : controversial.promptB;
+            speakersHTML =
+              '<div class="pas-speaker-line devils">' +
+                '😈 Everyone picked <strong>' + chosenOption + '</strong> — ' +
+                controversial.devilsAdvocate + ', can you make a case for the other side?' +
+              '</div>';
+          } else {
+            if (controversial.speakerA) {
+              speakersHTML +=
+                '<div class="pas-speaker-line side-a">' +
+                  '⚡ <strong>' + controversial.speakerA + '</strong> — tell us why you chose ' +
+                  controversial.promptA +
+                '</div>';
+            }
+            if (controversial.speakerB) {
+              speakersHTML +=
+                '<div class="pas-speaker-line side-b">' +
+                  '🔥 <strong>' + controversial.speakerB + '</strong> — tell us why you chose ' +
+                  controversial.promptB +
+                '</div>';
+            }
+          }
+          hotTake.innerHTML =
+            '<div class="pas-hot-take-label">🔥 Most controversial — let\'s talk about it</div>' +
+            '<div class="pas-hot-take-score">' +
+              controversial.sideA.length + ' vs ' + controversial.sideB.length +
+            '</div>' +
+            '<div class="pas-hot-take-speakers">' + speakersHTML + '</div>';
+          burstEmojis(['⚡','🔥','👀','😂','🤯'], 10);
+        }, 600);
+      } catch(e) {
+        dbg('renderPasReveal error: ' + e.message, 'err');
+      }
+    }
+
+    // ── Greatness in You ───────────────────────────────────────────────────────
+    async function renderGreatnessSetup() {
+      if (state.isHost) {
+        showScreen('screen-greatness-setup');
+        showExitBtn(true);
+        var list = document.getElementById('greatness-player-list');
+        list.innerHTML = state.players.map(function(p, i) {
+          return '<div class="greatness-exempt-row" data-id="' + p.id + '" style="animation-delay:' + (i * 0.07) + 's">' +
+            '<div class="exempt-checkbox"></div>' +
+            '<div class="exempt-name">' + p.name + '</div>' +
+            '<div class="exempt-badge"></div>' +
+          '</div>';
+        }).join('');
+        list.querySelectorAll('.greatness-exempt-row').forEach(function(row) {
+          row.addEventListener('click', function() {
+            var id = row.dataset.id;
+            var isExempt = greatnessState.exemptIds.indexOf(id) !== -1;
+            if (isExempt) {
+              greatnessState.exemptIds = greatnessState.exemptIds.filter(function(e) { return e !== id; });
+              row.classList.remove('exempted');
+              row.querySelector('.exempt-checkbox').textContent = '';
+              row.querySelector('.exempt-badge').textContent = '';
+            } else {
+              greatnessState.exemptIds.push(id);
+              row.classList.add('exempted');
+              row.querySelector('.exempt-checkbox').textContent = '✓';
+              row.querySelector('.exempt-badge').textContent = 'sitting out';
+            }
+          });
+        });
+      } else {
+        showScreen('screen-greatness-waiting');
+        showExitBtn(false);
+      }
+    }
+
+    async function renderGreatnessSpin(data) {
+      showScreen('screen-greatness-spin');
+      showExitBtn(true);
+      var gState = await run('getGreatnessState', [state.roomId]);
+      var total = gState.total;
+      var done = total - gState.remaining;
+      document.getElementById('greatness-round-counter').textContent =
+        'Spotlight ' + (done + 1) + ' of ' + total;
+      document.getElementById('greatness-spin-heading').textContent = 'Who\'s in the spotlight?';
+      document.getElementById('greatness-spin-result').style.display = 'none';
+      renderGreatnessDeck(gState.players.filter(function(p) {
+        return gState.exemptIds.indexOf(p.id) === -1;
+      }));
+      if (state.isHost) {
+        document.getElementById('btn-spin-receiver').style.display = 'block';
+        document.getElementById('greatness-spin-waiting').style.display = 'none';
+      } else {
+        document.getElementById('btn-spin-receiver').style.display = 'none';
+        document.getElementById('greatness-spin-waiting').style.display = 'block';
+      }
+    }
+
+    function renderGreatnessDeck(players) {
+      var container = document.getElementById('greatness-cards');
+      container.innerHTML = '';
+      container.style.height = '110px';
+      var count = players.length;
+      var spread = Math.min(count * 28, 200);
+      var startX = -spread / 2;
+      players.forEach(function(p, i) {
+        var card = document.createElement('div');
+        card.className = 'greatness-card-item face-down';
+        card.dataset.id = p.id;
+        card.dataset.name = p.name;
+        var angle = count > 1 ? ((i / (count - 1)) - 0.5) * 18 : 0;
+        var x = count > 1 ? startX + (i / (count - 1)) * spread : 0;
+        var y = Math.abs(angle) * 1.2;
+        card.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px) rotate(' + angle + 'deg)';
+        card.style.zIndex = i;
+        card.style.animationDelay = (i * 0.05) + 's';
+        container.appendChild(card);
+      });
+    }
+
+    async function animateCardSpin(players, winnerId) {
+      var container = document.getElementById('greatness-cards');
+      var cards = Array.from(container.querySelectorAll('.greatness-card-item'));
+      var winnerCard = cards.find(function(c) { return c.dataset.id === winnerId; });
+      var losers = cards.filter(function(c) { return c.dataset.id !== winnerId; });
+      return new Promise(function(resolve) {
+        var rounds = 0;
+        var maxRounds = 8;
+        function shuffleStep() {
+          cards.forEach(function(card) {
+            var currentTransform = card.style.transform;
+            var jitter = (Math.random() - 0.5) * 16;
+            var jitterR = (Math.random() - 0.5) * 12;
+            card.style.transition = 'transform 0.15s ease';
+            card.style.transform = currentTransform
+              .replace(/translateX\(([^)]+)\)/, function(m, val) {
+                return 'translateX(' + (parseFloat(val) + jitter) + 'px)';
+              });
+          });
+          rounds++;
+          if (rounds < maxRounds) {
+            setTimeout(shuffleStep, 150);
+          } else {
+            eliminateCards(losers, 0, function() {
+              if (winnerCard) {
+                winnerCard.style.transition = 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                winnerCard.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
+                winnerCard.style.zIndex = 10;
+                setTimeout(function() {
+                  winnerCard.className = 'greatness-card-item face-up';
+                  winnerCard.textContent = winnerCard.dataset.name;
+                  winnerCard.style.transform = '';
+                  resolve();
+                }, 400);
+              } else {
+                resolve();
+              }
+            });
+          }
+        }
+        shuffleStep();
+      });
+    }
+
+    function eliminateCards(cards, index, callback) {
+      if (index >= cards.length) { callback(); return; }
+      var card = cards[index];
+      card.style.transition = 'opacity 0.2s, transform 0.2s';
+      card.classList.add('eliminated');
+      setTimeout(function() { eliminateCards(cards, index + 1, callback); }, 120);
+    }
+
+    async function runGreatnessSpin() {
+      if (greatnessState.spinning) return;
+      greatnessState.spinning = true;
+      greatnessState.animating = true;
+      var btn = document.getElementById('btn-spin-receiver');
+      btn.disabled = true;
+      btn.textContent = 'Spinning...';
+      try {
+        var result = await run('spinReceiver', [state.roomId]);
+        if (result.error || result.done) {
+          greatnessState.animating = false;
+          greatnessState.spinning = false;
+          btn.disabled = false;
+          btn.textContent = '🎰 Spin to find out';
+          return;
+        }
+        var gState = await run('getGreatnessState', [state.roomId]);
+        var eligiblePlayers = gState.players.filter(function(p) {
+          return gState.exemptIds.indexOf(p.id) === -1;
+        });
+        await animateCardSpin(eligiblePlayers, result.receiverId);
+        var resultEl = document.getElementById('greatness-spin-result');
+        resultEl.style.display = 'block';
+        resultEl.innerHTML =
+          '<div class="result-name">✨ ' + result.receiverName + '</div>' +
+          '<div class="result-label">is in the spotlight</div>';
+        burstEmojis(['✨','⭐','💫','🌟'], 10);
+        await new Promise(function(r) { setTimeout(r, 2000); });
+        state.phase = 'greatness_receiver';
+        await runGiverSpin(result.receiverName, result.receiverId);
+      } catch(e) {
+        dbg('greatness spin error: ' + e.message, 'err');
+        greatnessState.spinning = false;
+        greatnessState.animating = false;
+      }
+    }
+
+    async function runGiverSpin(receiverName, receiverId) {
+      document.getElementById('greatness-spin-heading').textContent = 'Who\'s sharing?';
+      document.getElementById('greatness-spin-result').style.display = 'none';
+      var gState = await run('getGreatnessState', [state.roomId]);
+      var allExceptReceiver = gState.players.filter(function(p) { return p.id !== receiverId; });
+      renderGreatnessDeck(allExceptReceiver);
+      await new Promise(function(r) { setTimeout(r, 400); });
+      var giverResult = await run('spinGiver', [state.roomId]);
+      if (giverResult.error) {
+        greatnessState.animating = false;
+        greatnessState.spinning = false;
+        return;
+      }
+      await animateCardSpin(allExceptReceiver, giverResult.giverId);
+      var resultEl = document.getElementById('greatness-spin-result');
+      resultEl.style.display = 'block';
+      resultEl.innerHTML =
+        '<div class="result-name">' + giverResult.giverName + '</div>' +
+        '<div class="result-label">has something to share</div>';
+      burstEmojis(['💜','✨','💫'], 8);
+      await new Promise(function(r) { setTimeout(r, 2000); });
+      state.phase = 'greatness_giver';
+      greatnessState.animating = false;
+      greatnessState.spinning = false;
+    }
+
+    async function renderGreatnessPrompt() {
+      showScreen('screen-greatness-prompt');
+      showExitBtn(true);
+      document.getElementById('greatness-slot').style.display = 'block';
+      var gState = await run('getGreatnessState', [state.roomId]);
+      document.getElementById('greatness-receiver-banner').innerHTML =
+        '<div style="font-size:1.5rem">✨</div>' +
+        '<div>' +
+          '<div class="greatness-receiver-name">' + gState.receiverName + '</div>' +
+          '<div class="greatness-receiver-label">is in the spotlight</div>' +
+        '</div>';
+      document.getElementById('greatness-prompt-card').style.display = 'none';
+      document.getElementById('greatness-giver-banner').style.display = 'none';
+      document.getElementById('btn-next-spotlight').style.display = 'none';
+      document.getElementById('greatness-listening').style.display = 'none';
+      await runPromptSlot(gState.prompt, gState.giverName);
+    }
+
+    async function runPromptSlot(finalPrompt, giverName) {
+      var slotInner = document.getElementById('greatness-slot-inner');
+      var dummies = [
+        "What's one thing that makes them great?",
+        "What's a strength they have?",
+        "What do you admire about them?",
+        "What do they bring to the team?",
+        "What's something they do really well?",
+        "What would you miss about them?",
+        "What's their superpower?",
+        "What have you learned from them?",
+        "What's one thing that makes them great?",
+        "What's a strength they have?",
+        "What do you admire about them?",
+        "What do they bring to the team?",
+        "What's something they do really well?",
+        finalPrompt
+      ];
+      slotInner.style.transform = 'translateY(0)';
+      slotInner.style.transition = 'none';
+      slotInner.innerHTML = dummies.map(function(p) {
+        return '<div class="greatness-slot-item">' + p + '</div>';
+      }).join('');
+      var itemHeight = 56;
+      var currentIndex = 0;
+      var speed = 60;
+      var slowdownStart = dummies.length - 5;
+      return new Promise(function(resolve) {
+        function scroll() {
+          if (currentIndex >= dummies.length - 1) {
+            slotInner.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+            slotInner.style.transform = 'translateY(-' + ((dummies.length - 1) * itemHeight) + 'px)';
+            slotInner.querySelectorAll('.greatness-slot-item').forEach(function(el, i) {
+              el.classList.toggle('active', i === dummies.length - 1);
+            });
+            setTimeout(function() { showPromptCard(finalPrompt, giverName); resolve(); }, 600);
+            return;
+          }
+          slotInner.style.transition = 'transform ' + speed + 'ms linear';
+          slotInner.style.transform = 'translateY(-' + (currentIndex * itemHeight) + 'px)';
+          currentIndex++;
+          if (currentIndex > slowdownStart) speed = Math.min(speed + 120, 500);
+          setTimeout(scroll, speed);
+        }
+        setTimeout(scroll, 300);
+      });
+    }
+
+    function showPromptCard(prompt, giverName) {
+      document.getElementById('greatness-slot').style.display = 'none';
+      var promptCard = document.getElementById('greatness-prompt-card');
+      promptCard.style.display = 'block';
+      promptCard.textContent = prompt;
+      var giverBanner = document.getElementById('greatness-giver-banner');
+      giverBanner.style.display = 'flex';
+      giverBanner.innerHTML =
+        '<div class="greatness-giver-name">' + giverName + '</div>' +
+        '<div class="greatness-giver-label">the floor is yours ✨</div>';
+      if (state.isHost) {
+        document.getElementById('btn-next-spotlight').style.display = 'block';
+      } else {
+        document.getElementById('greatness-listening').style.display = 'block';
+      }
+      burstEmojis(['✨','💜','⭐','💫','🌟'], 12);
+    }
+
+    function renderGreatnessReceiver(data) {
+      if (!state.isHost) {
+        showScreen('screen-greatness-spin');
+        showExitBtn(false);
+        document.getElementById('btn-spin-receiver').style.display = 'none';
+        document.getElementById('greatness-spin-waiting').style.display = 'block';
+        document.getElementById('greatness-spin-waiting').textContent = 'The spotlight is being chosen... ✨';
+        document.getElementById('greatness-spin-result').style.display = 'none';
+      }
+    }
+
+    function renderGreatnessDone() {
+      showScreen('screen-revealing');
+      showExitBtn(false);
+      document.getElementById('reveal-prompt').style.display = 'none';
+      document.getElementById('reveal-votes').innerHTML = '';
+      document.getElementById('reveal-game-label').textContent = '✨ The Greatness in You';
+      var box = document.getElementById('reveal-box');
+      box.className = 'reveal-box revealed';
+      box.style.borderColor = '#a78bfa';
+      box.style.color = '#a78bfa';
+      box.innerHTML = "That's everyone. Thanks for sharing ♥";
+      var btn = document.getElementById('btn-next-round');
+      btn.textContent = 'Play another game';
+      btn.disabled = false;
+      btn.onclick = async function() {
+        btn.disabled = true;
+        btn.textContent = 'Going back...';
+        await run('resetRoom', [state.roomId]);
+      };
+      burstEmojis(['✨','💜','⭐','💫','🌟','♥'], 20);
+    }
+
+    // ── Quiz ───────────────────────────────────────────────────────────────────
     async function renderQuizPicker() {
       showScreen('screen-quiz-picker');
       showExitBtn(false);
-    
-      const quizzes = await run('getQuizList', []);
-      const container = document.getElementById('quiz-list');
-      container.innerHTML = quizzes.map(function(q) {
-        return '<div class="game-card" data-id="' + q.id + '">' +
-          '<div class="game-emoji">' + q.emoji + '</div>' +
-          '<div class="game-info">' +
-            '<div class="game-name">' + q.label + '</div>' +
-            '<div class="game-desc">' + q.description + '</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    
-      var selectedQuizId = null;
-    
-      container.querySelectorAll('.game-card').forEach(function(card) {
-        card.addEventListener('click', function() {
-          container.querySelectorAll('.game-card').forEach(function(c) {
-            c.classList.remove('selected');
+      try {
+        var quizzes = await run('getQuizList', []);
+        var container = document.getElementById('quiz-list');
+        container.innerHTML = quizzes.map(function(q) {
+          return '<div class="game-card" data-id="' + q.id + '">' +
+            '<div class="game-emoji">' + q.emoji + '</div>' +
+            '<div class="game-info">' +
+              '<div class="game-name">' + q.label + '</div>' +
+              '<div class="game-desc">' + q.description + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+
+        var selectedQuizId = null;
+        container.querySelectorAll('.game-card').forEach(function(card) {
+          card.addEventListener('click', function() {
+            container.querySelectorAll('.game-card').forEach(function(c) { c.classList.remove('selected'); });
+            card.classList.add('selected');
+            selectedQuizId = card.dataset.id;
+            var btn = document.getElementById('btn-start-quiz');
+            btn.disabled = false;
+            btn.textContent = 'Start quiz →';
           });
-          card.classList.add('selected');
-          selectedQuizId = card.dataset.id;
-          const btn = document.getElementById('btn-start-quiz');
-          btn.disabled = false;
-          btn.textContent = 'Start quiz →';
         });
-      });
-    
-      document.getElementById('btn-start-quiz').onclick = async function() {
-        if (!selectedQuizId) return;
-        const btn = document.getElementById('btn-start-quiz');
-        btn.disabled = true;
-        btn.textContent = 'Starting...';
-        state.currentGame = 'quiz_' + selectedQuizId;
-        quizState.quizId = selectedQuizId;
-        await run('startQuiz', [state.roomId, selectedQuizId]);
-      };
+
+        document.getElementById('btn-start-quiz').onclick = async function() {
+          if (!selectedQuizId) return;
+          var btn = document.getElementById('btn-start-quiz');
+          btn.disabled = true;
+          btn.textContent = 'Starting...';
+          state.currentGame = 'quiz_' + selectedQuizId;
+          quizState.quizId = selectedQuizId;
+          await run('startQuiz', [state.roomId, selectedQuizId]);
+        };
+      } catch(e) {
+        dbg('renderQuizPicker error: ' + e.message, 'err');
+      }
     }
-    
-    document.getElementById('btn-back-to-modes').addEventListener('click', function() {
-      renderModePicker();
-    });
-    
-    document.getElementById('mode-games').addEventListener('click', async function() {
-      showScreen('screen-lobby');
-      document.getElementById('lobby-code').textContent = state.roomId;
-      if (state.isHost) {
-        document.getElementById('host-controls').style.display = 'flex';
-        document.getElementById('lobby-waiting-hint').style.display = 'none';
-        await loadGamePicker();
-      } else {
-        document.getElementById('host-controls').style.display = 'none';
-        document.getElementById('lobby-waiting-hint').style.display = 'block';
-      }
-    });
-    
-    document.getElementById('mode-quiz').addEventListener('click', async function() {
-      if (state.isHost) {
-        await renderQuizPicker();
-      } else {
-        showScreen('screen-quiz-waiting-start');
-      }
-    });
-    
+
     async function startQuizFlow(quizId) {
       quizState.quizId = quizId;
       quizState.currentQuestion = 0;
       quizState.answers = [];
-    
-      const data = await run('getQuizQuestions', [quizId, state.playerId]);
+      var data = await run('getQuizQuestions', [quizId, state.playerId]);
       if (data.error) return;
-    
       quizState.questions = data.questions;
       renderQuizQuestion();
     }
-    
+
     function renderQuizQuestion() {
       showScreen('screen-quiz-question');
       showExitBtn(true);
-    
-      const q = quizState.questions[quizState.currentQuestion];
-      const total = quizState.questions.length;
-      const current = quizState.currentQuestion + 1;
-      const pct = Math.round((quizState.currentQuestion / total) * 100);
-    
-      var quizLabel = (quizState.quizId || '').replace(/_/g, ' ');
-      document.getElementById('quiz-label').textContent = '🧠 ' + quizLabel;
+      var q = quizState.questions[quizState.currentQuestion];
+      var total = quizState.questions.length;
+      var current = quizState.currentQuestion + 1;
+      var pct = Math.round((quizState.currentQuestion / total) * 100);
+      document.getElementById('quiz-label').textContent = '🧠 ' + (quizState.quizId || '').replace(/_/g, ' ');
       document.getElementById('quiz-progress').textContent = current + ' of ' + total;
       document.getElementById('quiz-progress-bar').style.width = pct + '%';
-    
-      const questionEl = document.getElementById('quiz-question-text');
+      var questionEl = document.getElementById('quiz-question-text');
       questionEl.style.animation = 'none';
       questionEl.offsetHeight;
       questionEl.style.animation = 'fadeSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both';
       questionEl.textContent = q.text;
-    
-      const answersEl = document.getElementById('quiz-answers');
+      var answersEl = document.getElementById('quiz-answers');
       answersEl.innerHTML = q.answers.map(function(a, i) {
         return '<button class="quiz-answer-btn" data-dim="' + a.dim + '" style="animation-delay:' + (i * 0.06) + 's">' +
           a.text +
         '</button>';
       }).join('');
-    
       answersEl.querySelectorAll('.quiz-answer-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          handleQuizAnswer(btn.dataset.dim, btn);
-        });
+        btn.addEventListener('click', function() { handleQuizAnswer(btn.dataset.dim, btn); });
       });
     }
-    
+
     async function handleQuizAnswer(dim, btn) {
       document.querySelectorAll('.quiz-answer-btn').forEach(function(b) {
         b.disabled = true;
         b.style.opacity = b === btn ? '1' : '0.4';
       });
       btn.classList.add('selected');
-    
       quizState.answers.push(dim);
-    
-      await run('submitQuizAnswer', [
-        state.roomId,
-        quizState.quizId,
-        state.playerId,
-        quizState.currentQuestion,
-        dim
-      ]);
-    
+      await run('submitQuizAnswer', [state.roomId, quizState.quizId, state.playerId, quizState.currentQuestion, dim]);
       setTimeout(async function() {
         quizState.currentQuestion++;
         if (quizState.currentQuestion >= quizState.questions.length) {
@@ -2234,32 +3135,21 @@
         }
       }, 400);
     }
-    
+
     async function finishQuiz() {
-      const result = await run('submitQuizResult', [
-        state.roomId,
-        quizState.quizId,
-        state.playerId
-      ]);
+      var result = await run('submitQuizResult', [state.roomId, quizState.quizId, state.playerId]);
       if (result.error) return;
       quizState.result = result;
-      await renderMyQuizResult(result);
+      await renderMyQuizResult();
     }
-    
+
     async function renderMyQuizResult() {
       showScreen('screen-quiz-result');
       showExitBtn(true);
-    
-      const data = await run('getMyQuizResult', [
-        state.roomId,
-        quizState.quizId,
-        state.playerId
-      ]);
+      var data = await run('getMyQuizResult', [state.roomId, quizState.quizId, state.playerId]);
       if (data.error) return;
-    
       document.getElementById('result-quiz-label').textContent = '🧠 ' + data.quizLabel;
-    
-      const primaryDim = data.primaryDim.split('+')[0];
+      var primaryDim = data.primaryDim.split('+')[0];
       document.getElementById('result-profile-card').innerHTML =
         '<div class="quiz-profile-name">' + data.profileName + '</div>' +
         '<div class="quiz-profile-tagline">"' + data.tagline + '"</div>' +
@@ -2269,15 +3159,13 @@
         '<div class="quiz-profile-tradeoff">' +
           '<strong>Watch out for:</strong> ' + (data.profile.tradeoff || '') +
         '</div>';
-    
-      const dims = data.dimensions;
-      const scores = data.scores;
-      const total = Object.values(scores).reduce(function(a, b) { return a + b; }, 0) || 1;
-    
+      var dims = data.dimensions;
+      var scores = data.scores;
+      var total = Object.values(scores).reduce(function(a, b) { return a + b; }, 0) || 1;
       document.getElementById('result-breakdown').innerHTML =
         Object.keys(dims).map(function(dim, i) {
-          const pct = Math.round((scores[dim] || 0) / total * 100);
-          const isPrimary = dim === primaryDim;
+          var pct = Math.round((scores[dim] || 0) / total * 100);
+          var isPrimary = dim === primaryDim;
           return '<div class="quiz-dim-row" style="animation-delay:' + (i * 0.07) + 's">' +
             '<div class="quiz-dim-label ' + (isPrimary ? 'primary' : '') + '">' + dims[dim].label + '</div>' +
             '<div class="quiz-dim-bar-wrap">' +
@@ -2286,22 +3174,18 @@
             '<div class="quiz-dim-pct">' + pct + '%</div>' +
           '</div>';
         }).join('');
-    
       document.getElementById('result-prompt-box').innerHTML =
         '<div class="quiz-prompt-label">Your conversation starter</div>' +
         (data.profile.prompt || '');
-    
       updateQuizWaitingStatus();
     }
-    
+
     async function updateQuizWaitingStatus() {
-      const groupData = await run('getGroupQuizResults', [state.roomId, quizState.quizId]);
+      var groupData = await run('getGroupQuizResults', [state.roomId, quizState.quizId]);
       if (groupData.error) return;
-    
-      const remaining = groupData.totalPlayers - groupData.finishedCount;
-      const waitingEl = document.getElementById('result-waiting');
+      var remaining = groupData.totalPlayers - groupData.finishedCount;
+      var waitingEl = document.getElementById('result-waiting');
       if (!waitingEl) return;
-    
       if (remaining > 0) {
         waitingEl.innerHTML = buildProgressHTML(groupData.finishedCount, groupData.totalPlayers, 'finished');
         if (state.isHost && groupData.finishedCount >= 2) {
@@ -2321,22 +3205,16 @@
         waitingEl.innerHTML = '<div style="color:var(--success);font-weight:700">Everyone\'s done! Revealing results... ✨</div>';
       }
     }
-    // ── Group reveal ───────────────────────────────────────────────────────────────
-    
+
     async function renderGroupQuizReveal() {
       showScreen('screen-quiz-reveal');
       showExitBtn(true);
-    
-      const data = await run('getGroupQuizResults', [state.roomId, quizState.quizId]);
+      var data = await run('getGroupQuizResults', [state.roomId, quizState.quizId]);
       if (data.error) return;
-    
       document.getElementById('reveal-quiz-label').textContent = '🧠 ' + data.quizLabel + ' — Results';
-    
-      const grid = document.getElementById('group-results-grid');
+      var grid = document.getElementById('group-results-grid');
       grid.innerHTML = data.playerResults.map(function(p, i) {
-        const initial = p.name.charAt(0).toUpperCase();
-        const primaryDim = p.primaryDim ? p.primaryDim.split('+')[0] : null;
-        const dims = data.dimensions;
+        var initial = p.name.charAt(0).toUpperCase();
         return '<div class="group-result-card" style="animation-delay:' + (i * 0.1) + 's">' +
           '<div class="group-result-avatar">' + initial + '</div>' +
           '<div class="group-result-info">' +
@@ -2346,1687 +3224,93 @@
           '</div>' +
         '</div>';
       }).join('');
-    
       document.getElementById('group-discussion-prompt').innerHTML =
         '<div class="quiz-group-prompt-label">💬 Team discussion</div>' +
         data.groupPrompt;
-    
       burstEmojis(['🧠','✨','💡','🎯','⭐'], 12);
     }
-    
-    // ── Phase handling for quizzes ─────────────────────────────────────────────────
-    
-    // Add these to handlePhaseChange switch:
-    // case 'quiz_active':  handleQuizActive(data); break;
-    // case 'quiz_reveal':  renderGroupQuizReveal(); break;
-    
+
     function handleQuizActive(data) {
-      // Extract quizId from current_game field e.g. "quiz_decision_making_dna"
       var currentGame = data.currentGame || state.currentGame || '';
       var quizId = currentGame.replace('quiz_', '');
       if (!quizId) return;
       quizState.quizId = quizId;
       startQuizFlow(quizId);
     }
-    
-    // ── Quiz buttons ───────────────────────────────────────────────────────────────
-    
-    document.getElementById('btn-quiz-play-again').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-quiz-play-again');
-      btn.disabled = true;
-      btn.textContent = 'Loading...';
-      quizState.quizId = null;
-      quizState.questions = [];
-      quizState.currentQuestion = 0;
-      quizState.answers = [];
-      await run('resetQuiz', [state.roomId]);
-    });
-    
-    document.getElementById('btn-quiz-back-to-games').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-quiz-back-to-games');
-      btn.disabled = true;
-      await run('resetQuiz', [state.roomId]);
-    });
 
-    // ── Polling ────────────────────────────────────────────────────────────────
-
-    function startPolling() {
-      if (state.pollInterval) clearInterval(state.pollInterval);
-      state.pollInterval = setInterval(syncRoom, 2500);
-    }
-
-    async function syncRoom() {
-      if (!state.roomId) return;
-      try {
-        const data = await run('getRoom', [state.roomId]);
-        if (data.error) return;
-        state.players = data.players;
-        if (data.currentGame) state.currentGame = data.currentGame;
-        if (data.defenseTimer) state.selectedTimer = data.defenseTimer;
-    
-        // Keep quizState.quizId in sync
-        if (data.currentGame && data.currentGame.indexOf('quiz_') === 0) {
-          var qid = data.currentGame.replace('quiz_', '');
-          if (!quizState.quizId) quizState.quizId = qid;
-        }
-    
-        if (data.phase !== state.phase) {
-          state.phase = data.phase;
-          handlePhaseChange(data);
-        } else {
-          updatePhaseUI(data);
-        }
-      } catch(e) {
-        console.error('Sync error', e);
-      }
-    }
-
-    function handlePhaseChange(data) {
-      if (greatnessState.animating && state.isHost) return;
-    
-      const isPas = state.currentGame === 'pick_a_side';
-      const isGIY = state.currentGame === 'greatness_in_you';
-      const isQuiz = state.currentGame && state.currentGame.indexOf('quiz_') === 0;
-    
-      switch (data.phase) {
-        case 'lobby':                renderLobby(data);                                      break;
-        case 'submitting':           renderSubmitting(data);                                 break;
-        case 'voting':               isPas ? renderPasVoting(data) : renderVoting(data);     break;
-        case 'revealing':            isPas ? renderPasReveal() : isGIY ? renderGreatnessDone() : renderRevealing(); break;
-        case 'revealing_pre':        renderRevealingPre();                                   break;
-        case 'defending':            renderDefending();                                      break;
-        case 'revealing_post':       renderRevealingPost();                                  break;
-        case 'greatness_setup':      isGIY ? renderGreatnessSetup() : null;                 break;
-        case 'greatness_setup_done': isGIY ? renderGreatnessSpin(data) : null;              break;
-        case 'greatness_spin':       isGIY ? renderGreatnessSpin(data) : null;              break;
-        case 'greatness_receiver':   isGIY ? renderGreatnessReceiver(data) : null;          break;
-        case 'greatness_giver':      isGIY ? renderGreatnessPrompt() : null;                break;
-        case 'quiz_active':          handleQuizActive(data);                                 break;
-        case 'quiz_reveal':          renderGroupQuizReveal();                                break;
-        case 'done':                 isGIY ? renderGreatnessDone() : renderDone();          break;
-      }
-    }
-
-    function updatePhaseUI(data) {
-      if (data.phase === 'submitting') {
-        const el = document.getElementById('submit-status');
-        if (el) el.innerHTML = buildProgressHTML(data.submissionCount, data.totalPlayers, 'submitted');
-      }
-      if (data.phase === 'voting') {
-        if (state.currentGame === 'pick_a_side') {
-          if (data.currentFactIndex !== state.currentFactIndex) {
-            state.currentFactIndex = data.currentFactIndex;
-            state.hasVoted = false;
-            renderPasVoting(data);
-          } else {
-            const el = document.getElementById('pas-vote-status');
-            if (el && !state.hasVoted) {
-              el.innerHTML = buildProgressHTML(data.voteCount, data.totalPlayers, 'voted');
-            }
-          }
-        } else {
-          const el = document.getElementById('vote-status');
-          if (el) el.innerHTML = buildProgressHTML(data.voteCount, data.totalPlayers, 'voted');
-        }
-      }
-      if (data.phase === 'lobby') {
-        renderPlayerChips(data.players);
-      }
-      // Update waiting indicator on result screen
-      if (data.phase === 'quiz_active') {
-        const waitingEl = document.getElementById('result-waiting');
-        if (waitingEl && waitingEl.closest('.screen.active')) {
-          updateQuizWaitingStatus();
-        }
-      }
-    }
-
-    // ── Player chips ───────────────────────────────────────────────────────────
-
-    function renderPlayerChips(players) {
-      const container = document.getElementById('lobby-players');
-      if (!container) return;
-      if (container.querySelectorAll('.player-chip').length === players.length) return;
-      container.innerHTML = players.map(function(p) {
-        return '<div class="player-chip ' + (p.id === state.playerId ? 'me' : '') + '">' +
-          (p.id === state.playerId ? '⭐ ' : '') + p.name +
-        '</div>';
-      }).join('');
-    }
-
-    // ── Lobby ──────────────────────────────────────────────────────────────────
-
-    async function renderLobby(data) {
-      showExitBtn(false);
-      document.getElementById('lobby-code').textContent = state.roomId;
-    
-      if (state.isHost) {
-        // Show mode picker for host
-        renderModePicker();
-        // But still update player chips in background
-        renderPlayerChips(data.players || []);
-      } else {
-        showScreen('screen-lobby');
-        document.getElementById('host-controls').style.display = 'none';
-        document.getElementById('lobby-waiting-hint').style.display = 'block';
-        renderPlayerChips(data.players || []);
-      }
-    }
-
-    async function loadGamePicker() {
-      const games = await run('getGameList', []);
-      const container = document.getElementById('game-list');
-      container.innerHTML = games.map(function(g) {
-        return '<div class="game-card" data-id="' + g.id + '">' +
-          '<div class="game-emoji">' + g.emoji + '</div>' +
-          '<div class="game-info">' +
-            '<div class="game-name">' + g.label + '</div>' +
-            '<div class="game-desc">' + g.description + '</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-
-      container.querySelectorAll('.game-card').forEach(function(card) {
-        card.addEventListener('click', function() {
-          container.querySelectorAll('.game-card').forEach(function(c) {
-            c.classList.remove('selected');
-          });
-          card.classList.add('selected');
-          state.selectedGame = card.dataset.id;
-          state.selectedCount = null;
-          state.selectedTimer = null;
-        
-          renderGameOptions(state.selectedGame, games);
-        
-          const btn = document.getElementById('btn-start');
-          if (state.selectedGame === 'hot_take_tribunal') {
-            btn.disabled = true;
-            btn.textContent = 'Choose rounds and timer';
-          } else if (state.selectedGame === 'pick_a_side') {
-            btn.disabled = true;
-            btn.textContent = 'Choose how many rounds';
-          } else {
-            btn.disabled = false;
-            btn.textContent = 'Start session →';
-          }
-        });
-      });
-    }
-
-    function renderGameOptions(gameId, games) {
-      const container = document.getElementById('game-options');
-    
-      if (gameId === 'hot_take_tribunal') {
-        const maxRounds = state.players.length || 5;
-        const roundOptions = [];
-        for (let i = 1; i <= maxRounds; i++) { roundOptions.push(i); }
-    
-        container.style.display = 'flex';
-        container.innerHTML =
-          '<div style="display:flex;flex-direction:column;gap:8px">' +
-            '<p class="hint">How many hot takes?</p>' +
-            '<div class="count-picker">' +
-              roundOptions.map(function(n) {
-                return '<button class="count-btn" data-count="' + n + '">' + n + '</button>';
-              }).join('') +
-            '</div>' +
-          '</div>' +
-          '<div style="display:flex;flex-direction:column;gap:8px">' +
-            '<p class="hint">How long to defend? (seconds)</p>' +
-            '<div class="count-picker">' +
-              ['15','30','45','60'].map(function(n) {
-                return '<button class="count-btn timer-btn" data-timer="' + n + '">' + n + 's</button>';
-              }).join('') +
-            '</div>' +
-          '</div>';
-    
-        container.querySelectorAll('.count-btn:not(.timer-btn)').forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            container.querySelectorAll('.count-btn:not(.timer-btn)').forEach(function(b) {
-              b.classList.remove('selected');
-            });
-            btn.classList.add('selected');
-            state.selectedCount = parseInt(btn.dataset.count);
-            checkHTTReady();
-          });
-        });
-    
-        container.querySelectorAll('.timer-btn').forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            container.querySelectorAll('.timer-btn').forEach(function(b) {
-              b.classList.remove('selected');
-            });
-            btn.classList.add('selected');
-            state.selectedTimer = parseInt(btn.dataset.timer);
-            checkHTTReady();
-          });
-        });
-    
-      } else if (gameId === 'pick_a_side') {
-        container.style.display = 'flex';
-        container.innerHTML =
-          '<div style="display:flex;flex-direction:column;gap:8px">' +
-            '<p class="hint">How many rounds?</p>' +
-            '<div class="count-picker">' +
-              ['3','5','7','10'].map(function(n) {
-                return '<button class="count-btn pas-count-btn" data-count="' + n + '">' + n + '</button>';
-              }).join('') +
-            '</div>' +
-          '</div>';
-    
-        container.querySelectorAll('.pas-count-btn').forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            container.querySelectorAll('.pas-count-btn').forEach(function(b) {
-              b.classList.remove('selected');
-            });
-            btn.classList.add('selected');
-            state.selectedCount = parseInt(btn.dataset.count);
-            document.getElementById('btn-start').disabled = false;
-            document.getElementById('btn-start').textContent = 'Start session →';
-          });
-        });
-    
-        document.getElementById('btn-start').disabled = true;
-        document.getElementById('btn-start').textContent = 'Choose how many rounds';
-    
-      } else {
-        container.style.display = 'none';
-        container.innerHTML = '';
-      }
-    }
-
-    function checkHTTReady() {
-      const btn = document.getElementById('btn-start');
-      if (state.selectedCount && state.selectedTimer) {
-        btn.disabled = false;
-        btn.textContent = 'Start session →';
-      } else {
-        btn.disabled = true;
-        btn.textContent = state.selectedCount
-          ? 'Choose a defense timer'
-          : state.selectedTimer
-            ? 'Choose how many rounds'
-            : 'Choose rounds and timer';
-      }
-    }
-
-    async function renderPasVoting(data) {
-      state.hasVoted = false;
-      showScreen('screen-pas-voting');
-      showExitBtn(true);
-    
-      const counter = document.getElementById('pas-counter');
-      const promptEl = document.getElementById('pas-prompt-display');
-      const statusEl = document.getElementById('pas-vote-status');
-      const countdownEl = document.getElementById('pas-countdown');
-    
-      counter.textContent = (data.currentFactIndex + 1) + ' of ' + data.factsTotal;
-      promptEl.innerHTML = '';
-      statusEl.innerHTML = buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
-      countdownEl.style.display = 'none';
-    
-      try {
-        const results = await run('getResults', [state.roomId]);
-        if (results.error) return;
-    
-        // Countdown: 3... 2... 1...
-        await runCountdown(countdownEl, 3);
-    
-        // Render the arena
-        promptEl.innerHTML =
-          '<div class="pas-arena">' +
-            '<button class="pas-option option-a" id="pas-btn-a">' + results.promptA + '</button>' +
-            '<div class="pas-vs"><div class="pas-vs-text">or</div></div>' +
-            '<button class="pas-option option-b" id="pas-btn-b">' + results.promptB + '</button>' +
-          '</div>';
-    
-        document.getElementById('pas-btn-a').addEventListener('click', function() {
-          handlePasVote('a', results.promptA, results.promptB);
-        });
-        document.getElementById('pas-btn-b').addEventListener('click', function() {
-          handlePasVote('b', results.promptA, results.promptB);
-        });
-    
-      } catch(e) {
-        console.error('Error loading Pick a Side voting', e);
-      }
-    }
-    
-    function runCountdown(el, from) {
-      return new Promise(function(resolve) {
-        el.style.display = 'block';
-        let n = from;
-    
-        function tick() {
-          el.style.animation = 'none';
-          el.offsetHeight; // force reflow to restart animation
-          el.style.animation = 'countdownPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both';
-          el.textContent = n;
-    
-          if (n <= 0) {
-            el.textContent = 'GO! ⚡';
-            setTimeout(function() {
-              el.style.display = 'none';
-              resolve();
-            }, 500);
-            return;
-          }
-    
-          n--;
-          setTimeout(tick, 700);
-        }
-    
-        tick();
-      });
-    }
-    
-    async function handlePasVote(side, promptA, promptB) {
-      if (state.hasVoted) return;
-      state.hasVoted = true;
-    
-      const btnA = document.getElementById('pas-btn-a');
-      const btnB = document.getElementById('pas-btn-b');
-    
-      if (side === 'a') {
-        btnA.classList.remove('option-a');
-        btnA.classList.add('chosen-a');
-        btnB.classList.remove('option-b');
-        btnB.classList.add('rejected');
-      } else {
-        btnB.classList.remove('option-b');
-        btnB.classList.add('chosen-b');
-        btnA.classList.remove('option-a');
-        btnA.classList.add('rejected');
-      }
-    
-      btnA.disabled = true;
-      btnB.disabled = true;
-    
-      document.getElementById('pas-vote-status').innerHTML =
-        '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
-        '<div>Locked in! Waiting for others...</div>';
-    
-      try {
-        await run('submitVote', [state.roomId, state.playerId, '', side]);
-      } catch(e) {
-        document.getElementById('pas-vote-status').textContent = 'Error. Try again.';
-        state.hasVoted = false;
-        btnA.disabled = false;
-        btnB.disabled = false;
-        btnA.className = 'pas-option option-a';
-        btnB.className = 'pas-option option-b';
-      }
-    }
-    
-async function renderPasReveal() {
-  showScreen('screen-pas-reveal');
-  showExitBtn(true);
-
-  document.getElementById('pas-results-list').innerHTML = '';
-  document.getElementById('pas-hot-take').style.display = 'none';
-
-  const btn = document.getElementById('btn-pas-next');
-  btn.disabled = false;
-  btn.textContent = 'Play another game';
-  btn.onclick = async function() {
-    btn.disabled = true;
-    btn.textContent = 'Going back...';
-    await run('resetRoom', [state.roomId]);
-  };
-
-  try {
-    const data = await run('getAllPasResults', [state.roomId]);
-    if (data.error) return;
-
-    const controversial = data.mostControversial;
-    const list = document.getElementById('pas-results-list');
-
-    // Simple round rows — no colored boxes, just clean text + bar
-    list.innerHTML = data.rounds.map(function(r, i) {
-      const total = r.sideA.length + r.sideB.length;
-      const pctA = total > 0 ? Math.round((r.sideA.length / total) * 100) : 50;
-      const isC = r.index === controversial.index;
-
-      return '<div class="pas-result-row' + (isC ? ' controversial' : '') + '" style="animation-delay:' + (i * 0.09) + 's">' +
-        '<div class="pas-result-label">' +
-          '<span class="pas-result-ab">' + r.promptA + '</span>' +
-          '<span class="pas-result-vs">vs</span>' +
-          '<span class="pas-result-ab">' + r.promptB + '</span>' +
-          (isC ? '<span class="pas-fire-badge">🔥</span>' : '') +
-        '</div>' +
-        '<div class="pas-result-bar-row">' +
-          '<span class="pas-bar-name side-a">' + (r.sideA.length > 0 ? r.sideA.join(', ') : '—') + '</span>' +
-          '<div class="pas-result-bar-wrap">' +
-            '<div class="pas-result-bar-a" style="width:' + pctA + '%"></div>' +
-          '</div>' +
-          '<span class="pas-bar-name side-b">' + (r.sideB.length > 0 ? r.sideB.join(', ') : '—') + '</span>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-
-    // Hot take callout — appears after short pause, no repeated prompt
-    setTimeout(function() {
-      const hotTake = document.getElementById('pas-hot-take');
-      hotTake.style.display = 'flex';
-
-      let speakersHTML = '';
-
-      if (controversial.isUnanimous) {
-        const chosenOption = controversial.unanimousSide === 'a'
-          ? controversial.promptA : controversial.promptB;
-        speakersHTML =
-          '<div class="pas-speaker-line devils">' +
-            '😈 Everyone picked <strong>' + chosenOption + '</strong> — ' +
-            controversial.devilsAdvocate + ', can you make a case for the other side?' +
-          '</div>';
-      } else {
-        if (controversial.speakerA) {
-          speakersHTML +=
-            '<div class="pas-speaker-line side-a">' +
-              '⚡ <strong>' + controversial.speakerA + '</strong> — tell us why you chose ' +
-              controversial.promptA +
-            '</div>';
-        }
-        if (controversial.speakerB) {
-          speakersHTML +=
-            '<div class="pas-speaker-line side-b">' +
-              '🔥 <strong>' + controversial.speakerB + '</strong> — tell us why you chose ' +
-              controversial.promptB +
-            '</div>';
-        }
-      }
-
-      hotTake.innerHTML =
-        '<div class="pas-hot-take-label">🔥 Most controversial — let\'s talk about it</div>' +
-        '<div class="pas-hot-take-score">' +
-          controversial.sideA.length + ' vs ' + controversial.sideB.length +
-        '</div>' +
-        '<div class="pas-hot-take-speakers">' + speakersHTML + '</div>';
-
-      burstEmojis(['⚡','🔥','👀','😂','🤯'], 10);
-    }, 600);
-
-  } catch(e) {
-    console.error('Error loading Pick a Side results', e);
-  }
-}
-    // ── Submitting ─────────────────────────────────────────────────────────────
-
-    function renderSubmitting(data) {
-      state.hasSubmitted = false;
-      showScreen('screen-submitting');
-      showExitBtn(true);
-
-      const isHTT = state.currentGame === 'hot_take_tribunal';
-
-      document.getElementById('submitting-label').textContent =
-        isHTT ? '🔥 Hot Take Tribunal' : 'Guess Who?';
-
-      document.getElementById('submitting-heading').textContent =
-        isHTT ? 'Submit your hot take' : 'Share a surprising fact about yourself';
-
-      document.getElementById('submitting-hint').textContent =
-        isHTT
-          ? 'An unpopular opinion you\'re willing to defend'
-          : 'Something your teammates probably don\'t know';
-
-      document.getElementById('fact-input').placeholder =
-        isHTT ? 'Unpopular opinion: ...' : 'I once...';
-
-      const card = document.getElementById('submitting-card');
-      card.className = isHTT ? 'card fire' : 'card';
-
-      document.getElementById('fact-input').value = '';
-      document.getElementById('fact-input').disabled = false;
-      document.getElementById('btn-submit-fact').disabled = false;
-      document.getElementById('btn-submit-fact').textContent = 'Submit';
-      document.getElementById('btn-submit-fact').className = '';
-      document.getElementById('submit-feedback').innerHTML = '';
-      document.getElementById('submit-status').innerHTML =
-        buildProgressHTML(data.submissionCount || 0, data.totalPlayers, 'submitted');
-    }
-
-    // ── Voting ─────────────────────────────────────────────────────────────────
-
-    async function renderVoting(data) {
-      const isPostVote = data.votePhase === 'post';
-
-      if (state.currentGame === 'hot_take_tribunal' && isPostVote) {
-        await renderVotingPost(data);
-        return;
-      }
-
-      state.hasVoted = false;
-      showScreen('screen-voting');
-      showExitBtn(true);
-
-      const isHTT = state.currentGame === 'hot_take_tribunal';
-      const isMLT = state.currentGame === 'most_likely_to';
-      const isGW  = state.currentGame === 'guess_who';
-
-      document.getElementById('voting-card').className = isHTT ? 'card fire' : 'card';
-      document.getElementById('voting-game-label').textContent =
-        isHTT ? '🔥 Hot Take Tribunal' : isMLT ? 'Most Likely To' : 'Guess Who?';
-      document.getElementById('voting-game-label').className = isHTT ? 'label fire' : 'label';
-
-      // Blank these out until results load — prevents flash of wrong content
-      document.getElementById('voting-heading').textContent = '';
-      document.getElementById('voting-hint').textContent = '';
-      document.getElementById('prompt-display').innerHTML = '';
-      document.getElementById('voting-players').innerHTML = '';
-      document.getElementById('agree-disagree-btns').style.display = 'none';
-
-      document.getElementById('prompt-counter').textContent =
-        (data.currentFactIndex + 1) + ' of ' + data.factsTotal;
-
-      document.getElementById('vote-status').innerHTML =
-        buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
-
-      try {
-        const results = await run('getResults', [state.roomId]);
-        if (results.error) return;
-
-        // Now safe to set heading
-        document.getElementById('voting-heading').textContent =
-          isGW  ? 'Who do you think said this?' :
-          isMLT ? 'Who is most likely to…' :
-                  'Do you agree with this take?';
-
-        document.getElementById('voting-hint').textContent =
-          isGW  ? "Pick your guess — you can't vote for yourself" :
-          isMLT ? 'Vote for one teammate' :
-          isHTT ? (results.authorId === state.playerId ? "This is your take — sit tight!" : 'Agree or disagree?') :
-                  '';
-
-        document.getElementById('agree-disagree-btns').style.display = isHTT ? 'grid' : 'none';
-        document.getElementById('voting-players').style.display = isHTT ? 'none' : 'flex';
-
-        const promptEl = document.getElementById('prompt-display');
-        if (isGW) {
-          promptEl.className = 'fact-box';
-          promptEl.innerHTML = '<em>' + results.prompt + '</em>';
-        } else if (isMLT) {
-          promptEl.className = 'mlt-prompt';
-          promptEl.innerHTML = '<div class="prompt-text">' + results.prompt + '</div>';
-        } else if (isHTT) {
-          promptEl.className = 'fact-box fire';
-          promptEl.innerHTML = '<em>' + results.prompt + '</em>';
-        }
-
-        if (isHTT && results.authorId === state.playerId) {
-          document.getElementById('btn-agree').disabled = true;
-          document.getElementById('btn-disagree').disabled = true;
-          state.hasVoted = true;
-          return;
-        }
-
-        if (isHTT) {
-          const btnAgree = document.getElementById('btn-agree');
-          const btnDisagree = document.getElementById('btn-disagree');
-          btnAgree.disabled = false;
-          btnAgree.className = 'btn-agree';
-          btnDisagree.disabled = false;
-          btnDisagree.className = 'btn-disagree';
-          btnAgree.onclick = function() { handleAgreeDisagree('agree', 'pre'); };
-          btnDisagree.onclick = function() { handleAgreeDisagree('disagree', 'pre'); };
-        }
-
-        if (!isHTT) {
-          const voters = isGW
-            ? state.players.filter(function(p) { return p.id !== state.playerId; })
-            : state.players;
-
-          const container = document.getElementById('voting-players');
-          container.innerHTML = voters.map(function(p, i) {
-            return '<button class="vote-btn" data-id="' + p.id + '" style="animation-delay:' + (i * 0.07) + 's">' +
-              '<span>' + p.name + '</span>' +
-              '<span class="vote-btn-arrow">→</span>' +
-            '</button>';
-          }).join('');
-
-          container.querySelectorAll('.vote-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() { handleVote(btn.dataset.id, btn); });
-          });
-        }
-
-      } catch(e) {
-        console.error('Error loading voting screen', e);
-      }
-    }
-
-    // ── Voting Post (HTT) ──────────────────────────────────────────────────────
-
-    async function renderVotingPost(data) {
-      state.hasVotedPost = false;
-      showScreen('screen-voting-post');
-      showExitBtn(true);
-
-      document.getElementById('vote-post-status').innerHTML =
-        buildProgressHTML(data.voteCount || 0, data.totalPlayers, 'voted');
-
-      try {
-        const results = await run('getResults', [state.roomId]);
-        if (results.error) return;
-
-        document.getElementById('vp-prompt').innerHTML = '<em>' + results.prompt + '</em>';
-
-        const btnAgreePost = document.getElementById('btn-agree-post');
-        const btnDisagreePost = document.getElementById('btn-disagree-post');
-
-        // Author can't vote on their own take
-        if (results.authorId === state.playerId) {
-          btnAgreePost.disabled = true;
-          btnDisagreePost.disabled = true;
-          document.getElementById('vote-post-status').textContent = 'Waiting for the verdict on your take...';
-          state.hasVotedPost = true;
-          return;
-        }
-
-        btnAgreePost.disabled = false;
-        btnAgreePost.className = 'btn-agree';
-        btnDisagreePost.disabled = false;
-        btnDisagreePost.className = 'btn-disagree';
-
-        btnAgreePost.onclick = function() { handleAgreeDisagree('agree', 'post'); };
-        btnDisagreePost.onclick = function() { handleAgreeDisagree('disagree', 'post'); };
-
-      } catch(e) {
-        console.error('Error loading post vote screen', e);
-      }
-    }
-
-    // ── Revealing Pre (HTT) ────────────────────────────────────────────────────
-
-    async function renderRevealingPre() {
-      showScreen('screen-revealing-pre');
-      showExitBtn(true);
-
-      // Clear everything before fetching — prevents ghosting
-      document.getElementById('rp-prompt').innerHTML = '';
-      document.getElementById('rp-tally').innerHTML = '';
-      document.getElementById('rp-defense').style.display = 'none';
-      document.getElementById('btn-open-defense').style.display = 'none';
-      document.getElementById('btn-start-defense').style.display = 'none';
-
-      const authorBox = document.getElementById('rp-author');
-      authorBox.className = 'reveal-box';
-      authorBox.style.borderColor = '';
-      authorBox.style.color = '';
-      authorBox.innerHTML =
-        '<div class="waiting-dots"><span></span><span></span><span></span></div>';
-
-      try {
-        const results = await run('getResults', [state.roomId]);
-        if (results.error) return;
-
-        // Populate prompt and tally — no author info yet
-        document.getElementById('rp-prompt').innerHTML = '<em>' + results.prompt + '</em>';
-        document.getElementById('rp-tally').innerHTML = buildTallyHTML(results.preTally);
-
-        // Store author info in closure only — not in the DOM yet
-        const authorName = results.authorName;
-
-        setTimeout(function() {
-          authorBox.classList.add('revealed');
-          authorBox.style.borderColor = '#f97316';
-          authorBox.style.color = '#f97316';
-          authorBox.innerHTML = '🔥 ' + authorName + ' said this!';
-
-          setTimeout(function() {
-            document.getElementById('rp-defense-name').textContent =
-              authorName + ', it\'s your turn.';
-            document.getElementById('rp-defense').style.display = 'flex';
-
-            if (state.isHost) {
-              document.getElementById('btn-open-defense').style.display = 'block';
-            }
-          }, 600);
-
-          burstEmojis(['🔥','💀','😂','👀','🌶️'], 10);
-        }, 2000);
-
-      } catch(e) {
-        console.error('Error loading pre-reveal', e);
-      }
-    }
-
-    // ── Defending ─────────────────────────────────────────────────────────────
-    // This is a pass-through — just moves to post voting
-    // The defense happens verbally on Zoom
-    // Host clicks "Everyone ready? Start the vote" when done
-
-    async function renderDefending() {
-      if (state.isHost) {
-        document.getElementById('btn-open-defense').style.display = 'none';
-        document.getElementById('btn-start-defense').style.display = 'block';
-        startDefenseTimer();
-      } else {
-        startDefenseTimer();
-      }
-    }
-
-    function startDefenseTimer() {
-      const existing = document.getElementById('defense-timer');
-      if (existing) existing.remove();
-
-      const timerEl = document.createElement('div');
-      timerEl.id = 'defense-timer';
-      timerEl.style.cssText =
-        'text-align:center; font-size:2.5rem; font-weight:900; color:#f97316; ' +
-        'animation: flamePulse 1s ease-in-out infinite; margin-top: 4px;';
-
-      const defense = document.getElementById('rp-defense');
-      if (defense) {
-        defense.parentNode.insertBefore(timerEl, defense.nextSibling);
-      }
-
-      let seconds = state.selectedTimer || 30;
-
-      function tick() {
-        if (!document.getElementById('defense-timer')) return;
-        timerEl.textContent = seconds + 's 🔥';
-
-        if (seconds <= 10) {
-          timerEl.style.color = '#ef4444';
-          timerEl.style.fontSize = '3rem';
-        }
-
-        if (seconds <= 0) {
-          timerEl.textContent = "Time's up! ⏰";
-          timerEl.style.animation = 'none';
-          return;
-        }
-
-        seconds--;
-        setTimeout(tick, 1000);
-      }
-
-      tick();
-    }
-
-    // ── Revealing Post (HTT) ───────────────────────────────────────────────────
-
-    async function renderRevealingPost() {
-      showScreen('screen-revealing-post');
-      showExitBtn(true);
-
-      // Clear stale content
-      document.getElementById('rv-prompt').innerHTML = '';
-      document.getElementById('rv-pre-tally').innerHTML = '';
-      document.getElementById('rv-post-tally').innerHTML = '';
-      document.getElementById('rv-flips').innerHTML = '';
-
-      const btn = document.getElementById('btn-next-htt');
-      btn.disabled = false;
-      btn.textContent = 'Next hot take →';
-
-      try {
-        const results = await run('getResults', [state.roomId]);
-        if (results.error) return;
-
-        document.getElementById('rv-prompt').innerHTML = '<em>' + results.prompt + '</em>';
-        document.getElementById('rv-pre-tally').innerHTML = buildTallyHTML(results.preTally);
-        document.getElementById('rv-post-tally').innerHTML = buildTallyHTML(results.postTally);
-
-        const container = document.getElementById('rv-flips');
-        if (results.flipData && results.flipData.length > 0) {
-          container.innerHTML = results.flipData.map(function(f, i) {
-            return '<div class="flip-row ' + (f.flipped ? 'flipped' : '') + '" style="animation-delay:' + (i * 0.08) + 's">' +
-              '<div class="flip-name">' + f.name + '</div>' +
-              '<div class="flip-votes">' +
-                '<span class="vote-pill ' + f.pre + '">' + f.pre + '</span>' +
-                '<span class="flip-arrow">→</span>' +
-                '<span class="vote-pill ' + f.post + '">' + f.post + '</span>' +
-                (f.flipped ? '<span class="flip-badge">🔄 flipped!</span>' : '') +
-              '</div>' +
-            '</div>';
-          }).join('');
-        } else {
-          container.innerHTML = '<p class="hint" style="text-align:center">No changes recorded</p>';
-        }
-
-        const flippedCount = results.flipData
-          ? results.flipData.filter(function(f) { return f.flipped; }).length
-          : 0;
-        if (flippedCount > 0) burstEmojis(['🔄','🤯','😮','🔥'], 10);
-
-      } catch(e) {
-        console.error('Error loading post reveal', e);
-      }
-    }
-
-    // ── Revealing (GW / MLT) ───────────────────────────────────────────────────
-
-    async function renderRevealing() {
-      showScreen('screen-revealing');
-      showExitBtn(true);
-
-      // Clear stale content first
-      document.getElementById('reveal-prompt').style.display = 'none';
-      document.getElementById('reveal-prompt').textContent = '';
-      document.getElementById('reveal-votes').innerHTML = '';
-      document.getElementById('reveal-game-label').textContent = '👀 Results';
-
-      const box = document.getElementById('reveal-box');
-      box.className = 'reveal-box';
-      box.style.borderColor = '';
-      box.style.color = '';
-      box.innerHTML =
-        '<div class="waiting-dots"><span></span><span></span><span></span></div>';
-
-      const btn = document.getElementById('btn-next-round');
-      btn.disabled = false;
-      btn.textContent = 'Next →';
-      btn.onclick = null;
-
-      try {
-        const results = await run('getResults', [state.roomId]);
-        if (results.error) return;
-
-        const isMLT = results.game === 'most_likely_to';
-
-        document.getElementById('reveal-game-label').textContent =
-          isMLT ? 'Most Likely To — Results' : 'Guess Who? — Results';
-
-        const promptEl = document.getElementById('reveal-prompt');
-        promptEl.style.display = 'block';
-        promptEl.textContent = results.prompt;
-
-        const maxVotes = Math.max.apply(null,
-          results.voteSummary.map(function(v) { return v.votes; }).concat([1])
-        );
-
-        document.getElementById('reveal-votes').innerHTML = results.voteSummary.map(function(v) {
-          const pct = Math.round((v.votes / maxVotes) * 100);
-          const isWinner = v.id === results.winner.id;
-          return '<div class="vote-row">' +
-            '<div class="vote-row-name">' + v.name + '</div>' +
-            '<div class="vote-bar-wrap">' +
-              '<div class="vote-bar ' + (isWinner ? 'winner' : '') + '" style="width:' + pct + '%"></div>' +
-            '</div>' +
-            '<div class="vote-count">' + v.votes + '</div>' +
-          '</div>';
-        }).join('');
-
-        // Store in closure — keep out of DOM until reveal
-        const winnerName = results.winner.name;
-        const authorName = results.authorName;
-
-        setTimeout(function() {
-          box.classList.add('revealed');
-          if (isMLT) {
-            box.innerHTML = '🏆 <strong style="margin:0 6px">' + winnerName + '</strong> wins this one!';
-            burstEmojis(['🏆','👑','🎉','✨','😂'], 14);
-          } else {
-            box.innerHTML = '🎉 It was <strong style="margin:0 6px">' + authorName + '</strong>!';
-            burstEmojis(['🎉','✨','🎊','⭐','🙌'], 14);
-          }
-        }, 2000);
-
-      } catch(e) {
-        console.error('Error loading reveal', e);
-      }
-    }
-
-    // ── Done ───────────────────────────────────────────────────────────────────
-
-    function renderDone() {
-      showScreen('screen-revealing');
-      showExitBtn(false);
-      document.getElementById('reveal-prompt').style.display = 'none';
-      document.getElementById('reveal-votes').innerHTML = '';
-      document.getElementById('reveal-game-label').textContent = 'Session complete!';
-
-      const box = document.getElementById('reveal-box');
-      box.className = 'reveal-box revealed';
-      box.innerHTML = "That's everyone! 🎊";
-
-      const btn = document.getElementById('btn-next-round');
-      btn.textContent = 'Play another game';
-      btn.disabled = false;
-      btn.onclick = async function() {
-        btn.disabled = true;
-        btn.textContent = 'Going back...';
-        await run('resetRoom', [state.roomId]);
-      };
-
-      burstEmojis(['🎉','🎊','✨','🙌','⭐'], 20);
-    }
-
-    // ── Vote handlers ──────────────────────────────────────────────────────────
-
-    async function handleVote(playerId, btn) {
-      if (state.hasVoted) return;
-      state.hasVoted = true;
-
-      document.querySelectorAll('.vote-btn').forEach(function(b) {
-        b.disabled = true;
-        if (b.dataset.id === playerId) b.classList.add('selected');
-      });
-
-      document.getElementById('vote-status').innerHTML =
-        '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
-        '<div>Vote locked in! Waiting for others...</div>';
-
-      try {
-        await run('submitVote', [state.roomId, state.playerId, playerId, '']);
-      } catch(e) {
-        document.getElementById('vote-status').textContent = 'Error submitting vote.';
-        state.hasVoted = false;
-      }
-    }
-
-    async function handleAgreeDisagree(value, phase) {
-      if (phase === 'pre' && state.hasVoted) return;
-      if (phase === 'post' && state.hasVotedPost) return;
-
-      if (phase === 'pre') {
-        state.hasVoted = true;
-        const btnAgree = document.getElementById('btn-agree');
-        const btnDisagree = document.getElementById('btn-disagree');
-        btnAgree.disabled = true;
-        btnDisagree.disabled = true;
-        if (value === 'agree') btnAgree.classList.add('selected');
-        else btnDisagree.classList.add('selected');
-        document.getElementById('vote-status').innerHTML =
-          '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
-          '<div>Vote locked in! Waiting for others...</div>';
-      } else {
-        state.hasVotedPost = true;
-        const btnAgreePost = document.getElementById('btn-agree-post');
-        const btnDisagreePost = document.getElementById('btn-disagree-post');
-        btnAgreePost.disabled = true;
-        btnDisagreePost.disabled = true;
-        if (value === 'agree') btnAgreePost.classList.add('selected');
-        else btnDisagreePost.classList.add('selected');
-        document.getElementById('vote-post-status').innerHTML =
-          '<div class="waiting-dots" style="margin-bottom:6px"><span></span><span></span><span></span></div>' +
-          '<div>Vote locked in! Waiting for others...</div>';
-      }
-
-      try {
-        await run('submitVote', [state.roomId, state.playerId, '', value]);
-      } catch(e) {
-        if (phase === 'pre') {
-          document.getElementById('vote-status').textContent = 'Error. Try again.';
-          state.hasVoted = false;
-        } else {
-          document.getElementById('vote-post-status').textContent = 'Error. Try again.';
-          state.hasVotedPost = false;
-        }
-      }
-    }
-
-    function renderPlayerChips(players) {
-      const container = document.getElementById('lobby-players');
-      if (!container) return;
-      if (container.querySelectorAll('.player-chip').length === players.length) return;
-      container.innerHTML = players.map(function(p) {
-        const isMe = p.id === state.playerId;
-        return '<div class="player-chip ' + (isMe ? 'me' : '') + '">' +
-          (isMe ? '<span>⭐</span>' : '') +
-          '<span>' + p.name + '</span>' +
-        '</div>';
-      }).join('');
-    }
-
-    function updateURL(roomId) {
-      try {
-        const url = new URL(window.location.href);
-        url.searchParams.set('room', roomId);
-        window.history.replaceState({}, '', url.toString());
-      } catch(e) {
-        console.warn('Could not update URL', e);
-      }
-    }
-    
-    function getRoomFromURL() {
-      try {
-        const url = new URL(window.location.href);
-        const room = url.searchParams.get('room');
-        return room ? room.toUpperCase().trim() : null;
-      } catch(e) {
-        return null;
-      }
-    }
-
-    // ── The Greatness in You ───────────────────────────────────────────────────────
-    
-    var greatnessState = {
-      exemptIds: [],
-      receiverName: null,
-      giverName: null,
-      prompt: null,
-      spinning: false,
-      animating: false  // ← add this
-    };
-    
-    async function renderGreatnessSetup() {
-      if (state.isHost) {
-        showScreen('screen-greatness-setup');
-        showExitBtn(true);
-    
-        const list = document.getElementById('greatness-player-list');
-        list.innerHTML = state.players.map(function(p, i) {
-          return '<div class="greatness-exempt-row" data-id="' + p.id + '" style="animation-delay:' + (i * 0.07) + 's">' +
-            '<div class="exempt-checkbox"></div>' +
-            '<div class="exempt-name">' + p.name + '</div>' +
-            '<div class="exempt-badge"></div>' +
-          '</div>';
-        }).join('');
-    
-        list.querySelectorAll('.greatness-exempt-row').forEach(function(row) {
-          row.addEventListener('click', function() {
-            const id = row.dataset.id;
-            const isExempt = greatnessState.exemptIds.indexOf(id) !== -1;
-    
-            if (isExempt) {
-              greatnessState.exemptIds = greatnessState.exemptIds.filter(function(e) { return e !== id; });
-              row.classList.remove('exempted');
-              row.querySelector('.exempt-checkbox').textContent = '';
-              row.querySelector('.exempt-badge').textContent = '';
-            } else {
-              greatnessState.exemptIds.push(id);
-              row.classList.add('exempted');
-              row.querySelector('.exempt-checkbox').textContent = '✓';
-              row.querySelector('.exempt-badge').textContent = 'sitting out';
-            }
-          });
-        });
-    
-      } else {
-        showScreen('screen-greatness-waiting');
-        showExitBtn(false);
-      }
-    }
-    
-    async function renderGreatnessSpin(data) {
-      showScreen('screen-greatness-spin');
-      showExitBtn(true);
-    
-      const gState = await run('getGreatnessState', [state.roomId]);
-    
-      const total = gState.total;
-      const done = total - gState.remaining;
-      document.getElementById('greatness-round-counter').textContent =
-        'Spotlight ' + (done + 1) + ' of ' + total;
-    
-      document.getElementById('greatness-spin-heading').textContent =
-        'Who\'s in the spotlight?';
-    
-      document.getElementById('greatness-spin-result').style.display = 'none';
-    
-      // Render face-down cards for all eligible players
-      renderGreatnessDeck(gState.players.filter(function(p) {
-        return gState.exemptIds.indexOf(p.id) === -1;
-      }));
-    
-      if (state.isHost) {
-        document.getElementById('btn-spin-receiver').style.display = 'block';
-        document.getElementById('greatness-spin-waiting').style.display = 'none';
-      } else {
-        document.getElementById('btn-spin-receiver').style.display = 'none';
-        document.getElementById('greatness-spin-waiting').style.display = 'block';
-      }
-    }
-    
-    function renderGreatnessDeck(players) {
-      const container = document.getElementById('greatness-cards');
-      container.innerHTML = '';
-      container.style.height = '110px';
-    
-      const count = players.length;
-      const spread = Math.min(count * 28, 200);
-      const startX = -spread / 2;
-    
-      players.forEach(function(p, i) {
-        const card = document.createElement('div');
-        card.className = 'greatness-card-item face-down';
-        card.dataset.id = p.id;
-        card.dataset.name = p.name;
-    
-        const angle = count > 1 ? ((i / (count - 1)) - 0.5) * 18 : 0;
-        const x = count > 1 ? startX + (i / (count - 1)) * spread : 0;
-        const y = Math.abs(angle) * 1.2;
-    
-        card.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px) rotate(' + angle + 'deg)';
-        card.style.zIndex = i;
-        card.style.animationDelay = (i * 0.05) + 's';
-    
-        container.appendChild(card);
-      });
-    }
-    
-    async function animateCardSpin(players, winnerId) {
-      const container = document.getElementById('greatness-cards');
-      const cards = Array.from(container.querySelectorAll('.greatness-card-item'));
-      const winnerCard = cards.find(function(c) { return c.dataset.id === winnerId; });
-      const losers = cards.filter(function(c) { return c.dataset.id !== winnerId; });
-    
-      // Shuffle animation
-      return new Promise(function(resolve) {
-        let rounds = 0;
-        const maxRounds = 8;
-    
-        function shuffleStep() {
-          cards.forEach(function(card) {
-            const currentTransform = card.style.transform;
-            const jitter = (Math.random() - 0.5) * 16;
-            const jitterY = (Math.random() - 0.5) * 8;
-            const jitterR = (Math.random() - 0.5) * 12;
-            card.style.transition = 'transform 0.15s ease';
-            card.style.transform = currentTransform
-              .replace(/translateX\(([^)]+)\)/, function(m, val) {
-                return 'translateX(' + (parseFloat(val) + jitter) + 'px)';
-              })
-              .replace(/translateY\(([^)]+)\)/, function(m, val) {
-                return 'translateY(' + (parseFloat(val) + jitterY) + 'px)';
-              });
-          });
-    
-          rounds++;
-          if (rounds < maxRounds) {
-            setTimeout(shuffleStep, 150);
-          } else {
-            // Eliminate losers one by one
-            eliminateCards(losers, 0, function() {
-              // Reveal winner
-              if (winnerCard) {
-                winnerCard.style.transition = 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
-                winnerCard.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
-                winnerCard.style.zIndex = 10;
-    
-                setTimeout(function() {
-                  winnerCard.className = 'greatness-card-item face-up';
-                  winnerCard.textContent = winnerCard.dataset.name;
-                  winnerCard.style.transform = '';
-                  resolve();
-                }, 400);
-              } else {
-                resolve();
-              }
-            });
-          }
-        }
-    
-        shuffleStep();
-      });
-    }
-    
-    function eliminateCards(cards, index, callback) {
-      if (index >= cards.length) {
-        callback();
-        return;
-      }
-    
-      const card = cards[index];
-      card.style.transition = 'opacity 0.2s, transform 0.2s';
-      card.classList.add('eliminated');
-    
-      setTimeout(function() {
-        eliminateCards(cards, index + 1, callback);
-      }, 120);
-    }
-    
-    async function runGreatnessSpin() {
-      if (greatnessState.spinning) return;
-      greatnessState.spinning = true;
-      greatnessState.animating = true;
-    
-      const btn = document.getElementById('btn-spin-receiver');
-      btn.disabled = true;
-      btn.textContent = 'Spinning...';
-    
-      try {
-        const result = await run('spinReceiver', [state.roomId]);
-        if (result.error) {
-          btn.disabled = false;
-          btn.textContent = '🎰 Spin to find out';
-          greatnessState.spinning = false;
-          greatnessState.animating = false;
-          return;
-        }
-    
-        if (result.done) {
-          greatnessState.animating = false;
-          greatnessState.spinning = false;
-          return;
-        }
-    
-        const gState = await run('getGreatnessState', [state.roomId]);
-        const eligiblePlayers = gState.players.filter(function(p) {
-          return gState.exemptIds.indexOf(p.id) === -1;
-        });
-    
-        await animateCardSpin(eligiblePlayers, result.receiverId);
-    
-        const resultEl = document.getElementById('greatness-spin-result');
-        resultEl.style.display = 'block';
-        resultEl.innerHTML =
-          '<div class="result-name">✨ ' + result.receiverName + '</div>' +
-          '<div class="result-label">is in the spotlight</div>';
-    
-        burstEmojis(['✨','⭐','💫','🌟'], 10);
-    
-        await new Promise(function(r) { setTimeout(r, 2000); });
-    
-        // Sync phase before giver spin starts
-        state.phase = 'greatness_receiver';
-    
-        await runGiverSpin(result.receiverName, result.receiverId);
-    
-      } catch(e) {
-        console.error('Spin error', e);
-        greatnessState.spinning = false;
-        greatnessState.animating = false;
-      }
-    }
-    
-    async function runGiverSpin(receiverName, receiverId) {
-      document.getElementById('greatness-spin-heading').textContent = 'Who\'s sharing?';
-      document.getElementById('greatness-spin-result').style.display = 'none';
-    
-      const gState = await run('getGreatnessState', [state.roomId]);
-    
-      const allExceptReceiver = gState.players.filter(function(p) {
-        return p.id !== receiverId;
-      });
-    
-      renderGreatnessDeck(allExceptReceiver);
-    
-      await new Promise(function(r) { setTimeout(r, 400); });
-    
-      const giverResult = await run('spinGiver', [state.roomId]);
-      if (giverResult.error) {
-        greatnessState.animating = false;
-        greatnessState.spinning = false;
-        return;
-      }
-    
-      await animateCardSpin(allExceptReceiver, giverResult.giverId);
-    
-      const resultEl = document.getElementById('greatness-spin-result');
-      resultEl.style.display = 'block';
-      resultEl.innerHTML =
-        '<div class="result-name">' + giverResult.giverName + '</div>' +
-        '<div class="result-label">has something to share</div>';
-    
-      burstEmojis(['💜','✨','💫'], 8);
-    
-      await new Promise(function(r) { setTimeout(r, 2000); });
-    
-      // Manually sync phase so poll doesn't re-trigger
-      state.phase = 'greatness_giver';
-    
-      greatnessState.animating = false;
-      greatnessState.spinning = false;
-    }
-    
-    async function renderGreatnessPrompt() {
-      showScreen('screen-greatness-prompt');
-      showExitBtn(true);
-
-      document.getElementById('greatness-slot').style.display = 'block'; // ← reset for each round
-    
-      const gState = await run('getGreatnessState', [state.roomId]);
-    
-      // Receiver banner
-      document.getElementById('greatness-receiver-banner').innerHTML =
-        '<div style="font-size:1.5rem">✨</div>' +
-        '<div>' +
-          '<div class="greatness-receiver-name">' + gState.receiverName + '</div>' +
-          '<div class="greatness-receiver-label">is in the spotlight</div>' +
-        '</div>';
-    
-      // Slot machine for prompt
-      document.getElementById('greatness-prompt-card').style.display = 'none';
-      document.getElementById('greatness-giver-banner').style.display = 'none';
-      document.getElementById('btn-next-spotlight').style.display = 'none';
-      document.getElementById('greatness-listening').style.display = 'none';
-    
-      await runPromptSlot(gState.prompt, gState.giverName);
-    }
-    
-    async function runPromptSlot(finalPrompt, giverName) {
-      const slotInner = document.getElementById('greatness-slot-inner');
-    
-      // More dummies = longer scroll = more satisfying
-      const dummies = [
-        "What's one thing that makes them great?",
-        "What's a strength they have?",
-        "What do you admire about them?",
-        "What do they bring to the team?",
-        "What's something they do really well?",
-        "What would you miss about them?",
-        "What's their superpower?",
-        "What have you learned from them?",
-        "What's one thing that makes them great?",
-        "What's a strength they have?",
-        "What do you admire about them?",
-        "What do they bring to the team?",
-        "What's something they do really well?",
-        finalPrompt
-      ];
-    
-      slotInner.style.transform = 'translateY(0)';
-      slotInner.style.transition = 'none';
-      slotInner.innerHTML = dummies.map(function(p) {
-        return '<div class="greatness-slot-item">' + p + '</div>';
-      }).join('');
-    
-      const itemHeight = 56;
-      let currentIndex = 0;
-      let speed = 60;              // start slower so you can see it moving
-      const slowdownStart = dummies.length - 5;
-    
-      return new Promise(function(resolve) {
-        function scroll() {
-          if (currentIndex >= dummies.length - 1) {
-            slotInner.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
-            slotInner.style.transform = 'translateY(-' + ((dummies.length - 1) * itemHeight) + 'px)';
-            slotInner.querySelectorAll('.greatness-slot-item').forEach(function(el, i) {
-              el.classList.toggle('active', i === dummies.length - 1);
-            });
-    
-            setTimeout(function() {
-              showPromptCard(finalPrompt, giverName);
-              resolve();
-            }, 600);
-            return;
-          }
-    
-          slotInner.style.transition = 'transform ' + speed + 'ms linear';
-          slotInner.style.transform = 'translateY(-' + (currentIndex * itemHeight) + 'px)';
-          currentIndex++;
-    
-          if (currentIndex > slowdownStart) {
-            speed = Math.min(speed + 120, 500);
-          }
-    
-          setTimeout(scroll, speed);
-        }
-    
-        setTimeout(scroll, 300);
-      });
-    }
-    
-    function showPromptCard(prompt, giverName) {
-      document.getElementById('greatness-slot').style.display = 'none';
-      
-      const promptCard = document.getElementById('greatness-prompt-card');
-      promptCard.style.display = 'block';
-      promptCard.textContent = prompt;
-    
-      const giverBanner = document.getElementById('greatness-giver-banner');
-      giverBanner.style.display = 'flex';
-      giverBanner.innerHTML =
-        '<div class="greatness-giver-name">' + giverName + '</div>' +
-        '<div class="greatness-giver-label">the floor is yours ✨</div>';
-    
-      if (state.isHost) {
-        document.getElementById('btn-next-spotlight').style.display = 'block';
-      } else {
-        document.getElementById('greatness-listening').style.display = 'block';
-      }
-    
-      burstEmojis(['✨','💜','⭐','💫','🌟'], 12);
-    }
-    
-    function renderGreatnessReceiver(data) {
-      if (!state.isHost) {
-        showScreen('screen-greatness-spin');
-        showExitBtn(false);
-        document.getElementById('btn-spin-receiver').style.display = 'none';
-        document.getElementById('greatness-spin-waiting').style.display = 'block';
-        document.getElementById('greatness-spin-waiting').textContent = 'The spotlight is being chosen... ✨';
-        document.getElementById('greatness-spin-result').style.display = 'none';
-      }
-    }
-    
-    function renderGreatnessDone() {
-      showScreen('screen-revealing');
-      showExitBtn(false);
-      document.getElementById('reveal-prompt').style.display = 'none';
-      document.getElementById('reveal-votes').innerHTML = '';
-      document.getElementById('reveal-game-label').textContent = '✨ The Greatness in You';
-    
-      const box = document.getElementById('reveal-box');
-      box.className = 'reveal-box revealed';
-      box.style.borderColor = '#a78bfa';
-      box.style.color = '#a78bfa';
-      box.innerHTML = "That's everyone. Thanks for sharing ♥";
-    
-      const btn = document.getElementById('btn-next-round');
-      btn.textContent = 'Play another game';
-      btn.disabled = false;
-      btn.onclick = async function() {
-        btn.disabled = true;
-        btn.textContent = 'Going back...';
-        await run('resetRoom', [state.roomId]);
-      };
-    
-      burstEmojis(['✨','💜','⭐','💫','🌟','♥'], 20);
-    }
-
-    
     // ── Button listeners ───────────────────────────────────────────────────────
+    // Only register each listener ONCE here at the bottom
 
     document.getElementById('btn-exit').addEventListener('click', async function() {
       if (!state.isHost) return;
       if (!confirm('End the game for everyone and go back to the lobby?')) return;
-      const btn = document.getElementById('btn-exit');
+      var btn = document.getElementById('btn-exit');
       btn.disabled = true;
       btn.textContent = 'Exiting...';
       await run('exitGame', [state.roomId]);
     });
 
     document.getElementById('btn-create').addEventListener('click', async function() {
-      const name = document.getElementById('landing-name').value.trim();
+      var name = document.getElementById('landing-name').value.trim();
       if (!name) { shake('landing-name'); return; }
-      const btn = document.getElementById('btn-create');
+      var btn = document.getElementById('btn-create');
       btn.disabled = true;
       btn.textContent = 'Creating room...';
+      var statusEl = document.getElementById('landing-status');
+      statusEl.textContent = '';
       try {
-        const data = await run('createRoom', [name]);
+        dbg('createRoom: ' + name);
+        var data = await run('createRoom', [name]);
         if (data.error) throw new Error(data.error);
-        state.roomId = data.roomId;
+        state.roomId   = data.roomId;
         state.playerId = data.playerId;
         state.playerName = name;
-        state.isHost = true;
-        state.phase = 'lobby';
-    
+        state.isHost   = true;
+        state.phase    = 'lobby';
+        dbg('Room created: ' + state.roomId, 'ok');
         updateURL(state.roomId);
         renderModePicker();
         renderPlayerChips([{ id: state.playerId, name: name }]);
         startPolling();
       } catch(e) {
-        document.getElementById('landing-status').textContent = 'Something went wrong. Try again.';
+        dbg('createRoom failed: ' + e.message, 'err');
+        statusEl.innerHTML =
+          '<div style="color:var(--danger);font-size:0.9rem">' +
+            '⚠️ Could not create room — check the console or press D for debug log. (' + e.message + ')' +
+          '</div>';
         btn.disabled = false;
         btn.textContent = 'Start a session';
       }
     });
 
-    document.getElementById('btn-pas-next').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-pas-next');
-      btn.disabled = true;
-      btn.textContent = 'Loading...';
-      try {
-        await run('advancePhase', [state.roomId]);
-      } catch(e) {
-        btn.disabled = false;
-        btn.textContent = 'Next round →';
-      }
-    });
-    
     document.getElementById('btn-join').addEventListener('click', async function() {
-      const name = document.getElementById('landing-name').value.trim();
-      const code = document.getElementById('landing-code').value.trim().toUpperCase();
+      var name = document.getElementById('landing-name').value.trim();
+      var code = document.getElementById('landing-code').value.trim().toUpperCase();
       if (!name) { shake('landing-name'); return; }
       if (!code) { shake('landing-code'); return; }
-
-      const btn = document.getElementById('btn-join');
+      var btn = document.getElementById('btn-join');
       btn.disabled = true;
       btn.textContent = 'Joining...';
-
+      var statusEl = document.getElementById('landing-status');
+      statusEl.textContent = '';
       try {
-        const data = await run('joinRoom', [code, name]);
+        var data = await run('joinRoom', [code, name]);
         if (data.error) throw new Error(data.error);
-
-        state.roomId = code;
-        state.playerId = data.playerId;
+        state.roomId     = code;
+        state.playerId   = data.playerId;
         state.playerName = name;
-        state.isHost = false;
-        state.phase = data.phase;
-        
-        updateURL(state.roomId); // ← add this line
-
+        state.isHost     = false;
+        state.phase      = data.phase;
+        updateURL(state.roomId);
         handlePhaseChange({ phase: data.phase, players: [] });
         startPolling();
       } catch(e) {
-        document.getElementById('landing-status').textContent = 'Room not found. Check the code and try again.';
+        statusEl.innerHTML =
+          '<div style="color:var(--danger);font-size:0.9rem">' +
+            '⚠️ ' + (e.message.indexOf('not found') !== -1 ? 'Room not found. Check the code.' : e.message) +
+          '</div>';
         btn.disabled = false;
         btn.textContent = 'Join a session';
-      }
-    });
-
-    document.getElementById('btn-start').addEventListener('click', async function() {
-      if (!state.selectedGame) return;
-      const btn = document.getElementById('btn-start');
-      btn.disabled = true;
-      btn.textContent = 'Starting...';
-    
-      // Set immediately so handlePhaseChange routes correctly
-      state.currentGame = state.selectedGame;
-    
-      const options = {};
-      if (state.selectedGame === 'hot_take_tribunal') {
-        options.count = state.selectedCount;
-        options.timer = state.selectedTimer;
-      } else if (state.selectedGame === 'pick_a_side') {
-        options.count = state.selectedCount;
-      }
-    
-      try {
-        await run('startGame', [state.roomId, state.selectedGame, options]);
-      } catch(e) {
-        state.currentGame = null;
-        btn.disabled = false;
-        btn.textContent = 'Start session →';
-      }
-    });
-
-    document.getElementById('btn-submit-fact').addEventListener('click', async function() {
-      const content = document.getElementById('fact-input').value.trim();
-      if (!content) { shake('fact-input'); return; }
-
-      const btn = document.getElementById('btn-submit-fact');
-      btn.disabled = true;
-      btn.textContent = 'Submitting...';
-      state.hasSubmitted = true;
-
-      try {
-        const result = await run('submitFact', [state.roomId, state.playerId, content]);
-
-        if (result.error) {
-          document.getElementById('submit-status').textContent = result.error;
-          btn.disabled = false;
-          btn.textContent = 'Submit';
-          state.hasSubmitted = false;
-          return;
-        }
-
-        btn.textContent = 'Submitted ✓';
-        btn.classList.add('success');
-        document.getElementById('fact-input').disabled = true;
-        document.getElementById('submit-feedback').innerHTML =
-          '<div class="submitted-banner">' +
-            '<div class="checkmark">✓</div>' +
-            'Locked in! Waiting for your teammates...' +
-          '</div>';
-        document.getElementById('submit-status').innerHTML =
-          '<div class="waiting-dots" style="margin-top:4px"><span></span><span></span><span></span></div>';
-
-        burstEmojis(['✨','⭐','💫'], 6);
-
-      } catch(e) {
-        document.getElementById('submit-status').textContent = 'Error submitting. Try again.';
-        btn.disabled = false;
-        btn.textContent = 'Submit';
-        state.hasSubmitted = false;
-      }
-    });
-
-    document.getElementById('btn-next-round').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-next-round');
-      btn.disabled = true;
-      btn.textContent = 'Loading...';
-      try {
-        await run('advancePhase', [state.roomId]);
-      } catch(e) {
-        btn.disabled = false;
-        btn.textContent = 'Next →';
-      }
-    });
-
-    document.getElementById('btn-open-defense').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-open-defense');
-      btn.disabled = true;
-      btn.textContent = 'Defense time...';
-      try {
-        await run('advancePhase', [state.roomId]);
-      } catch(e) {
-        btn.disabled = false;
-      }
-    });
-
-    document.getElementById('btn-start-defense').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-start-defense');
-      btn.disabled = true;
-      btn.textContent = 'Opening vote...';
-      try {
-        await run('advancePhase', [state.roomId]);
-      } catch(e) {
-        btn.disabled = false;
-      }
-    });
-
-    document.getElementById('btn-next-htt').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-next-htt');
-      btn.disabled = true;
-      btn.textContent = 'Loading...';
-      try {
-        await run('advancePhase', [state.roomId]);
-      } catch(e) {
-        btn.disabled = false;
-        btn.textContent = 'Next hot take →';
-      }
-    });
-
-    document.getElementById('btn-greatness-start').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-greatness-start');
-      btn.disabled = true;
-      btn.textContent = 'Starting...';
-      try {
-        await run('startGreatnessGame', [state.roomId, greatnessState.exemptIds]);
-      } catch(e) {
-        btn.disabled = false;
-        btn.textContent = 'Start ✨';
-      }
-    });
-    
-    document.getElementById('btn-spin-receiver').addEventListener('click', function() {
-      runGreatnessSpin();
-    });
-    
-    document.getElementById('btn-next-spotlight').addEventListener('click', async function() {
-      const btn = document.getElementById('btn-next-spotlight');
-      btn.disabled = true;
-      btn.textContent = 'Loading...';
-      try {
-        await run('completeSpotlight', [state.roomId]);
-      } catch(e) {
-        btn.disabled = false;
-        btn.textContent = 'Next spotlight →';
       }
     });
 
@@ -4042,7 +3326,7 @@ async function renderPasReveal() {
         document.getElementById('lobby-waiting-hint').style.display = 'block';
       }
     });
-    
+
     document.getElementById('mode-quiz').addEventListener('click', async function() {
       if (state.isHost) {
         await renderQuizPicker();
@@ -4051,39 +3335,180 @@ async function renderPasReveal() {
       }
     });
 
+    document.getElementById('btn-back-to-modes').addEventListener('click', function() {
+      renderModePicker();
+    });
+
+    document.getElementById('btn-start').addEventListener('click', async function() {
+      if (!state.selectedGame) return;
+      var btn = document.getElementById('btn-start');
+      btn.disabled = true;
+      btn.textContent = 'Starting...';
+      state.currentGame = state.selectedGame;
+      var options = {};
+      if (state.selectedGame === 'hot_take_tribunal') {
+        options.count = state.selectedCount;
+        options.timer = state.selectedTimer;
+      } else if (state.selectedGame === 'pick_a_side') {
+        options.count = state.selectedCount;
+      }
+      try {
+        await run('startGame', [state.roomId, state.selectedGame, options]);
+      } catch(e) {
+        state.currentGame = null;
+        btn.disabled = false;
+        btn.textContent = 'Start session →';
+      }
+    });
+
+    document.getElementById('btn-submit-fact').addEventListener('click', async function() {
+      var content = document.getElementById('fact-input').value.trim();
+      if (!content) { shake('fact-input'); return; }
+      var btn = document.getElementById('btn-submit-fact');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      state.hasSubmitted = true;
+      try {
+        var result = await run('submitFact', [state.roomId, state.playerId, content]);
+        if (result.error) {
+          document.getElementById('submit-status').textContent = result.error;
+          btn.disabled = false;
+          btn.textContent = 'Submit';
+          state.hasSubmitted = false;
+          return;
+        }
+        btn.textContent = 'Submitted ✓';
+        btn.classList.add('success');
+        document.getElementById('fact-input').disabled = true;
+        document.getElementById('submit-feedback').innerHTML =
+          '<div class="submitted-banner">' +
+            '<div class="checkmark">✓</div>' +
+            'Locked in! Waiting for your teammates...' +
+          '</div>';
+        document.getElementById('submit-status').innerHTML =
+          '<div class="waiting-dots" style="margin-top:4px"><span></span><span></span><span></span></div>';
+        burstEmojis(['✨','⭐','💫'], 6);
+      } catch(e) {
+        document.getElementById('submit-status').textContent = 'Error submitting. Try again.';
+        btn.disabled = false;
+        btn.textContent = 'Submit';
+        state.hasSubmitted = false;
+      }
+    });
+
+    document.getElementById('btn-next-round').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-next-round');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Next →';
+      }
+    });
+
+    document.getElementById('btn-open-defense').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-open-defense');
+      btn.disabled = true;
+      btn.textContent = 'Defense time...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) { btn.disabled = false; }
+    });
+
+    document.getElementById('btn-start-defense').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-start-defense');
+      btn.disabled = true;
+      btn.textContent = 'Opening vote...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) { btn.disabled = false; }
+    });
+
+    document.getElementById('btn-next-htt').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-next-htt');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Next hot take →';
+      }
+    });
+
+    document.getElementById('btn-pas-next').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-pas-next');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        await run('advancePhase', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Next round →';
+      }
+    });
+
+    document.getElementById('btn-greatness-start').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-greatness-start');
+      btn.disabled = true;
+      btn.textContent = 'Starting...';
+      try {
+        await run('startGreatnessGame', [state.roomId, greatnessState.exemptIds]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Start ✨';
+      }
+    });
+
+    document.getElementById('btn-spin-receiver').addEventListener('click', function() {
+      runGreatnessSpin();
+    });
+
+    document.getElementById('btn-next-spotlight').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-next-spotlight');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        await run('completeSpotlight', [state.roomId]);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Next spotlight →';
+      }
+    });
+
+    document.getElementById('btn-quiz-play-again').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-quiz-play-again');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      quizState.quizId = null;
+      quizState.questions = [];
+      quizState.currentQuestion = 0;
+      quizState.answers = [];
+      await run('resetQuiz', [state.roomId]);
+    });
+
+    document.getElementById('btn-quiz-back-to-games').addEventListener('click', async function() {
+      var btn = document.getElementById('btn-quiz-back-to-games');
+      btn.disabled = true;
+      await run('resetQuiz', [state.roomId]);
+    });
+
+    // ── URL prefill ────────────────────────────────────────────────────────────
     (function() {
-      const roomFromURL = getRoomFromURL();
+      var roomFromURL = getRoomFromURL();
       if (roomFromURL && roomFromURL.length === 4) {
-        const codeInput = document.getElementById('landing-code');
-        const nameInput = document.getElementById('landing-name');
-    
+        var codeInput = document.getElementById('landing-code');
+        var nameInput = document.getElementById('landing-name');
         codeInput.value = roomFromURL;
-    
-        // Highlight the code field
         codeInput.style.borderColor = 'var(--accent)';
         codeInput.style.boxShadow = '0 0 0 3px rgba(124, 106, 247, 0.18)';
-    
-        // Show a banner so it's obvious
-        const status = document.getElementById('landing-status');
-        status.innerHTML =
-          '<div style="' +
-            'background: rgba(124,106,247,0.1);' +
-            'border: 1px solid var(--accent);' +
-            'border-radius: 8px;' +
-            'padding: 10px 14px;' +
-            'color: var(--accent);' +
-            'font-size: 0.9rem;' +
-            'font-weight: 600;' +
-            'text-align: center;' +
-            'animation: popIn 0.4s cubic-bezier(0.22,1,0.36,1) both' +
-          '">' +
+        document.getElementById('landing-status').innerHTML =
+          '<div style="background:rgba(124,106,247,0.1);border:1px solid var(--accent);border-radius:8px;padding:10px 14px;color:var(--accent);font-size:0.9rem;font-weight:600;text-align:center;animation:popIn 0.4s cubic-bezier(0.22,1,0.36,1) both">' +
             '👋 Room <strong>' + roomFromURL + '</strong> is ready — enter your name to join' +
           '</div>';
-    
-        // Focus name field since code is already filled
         setTimeout(function() { nameInput.focus(); }, 100);
-    
-        // Fade out the highlight after 3 seconds
         setTimeout(function() {
           codeInput.style.borderColor = '';
           codeInput.style.boxShadow = '';
